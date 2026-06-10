@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>今日山霧 — 會自己更新的活動頁 | 山霧咖啡</title>
+<meta property="og:title" content="今日山霧 — 會自己更新的活動頁">
+<meta property="og:description" content="這一頁每天早上八點自己換一句話,沒有人按任何按鈕。">
+<style>
+  :root{
+    --ink:#10221d; --pine:#1d4438; --moss:#2e5c4d; --mist:#9db8ae;
+    --cream:#f4efe4; --paper:#ece5d4; --copper:#c98f4e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:
+      radial-gradient(120% 80% at 50% -20%, rgba(46,92,77,.5), transparent 60%),
+      radial-gradient(80% 60% at 50% 120%, rgba(201,143,78,.12), transparent 55%),
+      var(--ink);
+    color:var(--cream); min-height:100svh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:8vh 7vw;
+  }
+  .brand{font-size:.75rem; letter-spacing:.5em; color:var(--mist); margin-bottom:2.5rem}
+  .label{font-size:.78rem; letter-spacing:.42em; color:var(--copper); margin-bottom:1.6rem}
+  .slogan{
+    font-family:"Noto Serif TC","PMingLiU",serif; font-weight:600;
+    font-size:clamp(1.7rem,5.5vw,3.2rem); line-height:1.7; max-width:18em;
+    min-height:2.6em;
+  }
+  .countdown{
+    margin-top:2.8rem; font-size:clamp(.95rem,2vw,1.15rem); letter-spacing:.2em; color:var(--paper);
+    border-top:1px solid rgba(157,184,174,.3); border-bottom:1px solid rgba(157,184,174,.3);
+    padding:.9rem 1.6rem;
+  }
+  .countdown em{font-style:normal; color:var(--copper); font-family:"Noto Serif TC",serif; font-size:1.3em}
+  .meta{margin-top:2.6rem; font-size:.78rem; color:rgba(157,184,174,.75); line-height:2; letter-spacing:.06em}
+  .meta strong{color:var(--copper); font-weight:400}
+  footer{margin-top:4rem; font-size:.72rem; color:rgba(157,184,174,.45); letter-spacing:.12em; line-height:2}
+  footer a{color:rgba(201,143,78,.8)}
+</style>
+</head>
+<body>
+
+<p class="brand">SANWU COFFEE — 山霧咖啡</p>
+<p class="label">今 日 山 霧</p>
+<p class="slogan" id="slogan">…</p>
+<p class="countdown" id="countdown"></p>
+<p class="meta" id="meta"></p>
+
+<footer>
+  本頁為課程 demo(模組 7):GitHub Actions 每天台北 08:00 自動改寫 daily.json,頁面跟著變。<br>
+  沒有人按任何按鈕 · <a href="../index.html">回 demo 總覽</a>
+</footer>
+
+<script>
+/* ============ 模組 7 成品:頁面內容來自 daily.json ============
+   daily.json 由 .github/workflows/daily.yml 每天自動 commit 更新。
+   本機直接雙擊開啟時 fetch 會被擋(file:// 限制),就顯示內建預設值。 */
+const FALLBACK = {
+  slogan: "霧還沒散,咖啡先香了。",
+  generated_at: "(本機開啟顯示內建內容;線上版每天台北 08:00 自動更新)",
+};
+(async () => {
+  let data = FALLBACK;
+  try {
+    const r = await fetch("daily.json?t=" + Date.now());   // 加時間戳避開快取
+    if (r.ok) data = await r.json();
+  } catch (e) { /* file:// 直開,用 FALLBACK */ }
+  document.getElementById("slogan").textContent = data.slogan;
+  document.getElementById("meta").innerHTML =
+    "這句話的更新時間:<strong>" + data.generated_at + "</strong>";
+
+  // 倒數/進行中文案:純前端算,不用等排程
+  const start = new Date("2026-06-20T08:00:00+08:00");
+  const end   = new Date("2026-06-26T18:00:00+08:00");
+  const now = new Date();
+  const cd = document.getElementById("countdown");
+  if (now < start) {
+    const d = Math.ceil((start - now) / 86400000);
+    cd.innerHTML = "距離開幕還有 <em>" + d + "</em> 天";
+  } else if (now <= end) {
+    const d = Math.ceil((end - now) / 86400000);
+    cd.innerHTML = "開幕週進行中,剩 <em>" + d + "</em> 天,買一送一";
+  } else {
+    cd.textContent = "開幕週圓滿結束,山上見";
+  }
+})();
+</script>
+</body>
+</html>

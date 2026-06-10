@@ -72,6 +72,10 @@ repo → Actions 頁籤 → Daily Update → Run workflow(這就是 `workflow_di
 - **每日 AI 圖**(catime 模式):排程腳本呼叫生圖 API(key 放 repo Settings → Secrets,跟模組 6 同一個觀念),存圖 commit。
 - **自動抓資料**:每天抓天氣寫進頁面:「山上 16 度,適合熱拿鐵」。
 
+## 對照成品
+
+`demos/07-auto-update/` — 「今日山霧」頁,標語來自 `daily.json`;本 repo 的 `.github/workflows/daily.yml` 每天台北 08:00 自動改寫它(跟上面範本同一套)。到 repo 的 Actions 頁籤可以看到每天的執行紀錄,也可以按 Run workflow 現場示範。
+
 ## 常見坑
 
 1. **cron 是 UTC 時區**:`0 0 * * *` 是台北早上八點,不是半夜。要台北時間 X 點,寫 X-8(負數就 +24)。

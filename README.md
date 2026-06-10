@@ -43,6 +43,9 @@ demos/
   01-landing/                    活動 landing(AI 生成窗景 hero + 杯口蒸氣 + 粒子 + 倒數)
   02-lucky-draw/                 拉霸抽獎(機率表 + 優惠碼 + 防重抽 + confetti)
   03-ai-quiz/                    心理測驗(加權計分 + canvas 分享圖卡含拉花照)
+  06-ai-helper/                  問山霧 AI 小幫手(Worker 代理 / BYO key 直連 + worker.js 範本)
+  07-auto-update/                今日山霧(daily.json 由 Actions 每天台北 08:00 自動更新)
+.github/workflows/daily.yml      demo 07 的每日排程(模組 7 範本的實際運轉版)
 ```
 
 ## 怎麼驗證成果

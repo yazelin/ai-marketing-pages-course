@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>問山霧 — AI 活動小幫手 | 山霧咖啡</title>
+<meta property="og:title" content="問山霧 — AI 活動小幫手">
+<meta property="og:description" content="開幕週有什麼?讓 AI 小幫手告訴你。">
+<style>
+  :root{
+    --ink:#10221d; --pine:#1d4438; --moss:#2e5c4d; --mist:#9db8ae;
+    --cream:#f4efe4; --paper:#ece5d4; --copper:#c98f4e; --copper-d:#a8743a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:
+      radial-gradient(120% 80% at 50% -20%, rgba(46,92,77,.5), transparent 60%),
+      radial-gradient(80% 60% at 50% 120%, rgba(201,143,78,.12), transparent 55%),
+      var(--ink);
+    color:var(--cream); min-height:100svh;
+    display:flex; flex-direction:column; align-items:center; padding:6vh 5vw 6vh;
+  }
+  .brand{font-size:.75rem; letter-spacing:.5em; color:var(--mist); margin-bottom:1.2rem}
+  h1{
+    font-family:"Noto Serif TC","PMingLiU",serif; font-weight:600; text-align:center;
+    font-size:clamp(1.7rem,5.5vw,2.6rem); line-height:1.35; margin-bottom:.6rem;
+  }
+  h1 em{font-style:normal; color:var(--copper)}
+  .sub{color:var(--mist); font-size:.88rem; line-height:1.9; text-align:center; max-width:34em}
+
+  .setup{
+    width:min(38rem,100%); margin-top:2rem; border:1px solid rgba(157,184,174,.25);
+    border-radius:6px; background:rgba(46,92,77,.18); padding:1.4rem 1.5rem;
+  }
+  .tabs{display:flex; gap:.6rem; margin-bottom:1.1rem}
+  .tabs button{
+    flex:1; cursor:pointer; font-family:inherit; font-size:.82rem; letter-spacing:.08em;
+    padding:.65rem; border-radius:4px; border:1px solid rgba(157,184,174,.35);
+    background:transparent; color:var(--mist); transition:all .25s;
+  }
+  .tabs button.on{background:var(--pine); color:var(--cream); border-color:var(--copper)}
+  .setup label{display:block; font-size:.78rem; color:var(--mist); letter-spacing:.1em; margin-bottom:.45rem}
+  .setup input{
+    width:100%; font-family:inherit; font-size:.9rem; color:var(--cream);
+    background:rgba(16,34,29,.6); border:1px solid rgba(157,184,174,.3);
+    border-radius:4px; padding:.7rem .9rem; outline:none;
+  }
+  .setup input:focus{border-color:var(--copper)}
+  .setup .note{font-size:.74rem; color:rgba(157,184,174,.75); line-height:1.8; margin-top:.7rem}
+  .setup .note strong{color:var(--copper)}
+
+  .chat{
+    width:min(38rem,100%); margin-top:1.4rem; flex:1; display:flex; flex-direction:column;
+    border:1px solid rgba(201,143,78,.35); border-radius:6px; overflow:hidden;
+    background:linear-gradient(170deg, rgba(46,92,77,.3), rgba(16,34,29,.5));
+    min-height:24rem;
+  }
+  .log{flex:1; overflow-y:auto; padding:1.3rem; display:flex; flex-direction:column; gap:.85rem}
+  .msg{
+    max-width:84%; padding:.75rem 1.05rem; border-radius:10px;
+    font-size:.92rem; line-height:1.85; white-space:pre-wrap; word-break:break-word;
+    animation:pop .3s both;
+  }
+  @keyframes pop{from{opacity:0; transform:translateY(8px)}to{opacity:1; transform:none}}
+  .msg.user{align-self:flex-end; background:var(--copper); color:var(--ink); border-bottom-right-radius:3px}
+  .msg.ai{align-self:flex-start; background:rgba(244,239,228,.92); color:var(--ink); border-bottom-left-radius:3px}
+  .msg.sys{align-self:center; background:none; color:var(--mist); font-size:.78rem; text-align:center}
+  .typing i{display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--moss); margin:0 2px; animation:blink 1.2s infinite}
+  .typing i:nth-child(2){animation-delay:.2s} .typing i:nth-child(3){animation-delay:.4s}
+  @keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+  .inputrow{display:flex; gap:.6rem; padding: .9rem; border-top:1px solid rgba(157,184,174,.2)}
+  .inputrow input{
+    flex:1; font-family:inherit; font-size:.95rem; color:var(--cream);
+    background:rgba(16,34,29,.6); border:1px solid rgba(157,184,174,.3);
+    border-radius:4px; padding:.8rem 1rem; outline:none;
+  }
+  .inputrow input:focus{border-color:var(--copper)}
+  .inputrow button{
+    cursor:pointer; font-family:inherit; font-weight:700; font-size:.9rem; letter-spacing:.15em;
+    background:var(--copper); color:var(--ink); border:none; border-radius:4px; padding:0 1.5rem;
+    transition:background .25s;
+  }
+  .inputrow button:hover{background:var(--copper-d)}
+  .inputrow button:disabled{background:#5a5448; color:#2e2b25; cursor:not-allowed}
+  .quick{display:flex; flex-wrap:wrap; gap:.5rem; padding:0 .9rem .9rem}
+  .quick button{
+    cursor:pointer; font-family:inherit; font-size:.76rem; color:var(--mist);
+    background:none; border:1px solid rgba(157,184,174,.35); border-radius:99px;
+    padding:.35rem .9rem; transition:all .25s;
+  }
+  .quick button:hover{color:var(--copper); border-color:var(--copper)}
+  footer{margin-top:2.2rem; font-size:.72rem; color:rgba(157,184,174,.5); letter-spacing:.12em; text-align:center; line-height:2}
+  footer a{color:rgba(201,143,78,.8)}
+</style>
+</head>
+<body>
+
+<p class="brand">SANWU COFFEE — 山霧咖啡</p>
+<h1>問<em>山霧</em> — AI 活動小幫手</h1>
+<p class="sub">模組 6 成品:頁面即時呼叫 AI。前端在 GitHub Pages,AI 走你自己的通道——key 永遠不在這個網頁的程式碼裡。</p>
+
+<div class="setup">
+  <div class="tabs">
+    <button id="tabWorker" class="on">A. Worker 代理(課程正式做法)</button>
+    <button id="tabByo">B. 貼自己的 Groq Key(立即體驗)</button>
+  </div>
+  <div id="paneWorker">
+    <label>你的 Cloudflare Worker 網址(照模組 6 三步驟建好後貼進來)</label>
+    <input id="workerUrl" type="url" placeholder="https://xxx.你的帳號.workers.dev">
+    <p class="note">key 藏在 Worker 的 Secret 裡,訪客看不到——這是給<strong>正式活動</strong>用的架構。</p>
+  </div>
+  <div id="paneByo" style="display:none">
+    <label>你的 Groq API Key(免費申請:console.groq.com)</label>
+    <input id="byoKey" type="password" placeholder="gsk_...">
+    <p class="note"><strong>體驗模式</strong>:key 只存在你這台瀏覽器(localStorage),直連 Groq,不經過任何中間人。
+    正式活動別叫訪客貼 key,請用 A 模式。</p>
+  </div>
+</div>
+
+<div class="chat">
+  <div class="log" id="log">
+    <p class="msg sys">設定好上面任一模式,就可以開聊。</p>
+    <p class="msg ai">午安,我是山霧的 AI 小幫手。開幕週的事——買一送一怎麼算、怎麼上山、限定豆還有沒有——都可以問我。</p>
+  </div>
+  <div class="quick">
+    <button>買一送一怎麼算?</button>
+    <button>開幕週是哪幾天?</button>
+    <button>怎麼去山霧咖啡?</button>
+  </div>
+  <div class="inputrow">
+    <input id="box" type="text" maxlength="200" placeholder="問點開幕週的事">
+    <button id="send">送出</button>
+  </div>
+</div>
+
+<footer>本頁為課程 demo(模組 6),品牌為虛構 · <a href="../index.html">回 demo 總覽</a></footer>
+
+<script>
+/* ============ 模組 6 成品:同一個聊天 UI,兩種接法 ============
+   A. Worker 代理:POST {message} 到你的 workers.dev(key 藏在 Worker Secret)
+   B. BYO key:瀏覽器直連 Groq(OpenAI 相容 API,CORS 開放);key 只存 localStorage
+   正式活動用 A;B 是讓學員不用先架 Worker 也能看到「頁面會說話」。 */
+
+const SYSTEM_PROMPT = "你是山霧咖啡(SANWU COFFEE)的活動小幫手。用繁體中文、兩三句話內溫暖回答。已知資訊:開幕週 2026/6/20(六)到 6/26(五),每日 08:00-18:00,全品項買一送一(以較低價那杯為招待,不與其他優惠併用);地點是霧峰山路 36 號(虛構地址);自駕導航「山霧咖啡」,店前白線可停十二台;開幕限定「霧色」配方豆每日限量三十包;每日 14:00 主理人吧台手沖示範。只回答咖啡與本次開幕活動相關問題,其他話題溫柔婉拒。不要編造上面沒有的優惠或服務。";
+
+const $ = id => document.getElementById(id);
+const log = $("log");
+let mode = localStorage.getItem("sanwu-ai-mode") || "worker";
+
+/* 模式切換 + 設定記憶 */
+$("workerUrl").value = localStorage.getItem("sanwu-worker-url") || "";
+$("byoKey").value = localStorage.getItem("sanwu-groq-key") || "";
+function setMode(m){
+  mode = m; localStorage.setItem("sanwu-ai-mode", m);
+  $("tabWorker").classList.toggle("on", m === "worker");
+  $("tabByo").classList.toggle("on", m === "byo");
+  $("paneWorker").style.display = m === "worker" ? "" : "none";
+  $("paneByo").style.display = m === "byo" ? "" : "none";
+}
+$("tabWorker").onclick = () => setMode("worker");
+$("tabByo").onclick = () => setMode("byo");
+setMode(mode);
+$("workerUrl").addEventListener("change", e => localStorage.setItem("sanwu-worker-url", e.target.value.trim()));
+$("byoKey").addEventListener("change", e => localStorage.setItem("sanwu-groq-key", e.target.value.trim()));
+
+function bubble(cls, text){
+  const p = document.createElement("p");
+  p.className = "msg " + cls; p.textContent = text;
+  log.appendChild(p); log.scrollTop = log.scrollHeight;
+  return p;
+}
+
+async function askWorker(message){
+  const url = $("workerUrl").value.trim();
+  if (!url) throw new Error("先貼上你的 Worker 網址(或切到 B 模式體驗)");
+  const r = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message }),
+  });
+  if (!r.ok) throw new Error("Worker 回應 " + r.status + ",檢查模組 6 的三步驟");
+  return (await r.json()).reply;
+}
+
+async function askGroqDirect(message){
+  const key = $("byoKey").value.trim();
+  if (!key) throw new Error("先貼上你的 Groq API Key(console.groq.com 免費申請)");
+  const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: { "Authorization": "Bearer " + key, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "llama-3.3-70b-versatile",
+      max_tokens: 300,
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        { role: "user", content: message },
+      ],
+    }),
+  });
+  if (r.status === 401) throw new Error("Key 無效(401),確認複製完整");
+  if (!r.ok) throw new Error("Groq 回應 " + r.status);
+  const data = await r.json();
+  return data.choices?.[0]?.message?.content ?? "我恍神了,再問一次好嗎?";
+}
+
+let busy = false;
+async function send(text){
+  const message = (text ?? $("box").value).trim();
+  if (!message || busy) return;
+  if (message.length > 500) return bubble("sys", "訊息太長,500 字以內");
+  $("box").value = "";
+  bubble("user", message);
+  busy = true; $("send").disabled = true;
+  const t = bubble("ai typing", "");
+  t.innerHTML = '<span class="typing"><i></i><i></i><i></i></span>';
+  try {
+    const reply = mode === "worker" ? await askWorker(message) : await askGroqDirect(message);
+    t.classList.remove("typing"); t.textContent = reply;
+  } catch (e) {
+    t.remove();
+    bubble("sys", "小幫手忙線中 — " + e.message);
+  } finally {
+    busy = false; $("send").disabled = false;
+    log.scrollTop = log.scrollHeight;
+  }
+}
+$("send").onclick = () => send();
+$("box").addEventListener("keydown", e => { if (e.key === "Enter") send(); });
+document.querySelectorAll(".quick button").forEach(b => b.onclick = () => send(b.textContent));
+</script>
+</body>
+</html>

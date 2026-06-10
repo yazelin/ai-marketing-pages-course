@@ -1,0 +1,43 @@
+name: Daily Update (Demo 07)
+on:
+  schedule:
+    - cron: "0 0 * * *"   # 每天 UTC 00:00 = 台北 08:00
+  workflow_dispatch:        # 手動按鈕,上課現場示範用
+permissions:
+  contents: write
+concurrency:
+  group: daily-update
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pick today slogan
+        run: |
+          python3 - <<'EOF'
+          import json, datetime, zoneinfo
+          tz = zoneinfo.ZoneInfo("Asia/Taipei")
+          now = datetime.datetime.now(tz)
+          slogans = [
+              "霧還沒散,咖啡先香了。",
+              "今天的山霧,配今天的拿鐵。",
+              "第三天了,熟客都開始有自己的位子。",
+              "週四,適合一個人的吧台時光。",
+              "週五晚上,咖啡因換成故事。",
+              "週末第一杯,留給早起的你。",
+              "最後一天,買一送一,送給還沒來的那個人。",
+          ]
+          i = now.date().toordinal() % len(slogans)
+          json.dump({
+              "slogan": slogans[i],
+              "generated_at": now.strftime("%Y-%m-%d %H:%M (台北時間,由 GitHub Actions 自動更新)"),
+              "day_index": i,
+          }, open("demos/07-auto-update/daily.json", "w"), ensure_ascii=False, indent=2)
+          EOF
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add demos/07-auto-update/daily.json
+          git diff --cached --quiet || git commit -m "demo07: daily slogan update"
+          git push
