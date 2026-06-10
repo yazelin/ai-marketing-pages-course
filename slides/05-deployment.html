@@ -93,6 +93,18 @@
 </section>
 
 <section class="slide">
+  <h2>四個平台都有官方 CLI,同一套邏輯</h2>
+  <table>
+    <tr><th>平台</th><th>CLI</th><th>一次性授權</th><th>agent 部署</th></tr>
+    <tr><td>GitHub Pages</td><td>gh</td><td>gh auth login</td><td>gh repo create + 開 Pages</td></tr>
+    <tr><td>Cloudflare</td><td>wrangler</td><td>wrangler login</td><td>wrangler deploy(模組 6)</td></tr>
+    <tr><td>Vercel</td><td>vercel</td><td>vercel login</td><td>vercel / vercel --prod</td></tr>
+    <tr><td>Render</td><td>render</td><td>render login</td><td>git push 自動佈;CLI 觸發/看 log</td></tr>
+  </table>
+  <p class="sub">通則:授權跑一次、key 永遠不進對話、對外動作放行前看一眼指令。Vercel 甚至有 vercel agent init 專門服務 coding agent。</p>
+</section>
+
+<section class="slide">
   <h2>常見坑</h2>
   <ul class="points">
     <li><strong>404</strong> → index.html 不在 repo 根目錄,或 Pages 還在建置</li>
