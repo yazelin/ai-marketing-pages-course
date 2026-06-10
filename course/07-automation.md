@@ -123,6 +123,12 @@ export default {
 - **每日 AI 圖**(catime 模式):排程腳本呼叫生圖 API(key 放 repo Settings → Secrets,跟模組 6 同一個觀念),存圖 commit。
 - **自動抓資料**:每天抓天氣寫進頁面:「山上 16 度,適合熱拿鐵」。
 
+## 動手做
+
+**任務**:給你的頁加一個 `daily.json` 加一個 GitHub Actions 排程檔,到 repo 的 Actions 頁籤按 Run workflow 手動跑一次。
+**預期成果**:`daily.json` 內容變了,過一兩分鐘頁面也跟著變。
+**卡關怎麼辦**:push 失敗、看到 Permission denied,在 workflow 裡加上 `permissions: contents: write`。
+
 ## 對照成品
 
 `demos/07-auto-update/` — 「今日山霧」頁,標語來自 `daily.json`;本 repo 的 `.github/workflows/daily.yml` 每天台北 08:00 自動改寫它(跟上面範本同一套)。到 repo 的 Actions 頁籤可以看到每天的執行紀錄,也可以按 Run workflow 現場示範。
