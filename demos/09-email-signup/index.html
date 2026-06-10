@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>山霧咖啡 開幕快訊 — 搶先收到開幕券 | 山霧咖啡</title>
+<meta property="og:title" content="山霧咖啡 開幕快訊 — 搶先收到開幕券">
+<meta property="og:description" content="留個 email,開幕第一天的買一送一券先寄給你。">
+<style>
+  :root{
+    --ink:#10221d; --pine:#1d4438; --moss:#2e5c4d; --mist:#9db8ae;
+    --cream:#f4efe4; --paper:#ece5d4; --copper:#c98f4e; --copper-d:#a8743a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:
+      radial-gradient(120% 80% at 50% -20%, rgba(46,92,77,.5), transparent 60%),
+      radial-gradient(80% 60% at 50% 120%, rgba(201,143,78,.12), transparent 55%),
+      var(--ink);
+    color:var(--cream); min-height:100svh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:8vh 6vw;
+  }
+  .brand{font-size:.75rem; letter-spacing:.5em; color:var(--mist); margin-bottom:1.6rem}
+  .medallion{position:relative; width:92px; height:92px; margin-bottom:2rem}
+  .medallion img{
+    width:100%; height:100%; border-radius:50%; object-fit:cover; display:block;
+    border:1px solid rgba(201,143,78,.55);
+    box-shadow:0 0 0 7px rgba(201,143,78,.1), 0 18px 40px -18px rgba(0,0,0,.8);
+  }
+  .medallion .steam{position:absolute; left:50%; top:-6px}
+  .steam i{
+    position:absolute; bottom:0; width:9px; height:40px; border-radius:50%;
+    background:linear-gradient(to top, rgba(244,239,228,0), rgba(244,239,228,.5), rgba(244,239,228,0));
+    filter:blur(4px); opacity:0; transform-origin:bottom center; animation:steam 4.4s ease-in-out infinite;
+  }
+  .steam i:nth-child(1){left:-11px}
+  .steam i:nth-child(2){left:-1px; height:54px; animation-delay:1.4s}
+  .steam i:nth-child(3){left:8px; height:34px; animation-delay:2.6s}
+  @keyframes steam{
+    0%{opacity:0; transform:translateY(4px) scaleY(.6) skewX(0)}
+    25%{opacity:.8} 60%{opacity:.4; transform:translateY(-28px) scaleY(1.05) skewX(-7deg)}
+    100%{opacity:0; transform:translateY(-56px) scaleY(1.2) skewX(6deg)}
+  }
+  h1{
+    font-family:"Noto Serif TC","PMingLiU",serif; font-weight:600;
+    font-size:clamp(1.8rem,5.5vw,2.9rem); line-height:1.4; max-width:16em;
+  }
+  h1 em{font-style:normal; color:var(--copper)}
+  .sub{color:var(--mist); font-size:.92rem; line-height:1.95; max-width:26em; margin-top:1.1rem}
+
+  form{width:min(26rem,100%); margin-top:2.6rem; display:flex; flex-direction:column; gap:.9rem}
+  .field{text-align:left}
+  label{display:block; font-size:.76rem; letter-spacing:.1em; color:var(--mist); margin-bottom:.45rem}
+  input{
+    width:100%; font-family:inherit; font-size:1rem; color:var(--cream);
+    background:rgba(16,34,29,.6); border:1px solid rgba(157,184,174,.3);
+    border-radius:4px; padding:.85rem 1rem; outline:none; transition:border-color .25s;
+  }
+  input:focus{border-color:var(--copper)}
+  /* honeypot:給機器人填的隱形欄位,真人看不到 */
+  .gotcha{position:absolute; left:-9999px; width:1px; height:1px; opacity:0}
+  button{
+    margin-top:.4rem; cursor:pointer; font-family:inherit; font-weight:700;
+    font-size:1rem; letter-spacing:.18em; background:var(--copper); color:var(--ink);
+    border:none; border-radius:4px; padding:1rem; transition:background .25s, transform .15s;
+  }
+  button:hover{background:var(--copper-d)} button:active{transform:scale(.98)}
+  button:disabled{background:#5a5448; color:#2e2b25; cursor:not-allowed}
+  .msg{min-height:1.4em; font-size:.86rem; line-height:1.7; margin-top:.3rem}
+  .msg.ok{color:var(--copper)} .msg.err{color:#e8a0a0}
+  .privacy{font-size:.72rem; color:rgba(157,184,174,.6); line-height:1.8; margin-top:.4rem}
+
+  .done{display:none; flex-direction:column; align-items:center; gap:1rem; width:min(26rem,100%); margin-top:2.6rem}
+  .done.show{display:flex; animation:pop .4s both}
+  @keyframes pop{from{opacity:0; transform:translateY(10px)}to{opacity:1; transform:none}}
+  .done .check{
+    width:60px; height:60px; border-radius:50%; border:2px solid var(--copper);
+    display:flex; align-items:center; justify-content:center; color:var(--copper); font-size:1.8rem;
+  }
+  .done p{color:var(--cream); line-height:1.9}
+  .done .small{color:var(--mist); font-size:.84rem}
+  footer{margin-top:3rem; font-size:.72rem; color:rgba(157,184,174,.5); letter-spacing:.12em; line-height:2}
+  footer a{color:rgba(201,143,78,.8)}
+</style>
+</head>
+<body>
+
+<p class="brand">SANWU COFFEE — 山霧咖啡</p>
+<div class="medallion">
+  <img src="../assets/latte-top.jpg" alt="山霧咖啡拉花">
+  <span class="steam"><i></i><i></i><i></i></span>
+</div>
+<h1>開幕第一天的<em>買一送一券</em>,<br>先寄給你</h1>
+<p class="sub">留個 email,開幕前一晚我們把券和上山路線一起寄到你信箱。不寄廣告轟炸,一週最多一封。</p>
+
+<form id="form" novalidate>
+  <div class="field">
+    <label for="name">怎麼稱呼你(選填)</label>
+    <input id="name" name="name" type="text" autocomplete="name" placeholder="例如:亞澤">
+  </div>
+  <div class="field">
+    <label for="email">你的 Email</label>
+    <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+  </div>
+  <!-- honeypot:真人不會看到也不會填,機器人通常會 -->
+  <input class="gotcha" id="company" name="company" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <button id="submit" type="submit">把開幕券寄給我</button>
+  <p class="msg" id="msg"></p>
+  <p class="privacy">送出代表你同意收到山霧咖啡的開幕通知。隨時可在信中退訂。本頁為課程 demo,請勿填寫真實重要信箱。</p>
+</form>
+
+<div class="done" id="done">
+  <div class="check">✓</div>
+  <p id="doneText">收到了,開幕前我們會寄信給你。</p>
+  <p class="small">山上見。</p>
+</div>
+
+<footer>本頁為課程 demo(模組 9)· 品牌為虛構 · <a href="admin.html">名單後台</a> · <a href="../index.html">回 demo 總覽</a></footer>
+
+<script>
+/* ============ 模組 9 成品:報名頁 → Worker → D1 ============
+   Worker 收 email、驗證、honeypot、限流、去重後寫進 Cloudflare D1。
+   key/資料庫都在 Worker 那邊,這個頁面只負責 POST。 */
+const API = "https://sanwu-signup.yazelinj303.workers.dev";
+
+const $ = id => document.getElementById(id);
+const form = $("form"), msg = $("msg");
+
+function show(text, cls){ msg.textContent = text; msg.className = "msg " + cls; }
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  const email = $("email").value.trim();
+  const name = $("name").value.trim();
+  const company = $("company").value;   // honeypot
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return show("這個 email 看起來怪怪的,再確認一下", "err");
+
+  $("submit").disabled = true; show("寄送中…", "");
+  try {
+    const r = await fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, name, company }),
+    });
+    const data = await r.json();
+    if (r.ok) {
+      form.style.display = "none";
+      $("doneText").textContent = data.already
+        ? "你已經在名單上了,開幕前會收到信。"
+        : (name ? name + ",收到了!開幕前我們會寄信給你。" : "收到了,開幕前我們會寄信給你。");
+      $("done").classList.add("show");
+    } else {
+      show(data.error || "出了點狀況,稍後再試", "err");
+      $("submit").disabled = false;
+    }
+  } catch (err) {
+    show("連不上伺服器,檢查網路再試一次", "err");
+    $("submit").disabled = false;
+  }
+});
+</script>
+</body>
+</html>

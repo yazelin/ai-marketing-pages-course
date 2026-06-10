@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>名單後台 — 山霧咖啡開幕快訊</title>
+<meta name="robots" content="noindex">
+<style>
+  :root{
+    --ink:#10221d; --pine:#1d4438; --moss:#2e5c4d; --mist:#9db8ae;
+    --cream:#f4efe4; --paper:#ece5d4; --copper:#c98f4e; --copper-d:#a8743a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:var(--ink); color:var(--cream); min-height:100svh; padding:5vh 6vw 8vh;
+  }
+  .head{display:flex; flex-wrap:wrap; align-items:baseline; gap:1rem; margin-bottom:2rem}
+  .kicker{font-size:.72rem; letter-spacing:.4em; color:var(--copper)}
+  h1{font-family:"Noto Serif TC","PMingLiU",serif; font-weight:600; font-size:clamp(1.5rem,3.5vw,2.2rem)}
+  .gate{
+    width:min(28rem,100%); border:1px solid rgba(157,184,174,.25); border-radius:6px;
+    background:rgba(46,92,77,.18); padding:1.6rem;
+  }
+  .gate label{display:block; font-size:.78rem; color:var(--mist); letter-spacing:.1em; margin-bottom:.5rem}
+  .gate input{
+    width:100%; font-family:inherit; font-size:.95rem; color:var(--cream);
+    background:rgba(16,34,29,.6); border:1px solid rgba(157,184,174,.3);
+    border-radius:4px; padding:.75rem .9rem; outline:none;
+  }
+  .gate input:focus{border-color:var(--copper)}
+  .gate .note{font-size:.74rem; color:rgba(157,184,174,.7); line-height:1.8; margin-top:.7rem}
+  .bar{display:flex; flex-wrap:wrap; gap:.7rem; align-items:center; margin-bottom:1.4rem}
+  button{
+    cursor:pointer; font-family:inherit; font-weight:700; font-size:.85rem; letter-spacing:.1em;
+    border:none; border-radius:4px; padding:.7rem 1.3rem; transition:background .25s, transform .15s;
+  }
+  button:active{transform:scale(.97)}
+  .btn-go{background:var(--copper); color:var(--ink)} .btn-go:hover{background:var(--copper-d)}
+  .btn-ghost{background:transparent; border:1px solid var(--moss); color:var(--mist)}
+  .btn-ghost:hover{border-color:var(--copper); color:var(--copper)}
+  .count{color:var(--mist); font-size:.85rem; letter-spacing:.08em; margin-left:auto}
+  .msg{font-size:.85rem; line-height:1.7; margin:1rem 0; color:var(--mist)}
+  .msg.err{color:#e8a0a0}
+  table{border-collapse:collapse; width:100%; font-size:.88rem}
+  th,td{text-align:left; padding:.65rem .8rem; border-bottom:1px solid rgba(157,184,174,.16); line-height:1.6}
+  th{color:var(--copper); font-weight:700; letter-spacing:.06em; font-size:.78rem; position:sticky; top:0; background:var(--ink)}
+  td{color:var(--cream)} td .dim{color:var(--mist)}
+  tr:hover td{background:rgba(46,92,77,.14)}
+  .wrap{overflow-x:auto; border:1px solid rgba(157,184,174,.18); border-radius:6px}
+  .hide{display:none}
+  footer{margin-top:3rem; font-size:.72rem; color:rgba(157,184,174,.5); letter-spacing:.12em}
+  footer a{color:rgba(201,143,78,.8)}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <span class="kicker">ADMIN</span>
+  <h1>開幕快訊 — 名單後台</h1>
+</div>
+
+<div class="gate" id="gate">
+  <label for="token">管理密碼(Worker 的 ADMIN_TOKEN)</label>
+  <input id="token" type="password" placeholder="輸入後按下方讀取">
+  <p class="note">密碼存在 Worker 的 Secret 裡,不在這個網頁的程式碼。輸入正確才看得到名單;會記在這台瀏覽器,下次免再輸。</p>
+  <button class="btn-go" id="login" style="margin-top:1rem; width:100%">讀 取 名 單</button>
+  <p class="msg err hide" id="gateErr"></p>
+</div>
+
+<section id="panel" class="hide">
+  <div class="bar">
+    <button class="btn-go" id="refresh">重新整理</button>
+    <button class="btn-ghost" id="csv">匯出 CSV</button>
+    <button class="btn-ghost" id="logout">登出</button>
+    <span class="count" id="count"></span>
+  </div>
+  <div class="wrap">
+    <table>
+      <thead><tr><th>#</th><th>Email</th><th>稱呼</th><th>報名時間</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <p class="msg" id="panelMsg"></p>
+</section>
+
+<footer>本頁為課程 demo(模組 9)· <a href="index.html">回報名頁</a> · <a href="../index.html">demo 總覽</a></footer>
+
+<script>
+/* ============ 模組 9 後台:憑 token 跟 Worker 拿名單 ============
+   Worker 的 GET ?token=xxx 比對 ADMIN_TOKEN(藏在 Secret),對了才回名單。 */
+const API = "https://sanwu-signup.yazelinj303.workers.dev";
+const $ = id => document.getElementById(id);
+let list = [];
+
+function token(){ return localStorage.getItem("sanwu-admin-token") || ""; }
+
+async function load(){
+  const t = $("token").value.trim() || token();
+  if (!t) return fail($("gateErr"), "請先輸入管理密碼");
+  try {
+    const r = await fetch(API + "/list?token=" + encodeURIComponent(t));
+    if (r.status === 401) return fail($("gateErr"), "密碼不對");
+    if (!r.ok) return fail($("gateErr"), "讀取失敗(" + r.status + ")");
+    list = (await r.json()).signups || [];
+    localStorage.setItem("sanwu-admin-token", t);
+    $("gate").classList.add("hide"); $("panel").classList.remove("hide");
+    render();
+  } catch (e) { fail($("gateErr"), "連不上伺服器"); }
+}
+
+function render(){
+  const rows = $("rows"); rows.innerHTML = "";
+  list.forEach((s, i) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td class="dim">${i+1}</td><td>${esc(s.email)}</td>`
+      + `<td>${s.name ? esc(s.name) : '<span class="dim">—</span>'}</td>`
+      + `<td class="dim">${esc(s.created_at)}</td>`;
+    rows.appendChild(tr);
+  });
+  $("count").textContent = list.length + " 筆名單";
+  $("panelMsg").textContent = list.length ? "" : "還沒有人報名 — 去報名頁填一筆再回來看。";
+}
+
+function esc(s){ return String(s ?? "").replace(/[<>&"]/g, c => ({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c])); }
+function fail(el, t){ el.textContent = t; el.classList.remove("hide"); }
+
+function exportCsv(){
+  const head = "email,name,created_at\n";
+  const body = list.map(s =>
+    [s.email, s.name || "", s.created_at].map(v => `"${String(v).replace(/"/g,'""')}"`).join(",")
+  ).join("\n");
+  const blob = new Blob([head + body], { type: "text/csv;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "sanwu-signups.csv";
+  a.click();
+}
+
+$("login").onclick = load;
+$("token").addEventListener("keydown", e => { if (e.key === "Enter") load(); });
+$("refresh").onclick = load;
+$("csv").onclick = exportCsv;
+$("logout").onclick = () => { localStorage.removeItem("sanwu-admin-token"); location.reload(); };
+
+/* 已存過 token 就直接嘗試載入 */
+if (token()) load();
+</script>
+</body>
+</html>

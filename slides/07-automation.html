@@ -49,6 +49,36 @@
   </ul>
 </section>
 
+<section class="slide statement">
+  <p class="kicker">重要</p>
+  <p class="big">GitHub 排程<em>不保證準時</em>,<br>高負載時甚至<em>整次跳過</em>。</p>
+</section>
+
+<section class="slide">
+  <h2>三招加固(由簡到難)</h2>
+  <ul class="points">
+    <li><strong>1. 冪等</strong> — 內容從「今天是哪天」算出,不是「昨天 +1」;漏跑也自癒</li>
+    <li><strong>2. 跑更頻繁 + 沒變不 commit</strong> — catime 跑每小時;漏一次下次補上,不洗版</li>
+    <li><strong>3. 能前端算就別排程</strong> — demo 07 的倒數天數就是瀏覽器即時算,永遠準</li>
+  </ul>
+  <p class="sub">先把內容設計成冪等,一半的排程可靠性問題就消失了。</p>
+</section>
+
+<section class="slide">
+  <h2>更準時:Cloudflare Cron Triggers</h2>
+  <pre># wrangler.toml
+[triggers]
+crons = ["0 0 * * *"]   # 一樣 UTC,台北 08:00
+
+# worker.js
+export default {
+  async scheduled(controller, env, ctx) {
+    /* 排程一到,Cloudflare 自動呼叫這裡 */
+  },
+};</pre>
+  <p class="code-note">已在用 Cloudflare 又在意準時 → Cron Triggers(準時性遠勝 GitHub);只是每天換句文案、想跟 repo 綁一起 → GitHub Actions + 三招加固就夠。</p>
+</section>
+
 <section class="slide">
   <h2>常見坑</h2>
   <ul class="points">

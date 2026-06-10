@@ -1,7 +1,9 @@
 name: Daily Update (Demo 07)
 on:
   schedule:
-    - cron: "0 0 * * *"   # 每天 UTC 00:00 = 台北 08:00
+    # 每 6 小時跑一次(不是每天)——GitHub 排程會延遲/跳過,高頻率 + 冪等讓漏跑自癒。
+    # 內容由日期算出(冪等)且「沒變不 commit」,所以多跑幾次無副作用。見 course/07 招式 2。
+    - cron: "0 */6 * * *"
   workflow_dispatch:        # 手動按鈕,上課現場示範用
 permissions:
   contents: write

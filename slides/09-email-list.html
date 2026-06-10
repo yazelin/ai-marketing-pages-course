@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模組 9 收 email 名單 — AI 互動行銷頁實作課</title>
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<header class="bar"><span>模組 9 — 收 email 名單</span><span><a href="index.html">目錄</a> &nbsp; <span id="counter"></span></span></header>
+
+<section class="slide">
+  <p class="kicker">MODULE 9</p>
+  <h1>收 email 名單:<br>行銷人最該<em>先做</em>的一件事</h1>
+  <p class="sub">報名頁 + 真的存起來的後端 + 看得到、匯得出的後台。全部免費 tier。</p>
+</section>
+
+<section class="slide statement">
+  <p class="kicker">為什麼最實用</p>
+  <p class="big">社群觸及是<em>租</em>來的,<br>email 名單是<em>你自己</em>的。</p>
+</section>
+
+<section class="slide">
+  <h2>兩條路,先選難度</h2>
+  <table>
+    <tr><th></th><th>A. 不部署任何東西</th><th>B. 自己的 Worker + 資料庫</th></tr>
+    <tr><td>做法</td><td>Google 表單 / Formspree / Tally</td><td>Cloudflare Worker + D1</td></tr>
+    <tr><td>名單存哪</td><td>那個服務的後台 / Sheet</td><td>你自己的資料庫,完全掌控</td></tr>
+    <tr><td>適合</td><td>只想快、量不大</td><td>要客製、名單自己擁有、要接系統</td></tr>
+  </table>
+  <p class="sub">先說 A,因為它可能就夠你用了。</p>
+</section>
+
+<section class="slide">
+  <h2>路線 A:零部署</h2>
+  <ul class="points">
+    <li><strong>Google 表單</strong> — 建表單 → 活動頁放「報名」按鈕連過去;名單自動進 Sheet,可下載 CSV。最省事</li>
+    <li><strong>Formspree / Tally</strong> — 想讓報名框長在自己頁面裡,貼一段 form 程式碼即可</li>
+    <li>代價:外觀受限、名單在別人家、量大要付費——對多數小活動完全夠</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>路線 B 架構(模組 6 的延伸)</h2>
+  <pre>報名頁(GitHub Pages)──POST email──> Worker ──寫入──> D1 資料庫
+                                        ↑
+你的後台頁 ──GET ?token=管理密碼────────┘ ──回傳名單──> 看 / 匯 CSV</pre>
+  <ul class="points">
+    <li><strong>報名頁</strong> 純前端 POST email</li>
+    <li><strong>Worker</strong> 驗證 / 擋機器人 / 限流 / 去重 / 寫入;帶密碼的讀取入口給後台</li>
+    <li><strong>D1</strong> Cloudflare 免費 SQL 資料庫,名單存這(每天五百萬次讀寫)</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>部署(wrangler,同模組 6)</h2>
+  <pre>wrangler d1 create sanwu-signups        # 建庫,記下 database_id
+# 把 database_id 填進 wrangler.toml
+wrangler d1 execute sanwu-signups --remote --file ./schema.sql
+wrangler deploy                         # 部署 Worker
+wrangler secret put ADMIN_TOKEN         # 設後台密碼(自己想一組長字串)</pre>
+  <p class="code-note">ADMIN_TOKEN 是後台鑰匙,藏在 Worker Secret,永遠不寫進任何網頁。</p>
+</section>
+
+<section class="slide">
+  <h2>名單拿到了,然後呢</h2>
+  <ul class="points">
+    <li>CSV 匯進 <strong>MailerLite / Mailchimp</strong>(免費 tier 群發數百到數千封)做開幕通知</li>
+    <li>進階:Worker 接 email 寄送 API(Resend / Postmark),報名當下自動寄歡迎信</li>
+    <li>本章先做到「<strong>收得到、看得到、匯得出</strong>」</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>常見坑</h2>
+  <ul class="points">
+    <li><strong>裸表單沒擋機器人</strong> → honeypot 隱形欄位 + 每 IP 限流 + 格式驗證(可加 Turnstile)</li>
+    <li><strong>去重沒做</strong> → 靠資料庫 UNIQUE;回應別洩漏「這 email 在不在名單」</li>
+    <li><strong>管理密碼放進前端</strong> → 只能存 Worker Secret,前端是輸入後傳給 Worker 比對</li>
+    <li><strong>個資責任</strong> → 寫清楚用途與退訂、不收沒必要的、別外流</li>
+  </ul>
+  <span class="demo-tag">對照:demos/09-email-signup(報名頁 + admin.html 後台,接真的 D1)</span>
+</section>
+<div class="progress"><i id="prog"></i></div>
+<p class="navhint">← → 翻頁</p>
+<script src="deck.js"></script>
+</body>
+</html>
