@@ -1,5 +1,13 @@
 # 執行日誌
 
+## 2026-06-10(下午,續 2)— 補模組 6/7 可動 demo
+
+使用者問「有 AI 的 demo?06/07 在 demos 嗎?」——原設計(design.md)模組 6/7 只附範本不做 demo,現在補成品:
+
+- **demos/06-ai-helper「問山霧」**:同一個聊天 UI 兩種接法。A 模式貼學員自己的 Worker 網址(正式架構,folder 內附完整 worker.js);B 模式貼自己的 Groq key 瀏覽器直連(先 `curl -X OPTIONS` 實測過 Groq CORS 為 `*` 才動工)。key 都不在頁面程式碼裡,可放公開 Pages。驗證:未設定送出有指引、假 key 回 401 白話提示、quick 鈕三顆、模式記憶 localStorage。真 key 的 happy path 留給使用者驗(我沒有 key)。
+- **demos/07-auto-update「今日山霧」**:daily.json + `.github/workflows/daily.yml`(cron 每天 UTC 00:00 = 台北 08:00 + workflow_dispatch),Asia/Taipei 時區寫更新時間戳。頁面 fetch daily.json 加時間戳防快取;file:// 直開 fallback 內建文案。
+- demo 總覽 +2 卡、course/slides 06/07 補「對照成品」、PDF 重產(26 頁)。
+
 ## 2026-06-10(下午,續)— 上線 GitHub Pages
 
 使用者要求學員看得到:repo 轉 public(gh api PATCH private=false;此版 gh repo edit 沒有 visibility consequences flag)+ 開 Pages(gh api POST /pages,legacy build,main 根目錄)。加了課程站首頁 index.html 與 .nojekyll。模組 5 增補「AI agent + gh CLI 一句話部署」一節(回應使用者問「怎麼在 Claude/Codex 用 gh cli」),講義 PDF 重產(26 頁)。上線驗證:10 條 URL 全 200;線上 demo 01 用瀏覽器實測 — 粒子 54,593 非透明像素、hero 圖載入、蒸氣 3 縷、倒數正確、console 零錯誤。
