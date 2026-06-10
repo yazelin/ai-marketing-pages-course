@@ -113,17 +113,49 @@ if (token !== env.ADMIN_TOKEN) return json({ error: "unauthorized" }, 401);
 
 這道門擋在最前面,後面的 token gate 可留可拿。
 
+### 做法三:Google 登入白名單(每人實名、免域名,推薦的中間選項)
+
+做法二的 Cloudflare Access 很完整,但要有自訂網域。如果你**沒有域名、又不想用一把共享密碼**,有個甜蜜點:讓後台用 **Google 帳號登入**,只放行你白名單裡的 email。每個人各自實名、隨時加人/踢人、不用域名、免費,直接在 GitHub Pages 就能跑。
+
+**原理**:前端用 Google 的登入元件(Google Identity Services),使用者按「用 Google 登入」→ 拿到一個 Google 簽名的身分憑證(ID token,一個 JWT)→ 傳給你的 Worker → Worker 驗證簽名 + 比對 email 是否在白名單 → 對了才回名單。
+```text
+管理員 ──Google 登入──> 拿到 Google 簽的 ID token ──> Worker 驗簽 + 查白名單 ──> 回名單
+```
+關鍵:前端只需要一個 **Client ID(公開、可放網頁原始碼,不是密碼)**;這個流程**不需要 client secret**。
+
+**步驟一:建一個 Google OAuth Client ID(這就是「在哪建」的答案)**
+
+1. 開 https://console.cloud.google.com/apis/credentials ,左上角建立或選一個專案
+2. 若第一次用,先設「**OAuth 同意畫面**」:User Type 選**外部**、填 App 名稱與你的 email、其餘一路下一步(不用送審)
+3. 回「憑證」→「**+ 建立憑證**」→「**OAuth 用戶端 ID**」
+4. 應用程式類型選「**網頁應用程式**」
+5. 「**已授權的 JavaScript 來源**」加上你後台所在的網域(**只填協定+網域,不含路徑**),例如 `https://你的帳號.github.io`;要本機測再加 `http://localhost:8000`
+6. 按建立 → 跳出視窗顯示 **用戶端 ID** `xxxx.apps.googleusercontent.com` → 複製起來。**這串是公開的,放進前端沒關係**。
+
+**步驟二:前端放 Google 登入**
+
+```text
+給 AI:在我的後台頁用 Google Identity Services 做登入:
+- 引入 https://accounts.google.com/gsi/client
+- 用我的 Client ID 渲染「用 Google 登入」按鈕
+- 登入成功拿到 credential(ID token),帶 Authorization: Bearer <token> 去打 Worker 的 /list
+- 被擋(401)就顯示「你的 Google 帳號不在白名單」
+```
+
+**步驟三:Worker 驗 token + 白名單**
+
+Worker 收到 Bearer token 後:從 Google 的公鑰驗 JWT 簽名、檢查 `aud` 等於你的 Client ID、檢查 email 在白名單(白名單放 Worker 環境變數 `ALLOWED_EMAILS`,逗號分隔)。**改白名單就能即時加人/踢人**,不用動程式。
+
 ### 怎麼選
 
-| | 做法一:token 標頭 | 做法二:Cloudflare Access |
-|---|---|---|
-| 門檻 | 一把共享密碼 | 每個人實名登入 |
-| 適合 | 活動報名名單、自己看 | 真實客戶個資、多人、要稽核 |
-| 成本 | 零,本章已內建 | 後台得搬上 Cloudflare + 一個自訂網域 |
-| 踢人 | 換 token,全員重給一次 | 後台移除某 email,即時生效 |
-| 有沒有存取紀錄 | 沒有 | 有,每次登入都記錄 |
+| | 做法一:token 標頭 | 做法三:Google 登入 | 做法二:Cloudflare Access |
+|---|---|---|---|
+| 門檻 | 一把共享密碼 | 每人用 Google 實名 | 每人實名 |
+| 要域名嗎 | 不用 | **不用** | 要(Cloudflare 託管) |
+| 加人/踢人 | 換 token 全員重給 | 改白名單即時 | 後台移除即時 |
+| 成本 | 零,本章已內建 | 零(只要建個 Client ID) | 要把後台搬上 Cloudflare |
 
-一句話:**自己看的活動名單,做法一就好;要對客戶負責的名單,升級做法二。** 別把真實客戶個資長期只靠一把共享 token 守著。
+一句話:**自己看就做法一;沒域名又想實名登入用做法三(Google);有 Cloudflare 域名、要完整稽核用做法二。** 別把真實客戶個資長期只靠一把共享 token 守著。
 
 ## 名單拿到了,然後呢
 
