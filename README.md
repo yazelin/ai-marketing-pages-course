@@ -1,12 +1,15 @@
-# AI 互動行銷頁實作課 — 公開教材
+# AI 互動行銷頁實作課
 
-不寫程式,做出會動、會玩、能上線的活動網頁。給行銷人的 AI 實作課。
+> 分享目前規劃的「AI & 行銷人」主題 AI Coding 課程內容
 
-- 課程站:https://yazelin.github.io/ai-marketing-pages-course/ 
-- 上課簡報:https://yazelin.github.io/ai-marketing-pages-course/slides/ 
-- 講義 PDF:https://yazelin.github.io/ai-marketing-pages-course/handout.pdf 
-- Demo 總覽:https://yazelin.github.io/ai-marketing-pages-course/demos/ 
-- 行銷頁健檢器(做完自檢用):https://yazelin.github.io/marketing-page-checker/ 
+不寫程式,做出會動、會玩、能上線的活動網頁。
+給行銷人的 AI 實作課。
+
+- 課程首頁 : https://yazelin.github.io/ai-marketing-pages-course/ 
+- 線上課程簡報 : https://yazelin.github.io/ai-marketing-pages-course/slides/ 
+- 下載課程講義 PDF : https://yazelin.github.io/ai-marketing-pages-course/handout.pdf 
+- 實作 Demo 總覽 : https://yazelin.github.io/ai-marketing-pages-course/demos/ 
+- 行銷頁健檢器(做完自檢用) : https://yazelin.github.io/marketing-page-checker/ 
 
 ## 內容
 
