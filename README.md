@@ -6,21 +6,27 @@
 - 上課簡報:https://yazelin.github.io/ai-marketing-pages-course/slides/ 
 - 講義 PDF:https://yazelin.github.io/ai-marketing-pages-course/handout.pdf 
 - Demo 總覽:https://yazelin.github.io/ai-marketing-pages-course/demos/ 
+- 行銷頁健檢器(做完自檢用):https://yazelin.github.io/marketing-page-checker/ 
 
 ## 內容
 
 ```
 index.html      課程站首頁
-slides/         上課簡報(10 份,瀏覽器直接放映,← → 翻頁)
-handout.pdf     講義 PDF(26 頁 A4)
-course/         全部模組講義 markdown(模組 0-8)
-demos/          山霧咖啡五件套 demo,全部零 build
+slides/         上課簡報(11 份,瀏覽器直接放映,← → 翻頁)
+handout.pdf     講義 PDF(A4,模組 0-10)
+course/         全部模組講義 markdown(模組 0-10)
+demos/          山霧咖啡 demo 六件套,全部零 build
   01-landing/      活動 landing(AI 生成 hero + 蒸氣 + 粒子 + 倒數)
   02-lucky-draw/   拉霸抽獎(機率表 + 優惠碼 + 防重抽)
   03-ai-quiz/      心理測驗(加權計分 + canvas 分享圖卡)
   06-ai-helper/    AI 活動小幫手(Worker 代理 / BYO key,附 worker.js)
-  07-auto-update/  自動更新頁(本 repo 的 Actions 每天台北 08:00 真的在跑)
+  07-auto-update/  自動更新頁(本 repo 的 Actions 排程真的在跑)
+  09-email-signup/ 收 email 名單(報名頁 + Worker + D1 + 後台)
 ```
+
+## 延伸:行銷頁健檢器
+
+做完你的活動頁,貼網址到 [行銷頁健檢器](https://yazelin.github.io/marketing-page-checker/) 自檢——OG/SEO/CTA/速度/體質/追蹤給分數與白話修法。它本身就是用本課教的 GitHub Pages + Cloudflare Worker 架構做的,是「學 → 做 → 自檢」閉環的最後一塊。
 
 ## 在自己電腦上玩
 
