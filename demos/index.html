@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>課程 Demo 總覽 — AI 互動行銷頁實作課</title>
+<style>
+  :root{
+    --ink:#10221d; --pine:#1d4438; --moss:#2e5c4d; --mist:#9db8ae;
+    --cream:#f4efe4; --paper:#ece5d4; --copper:#c98f4e; --copper-d:#a8743a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:
+      radial-gradient(120% 90% at 80% -10%, rgba(157,184,174,.14), transparent 60%),
+      radial-gradient(100% 80% at 10% 110%, rgba(201,143,78,.10), transparent 55%),
+      var(--ink);
+    color:var(--cream); min-height:100vh; padding:9vh 6vw 12vh;
+  }
+  .kicker{
+    font-size:.78rem; letter-spacing:.42em; color:var(--mist);
+    text-transform:uppercase; margin-bottom:1.2rem;
+  }
+  h1{
+    font-family:"Noto Serif TC","PMingLiU",serif; font-weight:600;
+    font-size:clamp(1.9rem,4.5vw,3.2rem); line-height:1.25; margin-bottom:.8rem;
+  }
+  .sub{color:var(--mist); max-width:34em; line-height:1.9; margin-bottom:5rem; font-size:.95rem}
+  .grid{display:grid; gap:1.4rem; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); max-width:1080px}
+  a.card{
+    display:block; text-decoration:none; color:var(--cream);
+    border:1px solid rgba(157,184,174,.22); border-radius:4px;
+    padding:2.2rem 1.9rem 2rem; position:relative; overflow:hidden;
+    background:linear-gradient(160deg, rgba(46,92,77,.28), rgba(16,34,29,.1));
+    transition:transform .35s cubic-bezier(.2,.8,.2,1), border-color .35s;
+  }
+  a.card:hover{transform:translateY(-5px); border-color:var(--copper)}
+  a.card::after{
+    content:""; position:absolute; inset:auto 0 0 0; height:2px;
+    background:linear-gradient(90deg, var(--copper), transparent 70%);
+    transform:scaleX(0); transform-origin:left; transition:transform .45s;
+  }
+  a.card:hover::after{transform:scaleX(1)}
+  .num{
+    font-family:"Noto Serif TC",serif; font-size:.8rem; color:var(--copper);
+    letter-spacing:.3em; margin-bottom:1.1rem;
+  }
+  .card h2{font-family:"Noto Serif TC",serif; font-weight:600; font-size:1.3rem; margin-bottom:.7rem}
+  .card p{color:var(--mist); font-size:.88rem; line-height:1.85}
+  .tag{
+    display:inline-block; margin-top:1.3rem; font-size:.72rem; letter-spacing:.18em;
+    color:var(--copper); border:1px solid rgba(201,143,78,.45); border-radius:99px;
+    padding:.3rem .9rem;
+  }
+  footer{margin-top:6rem; color:rgba(157,184,174,.55); font-size:.78rem; letter-spacing:.12em; line-height:2}
+</style>
+</head>
+<body>
+  <p class="kicker">AI Marketing Pages Course — Demos</p>
+  <h1>課程 Demo 總覽</h1>
+  <p class="sub">三個零 build 的完整成品,全部雙擊即可開啟。虛構品牌「山霧咖啡 SANWU COFFEE」貫穿,每一個都對應課程模組,看完講義就來這裡對答案。</p>
+
+  <div class="grid">
+    <a class="card" href="01-landing/index.html">
+      <p class="num">DEMO 01 · 模組 1+2+3</p>
+      <h2>開幕週活動頁</h2>
+      <p>AI 對話生成的單檔 landing page:星座連線粒子 hero、開幕倒數、活動亮點、置底 CTA、完整 OG tags。</p>
+      <span class="tag">LANDING</span>
+    </a>
+    <a class="card" href="02-lucky-draw/index.html">
+      <p class="num">DEMO 02 · 模組 4A</p>
+      <h2>山霧拉霸 抽開幕禮</h2>
+      <p>三輪拉霸抽獎:機率表就在程式碼最上方、中獎發優惠碼、localStorage 每日限抽一次、大獎撒彩帶。</p>
+      <span class="tag">LUCKY DRAW</span>
+    </a>
+    <a class="card" href="03-ai-quiz/index.html">
+      <p class="num">DEMO 03 · 模組 4B</p>
+      <h2>你是哪一型咖啡人</h2>
+      <p>五題心理測驗、四種結果型、加權計分;結果頁用 canvas 即時畫出 1080x1350 分享圖卡,一鍵下載。</p>
+      <span class="tag">QUIZ</span>
+    </a>
+  </div>
+
+  <footer>
+    SANWU COFFEE 為課程虛構品牌 · 所有 demo 零依賴、可離線開啟<br>
+    repo:ai-marketing-pages-course / 講義在 course/,決策記錄在 docs/
+  </footer>
+</body>
+</html>

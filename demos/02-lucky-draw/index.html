@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>山霧拉霸 — 抽你的開幕禮 | 山霧咖啡</title>
+<meta property="og:title" content="山霧拉霸 — 抽你的開幕禮">
+<meta property="og:description" content="開幕週限定,每天一次,拉中招待你。">
+<meta property="og:image" content="https://example.com/og-draw-1200x630.jpg">
+<style>
+  :root{
+    --ink:#10221d; --pine:#1d4438; --moss:#2e5c4d; --mist:#9db8ae;
+    --cream:#f4efe4; --paper:#ece5d4; --copper:#c98f4e; --copper-d:#a8743a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:
+      radial-gradient(120% 80% at 50% -20%, rgba(46,92,77,.5), transparent 60%),
+      radial-gradient(80% 60% at 50% 120%, rgba(201,143,78,.12), transparent 55%),
+      var(--ink);
+    color:var(--cream); min-height:100svh;
+    display:flex; flex-direction:column; align-items:center;
+    padding:7vh 6vw 10vh; text-align:center;
+  }
+  .brand{font-size:.75rem; letter-spacing:.5em; color:var(--mist); margin-bottom:1.6rem}
+  h1{
+    font-family:"Noto Serif TC","PMingLiU",serif; font-weight:600;
+    font-size:clamp(1.9rem,6vw,3rem); line-height:1.3;
+  }
+  h1 em{font-style:normal; color:var(--copper)}
+  .sub{color:var(--mist); margin-top:.9rem; font-size:.9rem; line-height:1.9}
+
+  .machine{
+    margin-top:3rem; padding:1.6rem; border-radius:10px;
+    border:1px solid rgba(201,143,78,.4);
+    background:linear-gradient(170deg, rgba(46,92,77,.45), rgba(16,34,29,.6));
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.8), inset 0 1px 0 rgba(244,239,228,.08);
+  }
+  .reels{display:flex; gap:.9rem}
+  .reel{
+    width:clamp(82px,22vw,110px); height:clamp(82px,22vw,110px);
+    border-radius:6px; background:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:inset 0 6px 18px rgba(16,34,29,.35);
+    overflow:hidden;
+  }
+  .reel svg{width:58%; height:58%; transition:transform .1s}
+  .reel.spin svg{animation:blur .09s linear infinite}
+  @keyframes blur{
+    0%{transform:translateY(-120%); opacity:.2}
+    50%{transform:translateY(0); opacity:1}
+    100%{transform:translateY(120%); opacity:.2}
+  }
+  .lever{
+    margin-top:1.6rem; width:100%; border:none; cursor:pointer;
+    background:var(--copper); color:var(--ink); font-weight:700;
+    font-size:1.05rem; letter-spacing:.3em; padding:1.1rem; border-radius:4px;
+    font-family:inherit; transition:background .25s, transform .15s;
+  }
+  .lever:hover{background:var(--copper-d)}
+  .lever:active{transform:scale(.97)}
+  .lever:disabled{background:#5a5448; color:#2e2b25; cursor:not-allowed; letter-spacing:.15em}
+
+  .result{
+    margin-top:2.4rem; min-height:9rem; max-width:30rem;
+    opacity:0; transform:translateY(14px); transition:opacity .5s, transform .5s;
+  }
+  .result.show{opacity:1; transform:none}
+  .result .headline{
+    font-family:"Noto Serif TC",serif; font-weight:600;
+    font-size:clamp(1.3rem,4.5vw,1.8rem); margin-bottom:.7rem;
+  }
+  .result .headline.win{color:var(--copper)}
+  .result p{color:var(--mist); font-size:.88rem; line-height:1.9}
+  .coupon{
+    margin-top:1.1rem; display:inline-block; padding:.85rem 1.8rem;
+    border:1.5px dashed var(--copper); border-radius:4px; background:rgba(201,143,78,.08);
+    font-family:"Courier New",monospace; font-size:1.25rem; letter-spacing:.18em;
+    color:var(--cream); user-select:all;
+  }
+  .hint{margin-top:.8rem; font-size:.76rem; color:rgba(157,184,174,.7); letter-spacing:.08em}
+  .odds{
+    margin-top:3.2rem; font-size:.74rem; color:rgba(157,184,174,.55);
+    letter-spacing:.1em; line-height:2;
+  }
+  footer{margin-top:3rem; font-size:.72rem; color:rgba(157,184,174,.4); letter-spacing:.12em}
+  footer a{color:rgba(201,143,78,.7)}
+  #confetti{position:fixed; inset:0; pointer-events:none; z-index:90}
+</style>
+</head>
+<body>
+
+<p class="brand">SANWU COFFEE — 山霧咖啡</p>
+<h1>山霧拉霸<br><em>抽</em>你的開幕禮</h1>
+<p class="sub">開幕週限定,每天一次。<br>三杯咖啡排成一排,這週的咖啡我們請。</p>
+
+<div class="machine">
+  <div class="reels">
+    <div class="reel" id="r0"></div>
+    <div class="reel" id="r1"></div>
+    <div class="reel" id="r2"></div>
+  </div>
+  <button class="lever" id="lever">拉 一 把</button>
+</div>
+
+<div class="result" id="result"></div>
+
+<p class="odds">中獎機率公開:大獎 5% · 小獎 25% · 銘謝惠顧 70%<br>優惠碼限開幕週到店出示,一日一抽。</p>
+<footer>本頁為課程 demo,品牌為虛構 · <a href="../index.html">回 demo 總覽</a></footer>
+
+<canvas id="confetti"></canvas>
+
+<script>
+/* ================= 機率表(要調整中獎率改這裡就好) =================
+   weight 為相對權重,加總不必是 100。 */
+const PRIZES = [
+  { id:"grand", weight:5,  label:"大獎 — 整週買一送一券",
+    desc:"三杯山霧排成一排。開幕週每天來,每天都請你第二杯。",
+    coupon:true },
+  { id:"small", weight:25, label:"小獎 — 任一飲品折 20 元",
+    desc:"霧裡撿到糖。出示優惠碼,這杯幫你折二十。",
+    coupon:true },
+  { id:"none",  weight:70, label:"霧太濃,沒對齊",
+    desc:"別走,明天霧散一點再來一把。每天都有一次機會。",
+    coupon:false },
+];
+const DAILY_LIMIT_KEY = "sanwu-draw-date";   // localStorage 防重抽(模組 4 坑 5:用 localStorage 不用 sessionStorage)
+
+/* ============ 轉輪符號(inline SVG:咖啡 / 蛋糕 / 星 / 葉) ============ */
+const SYM = {
+  coffee:`<svg viewBox="0 0 24 24" fill="none" stroke="#1d4438" stroke-width="1.6" stroke-linecap="round"><path d="M4 9h12v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V9z"/><path d="M16 10h2a2.5 2.5 0 0 1 0 5h-2"/><path d="M8 5c0-1 .8-1 .8-2M12 5c0-1 .8-1 .8-2"/></svg>`,
+  cake:`<svg viewBox="0 0 24 24" fill="none" stroke="#a8743a" stroke-width="1.6" stroke-linecap="round"><path d="M4 19h16M5 19v-6h14v6M12 9v4M12 9a1.8 1.8 0 0 0 1.8-1.8C13.8 6 12 4.5 12 4.5s-1.8 1.5-1.8 2.7A1.8 1.8 0 0 0 12 9z"/><path d="M5 15c1.5 1.4 3-1.4 4.5 0s3-1.4 4.5 0 3-1.4 4.5 0"/></svg>`,
+  star:`<svg viewBox="0 0 24 24" fill="none" stroke="#c98f4e" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.8l-5.2 2.8 1-5.8-4.3-4.1 5.9-.8z"/></svg>`,
+  leaf:`<svg viewBox="0 0 24 24" fill="none" stroke="#2e5c4d" stroke-width="1.6" stroke-linecap="round"><path d="M19 5C9 5 5 10 5 19c9 0 14-4 14-14z"/><path d="M5 19C9 14 13 11 17 7"/></svg>`,
+};
+const KEYS = Object.keys(SYM);
+
+/* ============ 抽獎邏輯:先按機率決定結果,再讓轉輪演出來 ============ */
+function pickPrize(){
+  const total = PRIZES.reduce((s,p)=>s+p.weight,0);
+  let r = Math.random()*total;
+  for (const p of PRIZES){ if ((r-=p.weight) < 0) return p; }
+  return PRIZES.at(-1);
+}
+function reelFaces(prize){
+  const pick = a => a[Math.floor(Math.random()*a.length)];
+  if (prize.id === "grand") return ["coffee","coffee","coffee"];
+  if (prize.id === "small"){
+    const s = pick(KEYS), others = KEYS.filter(k=>k!==s);
+    const faces = [s, s, pick(others)];
+    return faces.sort(()=>Math.random()-.5);
+  }
+  const shuffled = [...KEYS].sort(()=>Math.random()-.5);   // 三個全不同,輸得誠實
+  return shuffled.slice(0,3);
+}
+function couponCode(){
+  const abc = "ACDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let s = "";
+  for (let i=0;i<4;i++) s += abc[Math.floor(Math.random()*abc.length)];
+  return "SANWU-" + s;
+}
+
+/* ============ 演出 ============ */
+const reels = [0,1,2].map(i => document.getElementById("r"+i));
+const lever = document.getElementById("lever");
+const result = document.getElementById("result");
+reels.forEach((r,i) => r.innerHTML = SYM[KEYS[i % KEYS.length]]);
+
+function todayStr(){ return new Date().toISOString().slice(0,10); }
+function drawnToday(){ return localStorage.getItem(DAILY_LIMIT_KEY) === todayStr(); }
+if (new URLSearchParams(location.search).has("reset"))   // 驗收用:?reset 清除今日紀錄
+  localStorage.removeItem(DAILY_LIMIT_KEY);
+function lockIfDrawn(){
+  if (drawnToday()){
+    lever.disabled = true;
+    lever.textContent = "今天抽過了,明天見";
+  }
+}
+lockIfDrawn();
+
+lever.addEventListener("click", () => {
+  if (drawnToday()) return lockIfDrawn();
+  lever.disabled = true; lever.textContent = "轉 動 中";
+  result.classList.remove("show");
+
+  const prize = pickPrize();
+  const faces = reelFaces(prize);
+  const timers = reels.map((r, i) => {
+    r.classList.add("spin");
+    return setInterval(() => {
+      r.innerHTML = SYM[KEYS[Math.floor(Math.random()*KEYS.length)]];
+    }, 80);
+  });
+  faces.forEach((face, i) => {
+    setTimeout(() => {
+      clearInterval(timers[i]);
+      reels[i].classList.remove("spin");
+      reels[i].innerHTML = SYM[face];
+      if (i === 2) settle(prize);
+    }, 1100 + i*650);
+  });
+});
+
+function settle(prize){
+  localStorage.setItem(DAILY_LIMIT_KEY, todayStr());
+  const win = prize.coupon;
+  result.innerHTML = `
+    <p class="headline ${win?"win":""}">${prize.label}</p>
+    <p>${prize.desc}</p>
+    ${win ? `<div class="coupon">${couponCode()}</div>
+             <p class="hint">截圖此畫面,開幕週到店出示</p>` : ""}`;
+  result.classList.add("show");
+  lever.textContent = "今天抽過了,明天見";
+  if (prize.id === "grand") confettiBurst(180);
+  else if (prize.id === "small") confettiBurst(70);
+}
+
+/* ============ 零依賴 confetti ============ */
+function confettiBurst(count){
+  const cv = document.getElementById("confetti");
+  const ctx = cv.getContext("2d");
+  cv.width = innerWidth; cv.height = innerHeight;
+  const colors = ["#c98f4e","#f4efe4","#9db8ae","#2e5c4d","#a8743a"];
+  const ps = Array.from({length:count}, () => ({
+    x: innerWidth/2 + (Math.random()-.5)*120,
+    y: innerHeight*.45,
+    vx: (Math.random()-.5)*11,
+    vy: -(Math.random()*10+5),
+    w: Math.random()*7+4, h: Math.random()*5+3,
+    rot: Math.random()*Math.PI, vr: (Math.random()-.5)*.3,
+    c: colors[Math.floor(Math.random()*colors.length)],
+    life: 1,
+  }));
+  (function tick(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    let alive = false;
+    for (const p of ps){
+      p.vy += .28; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= .006;
+      if (p.life > 0 && p.y < cv.height + 20){
+        alive = true;
+        ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+        ctx.globalAlpha = Math.max(p.life,0);
+        ctx.fillStyle = p.c; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+        ctx.restore();
+      }
+    }
+    if (alive) requestAnimationFrame(tick);
+    else ctx.clearRect(0,0,cv.width,cv.height);
+  })();
+}
+</script>
+</body>
+</html>

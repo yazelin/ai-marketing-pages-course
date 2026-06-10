@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你是哪一型咖啡人 — 山霧咖啡 開幕心理測驗</title>
+<meta property="og:title" content="你是哪一型咖啡人?">
+<meta property="og:description" content="五題測出你的咖啡人格,山霧咖啡開幕週用對的那杯招待你。">
+<meta property="og:image" content="https://example.com/og-quiz-1200x630.jpg">
+<style>
+  :root{
+    --ink:#10221d; --pine:#1d4438; --moss:#2e5c4d; --mist:#9db8ae;
+    --cream:#f4efe4; --paper:#ece5d4; --copper:#c98f4e; --copper-d:#a8743a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:
+      radial-gradient(110% 70% at 90% -10%, rgba(157,184,174,.35), transparent 55%),
+      radial-gradient(90% 60% at 0% 110%, rgba(201,143,78,.18), transparent 50%),
+      var(--paper);
+    color:var(--ink); min-height:100svh;
+    display:flex; flex-direction:column; align-items:center; padding:7vh 6vw 9vh;
+  }
+  .brand{font-size:.75rem; letter-spacing:.5em; color:var(--moss); margin-bottom:1.4rem}
+  .stage{width:min(34rem,100%)}
+
+  /* intro */
+  h1{
+    font-family:"Noto Serif TC","PMingLiU",serif; font-weight:600; text-align:center;
+    font-size:clamp(1.9rem,6vw,2.9rem); line-height:1.35; color:var(--pine);
+  }
+  h1 em{font-style:normal; color:var(--copper-d)}
+  .intro p{
+    text-align:center; color:var(--moss); margin-top:1.1rem;
+    font-size:.92rem; line-height:2;
+  }
+  .btn{
+    display:block; width:100%; margin-top:2.4rem; border:none; cursor:pointer;
+    background:var(--pine); color:var(--cream); font-family:inherit; font-weight:700;
+    font-size:1rem; letter-spacing:.25em; padding:1.1rem; border-radius:4px;
+    transition:background .25s, transform .15s;
+  }
+  .btn:hover{background:var(--moss)} .btn:active{transform:scale(.98)}
+  .btn.copper{background:var(--copper); color:var(--ink)}
+  .btn.copper:hover{background:var(--copper-d)}
+  .btn.ghost{background:transparent; border:1px solid var(--moss); color:var(--moss)}
+
+  /* quiz */
+  .progress{height:3px; background:rgba(29,68,56,.15); border-radius:99px; margin-bottom:2.6rem; overflow:hidden}
+  .progress i{display:block; height:100%; background:var(--copper); width:0; transition:width .4s cubic-bezier(.2,.8,.2,1)}
+  .qno{font-family:"Noto Serif TC",serif; color:var(--copper-d); letter-spacing:.3em; font-size:.8rem; margin-bottom:1rem}
+  .qtext{
+    font-family:"Noto Serif TC",serif; font-weight:600; color:var(--pine);
+    font-size:clamp(1.25rem,4vw,1.6rem); line-height:1.6; margin-bottom:2rem; min-height:4.6em;
+  }
+  .opt{
+    display:block; width:100%; text-align:left; cursor:pointer; font-family:inherit;
+    background:rgba(244,239,228,.7); border:1px solid rgba(29,68,56,.25); color:var(--ink);
+    border-radius:4px; padding:1.05rem 1.3rem; margin-bottom:.85rem;
+    font-size:.95rem; line-height:1.7; transition:border-color .2s, background .2s, transform .15s;
+  }
+  .opt:hover{border-color:var(--copper); background:var(--cream)}
+  .opt:active{transform:scale(.985)}
+  .fade{animation:fade .45s both}
+  @keyframes fade{from{opacity:0; transform:translateY(16px)}to{opacity:1; transform:none}}
+
+  /* result */
+  .rkicker{text-align:center; font-size:.78rem; letter-spacing:.42em; color:var(--moss); margin-bottom:1rem}
+  .rtype{
+    font-family:"Noto Serif TC",serif; font-weight:600; text-align:center;
+    font-size:clamp(2rem,7vw,3rem); color:var(--pine); margin-bottom:1.4rem;
+  }
+  .rdesc{text-align:center; color:var(--ink); font-size:.95rem; line-height:2.1; margin-bottom:.4rem}
+  .rdrink{
+    text-align:center; margin-top:1.4rem; padding:1rem;
+    border-top:1px solid rgba(29,68,56,.2); border-bottom:1px solid rgba(29,68,56,.2);
+    color:var(--copper-d); font-size:.9rem; letter-spacing:.06em;
+  }
+  #card{
+    display:block; width:min(21rem,84vw); margin:2.2rem auto 0; border-radius:6px;
+    box-shadow:0 24px 60px -24px rgba(16,34,29,.55);
+  }
+  .hide{display:none}
+  footer{margin-top:auto; padding-top:3rem; font-size:.72rem; color:rgba(46,92,77,.6); letter-spacing:.12em}
+  footer a{color:var(--copper-d)}
+</style>
+</head>
+<body>
+
+<p class="brand">SANWU COFFEE — 山霧咖啡</p>
+
+<div class="stage">
+
+  <!-- 開場 -->
+  <section id="intro" class="intro fade">
+    <h1>你是哪一型<em>咖啡人</em>?</h1>
+    <p>五個日常瞬間,測出你的咖啡人格。<br>開幕週帶著結果來,我們用對的那杯招待你。</p>
+    <button class="btn" id="start">開 始 測 驗</button>
+  </section>
+
+  <!-- 題目 -->
+  <section id="quiz" class="hide">
+    <div class="progress"><i id="bar"></i></div>
+    <p class="qno" id="qno"></p>
+    <p class="qtext" id="qtext"></p>
+    <div id="opts"></div>
+  </section>
+
+  <!-- 結果 -->
+  <section id="resultPage" class="hide">
+    <p class="rkicker">你 的 咖 啡 人 格</p>
+    <p class="rtype" id="rtype"></p>
+    <p class="rdesc" id="rdesc"></p>
+    <p class="rdrink" id="rdrink"></p>
+    <canvas id="card" width="1080" height="1350"></canvas>
+    <button class="btn copper" id="save">儲 存 結 果 圖 卡</button>
+    <button class="btn ghost" id="again">再 測 一 次</button>
+  </section>
+
+</div>
+
+<footer>本頁為課程 demo,品牌為虛構 · <a href="../index.html">回 demo 總覽</a></footer>
+
+<script>
+/* ============ 題庫(模組 4B:這份 JSON 就是用 AI 生的,行銷人的主場) ============
+   每個選項的 w 是對四型的加權:R 儀式感 / E 效率 / S 社交 / A 探險 */
+const QUESTIONS = [
+  { q:"週六早上九點,你醒來的第一件事?",
+    o:[ {t:"磨豆、燒水,把早晨過成一套順序", w:{R:2}},
+        {t:"按下膠囊機,十分鐘後已經在回訊息", w:{E:2}},
+        {t:"揪人:誰要一起去那間新開的店", w:{S:2}} ]},
+  { q:"菜單上出現一支沒喝過的豆子,標著「實驗批次」。你?",
+    o:[ {t:"就它了,沒喝過的最想喝", w:{A:2}},
+        {t:"先問味道再決定,踩雷很浪費", w:{E:1,R:1}},
+        {t:"問店員他自己最喜歡哪支", w:{S:2}} ]},
+  { q:"理想的咖啡店座位是?",
+    o:[ {t:"窗邊單人位,光線剛好,誰都別坐過來", w:{R:2}},
+        {t:"吧台,看得到手沖、聊得到豆子", w:{S:1,A:1}},
+        {t:"有插座、桌面大,咖啡好喝但工作優先", w:{E:2}} ]},
+  { q:"朋友問你「咖啡有差那麼多嗎」,你心裡的回答是?",
+    o:[ {t:"有,而且我可以講半小時", w:{R:1,A:1}},
+        {t:"有差,但能準時出現在我手上更重要", w:{E:2}},
+        {t:"重點不是咖啡,是跟誰一起喝", w:{S:2}} ]},
+  { q:"旅行到陌生城市的第一個下午,你會?",
+    o:[ {t:"照清單朝聖那間做完功課的店", w:{R:1,E:1}},
+        {t:"亂走,聞到香氣就轉進去", w:{A:2}},
+        {t:"問當地人:你們都喝哪一間", w:{S:1,A:1}} ]},
+];
+
+const TYPES = {
+  R:{ name:"儀式感型", en:"THE RITUALIST",
+      desc:"咖啡對你從來不只是咖啡因,是一天裡少數完全屬於自己的十五分鐘。你不趕時間,你在過日子。",
+      drink:"開幕週推薦 — 手沖單品「霧色」,慢慢來。",
+      share:"我的咖啡人格是儀式感型。你呢?" },
+  E:{ name:"效率型", en:"THE OPERATOR",
+      desc:"你不是不講究,是把講究藏在系統裡。好喝、準時、不囉嗦,你的咖啡跟你的行程一樣可靠。",
+      drink:"開幕週推薦 — 冰美式雙份,三十秒出杯。",
+      share:"我的咖啡人格是效率型。你呢?" },
+  S:{ name:"社交型", en:"THE GATHERER",
+      desc:"你記得每個朋友喝什麼。咖啡店對你是客廳的延伸,一杯咖啡的時間,你能把日子聊回溫。",
+      drink:"開幕週推薦 — 拿鐵兩杯,第二杯本來就該給朋友。",
+      share:"我的咖啡人格是社交型。你呢?" },
+  A:{ name:"探險型", en:"THE WANDERER",
+      desc:"喝過的不想再喝,沒喝過的都想試。你的口袋名單永遠在更新,味蕾是你認識世界的方式。",
+      drink:"開幕週推薦 — 實驗批次氣泡咖啡,只有這週有。",
+      share:"我的咖啡人格是探險型。你呢?" },
+};
+
+/* ============ 流程 ============ */
+const $ = id => document.getElementById(id);
+let idx = 0, score = {R:0,E:0,S:0,A:0};
+
+$("start").onclick = () => { swap("intro","quiz"); render(); };
+$("again").onclick = () => {
+  idx = 0; score = {R:0,E:0,S:0,A:0};
+  swap("resultPage","quiz"); render();
+};
+function swap(a,b){ $(a).classList.add("hide"); const el=$(b); el.classList.remove("hide"); el.classList.add("fade"); }
+
+function render(){
+  const q = QUESTIONS[idx];
+  $("bar").style.width = (idx / QUESTIONS.length * 100) + "%";
+  $("qno").textContent = `Q${idx+1} / ${QUESTIONS.length}`;
+  $("qtext").textContent = q.q;
+  const box = $("opts"); box.innerHTML = "";
+  q.o.forEach(o => {
+    const b = document.createElement("button");
+    b.className = "opt fade"; b.textContent = o.t;
+    b.onclick = () => {
+      for (const [k,v] of Object.entries(o.w)) score[k] += v;
+      if (++idx < QUESTIONS.length) render();
+      else finish();
+    };
+    box.appendChild(b);
+  });
+}
+
+function finish(){
+  $("bar").style.width = "100%";
+  const key = Object.entries(score).sort((a,b)=>b[1]-a[1])[0][0];
+  const t = TYPES[key];
+  $("rtype").textContent = t.name;
+  $("rdesc").textContent = t.desc;
+  $("rdrink").textContent = t.drink;
+  swap("quiz","resultPage");
+  drawCard(t);
+}
+
+/* ============ canvas 分享圖卡 1080x1350(模組 4B) ============ */
+function drawCard(t){
+  const cv = $("card"), c = cv.getContext("2d");
+  const W = 1080, H = 1350;
+  const sans  = '"Noto Sans TC","Microsoft JhengHei",sans-serif';
+
+  // 底:深墨綠 + 霧感漸層
+  const g = c.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,"#162e29");
+  g.addColorStop(.55,"#10221d"); g.addColorStop(1,"#0c1a16");
+  c.fillStyle = g; c.fillRect(0,0,W,H);
+  const r = c.createRadialGradient(W*.8,-100,50, W*.8,-100,900);
+  r.addColorStop(0,"rgba(157,184,174,.22)"); r.addColorStop(1,"rgba(157,184,174,0)");
+  c.fillStyle = r; c.fillRect(0,0,W,H);
+
+  // 細框
+  c.strokeStyle = "rgba(201,143,78,.55)"; c.lineWidth = 2;
+  c.strokeRect(54,54,W-108,H-108);
+
+  c.textAlign = "center";
+  // 品牌
+  c.fillStyle = "#9db8ae"; c.font = `28px ${sans}`;
+  c.fillText("S A N W U   C O F F E E   —   山 霧 咖 啡", W/2, 105+56);
+  // 測驗名
+  c.fillStyle = "rgba(244,239,228,.75)"; c.font = `34px ${sans}`;
+  c.fillText("我 的 咖 啡 人 格", W/2, 330);
+  // 型別(主視覺)
+  c.fillStyle = "#f4efe4"; c.font = '600 120px "Noto Serif TC","PMingLiU",serif';
+  c.fillText(t.name, W/2, 510);
+  c.fillStyle = "#c98f4e"; c.font = `30px ${sans}`;
+  c.fillText(t.en.split("").join(" "), W/2, 580);
+  // 分隔
+  c.strokeStyle = "rgba(157,184,174,.4)"; c.lineWidth = 1;
+  c.beginPath(); c.moveTo(W/2-90,640); c.lineTo(W/2+90,640); c.stroke();
+  // 描述(手動換行)
+  c.fillStyle = "rgba(244,239,228,.92)"; c.font = `38px ${sans}`;
+  wrap(c, t.desc, W/2, 730, 760, 64);
+  // 推薦
+  c.fillStyle = "#c98f4e"; c.font = `34px ${sans}`;
+  wrap(c, t.drink, W/2, 1010, 800, 54);
+  // 行動句
+  c.fillStyle = "rgba(157,184,174,.85)"; c.font = `30px ${sans}`;
+  c.fillText(t.share, W/2, 1150);
+  c.fillStyle = "rgba(244,239,228,.6)"; c.font = `26px ${sans}`;
+  c.fillText("開幕週 6/20 — 6/26 · 全品項買一送一", W/2, 1220);
+
+  function wrap(ctx, text, x, y, maxW, lh){
+    let line = "", yy = y;
+    for (const ch of text){
+      if (ctx.measureText(line+ch).width > maxW){ ctx.fillText(line,x,yy); line=ch; yy+=lh; }
+      else line += ch;
+    }
+    if (line) ctx.fillText(line,x,yy);
+  }
+}
+
+$("save").onclick = () => {
+  const a = document.createElement("a");
+  a.download = "sanwu-coffee-type.png";
+  a.href = $("card").toDataURL("image/png");
+  a.click();
+};
+</script>
+</body>
+</html>

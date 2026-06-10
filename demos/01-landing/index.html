@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>山霧咖啡 開幕週 — 6/20 至 6/26 整週買一送一</title>
+<meta name="description" content="山霧咖啡開幕週,6月20日至26日,全品項買一送一。霧還沒散,咖啡先香了。">
+<meta property="og:title" content="山霧咖啡 開幕週 — 整週買一送一">
+<meta property="og:description" content="6/20 至 6/26,霧還沒散,咖啡先香了。加入 LINE 領開幕券。">
+<meta property="og:image" content="https://example.com/og-1200x630.jpg">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --ink:#10221d; --pine:#1d4438; --moss:#2e5c4d; --mist:#9db8ae;
+    --cream:#f4efe4; --paper:#ece5d4; --copper:#c98f4e; --copper-d:#a8743a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:var(--ink); color:var(--cream); overflow-x:hidden;
+  }
+  ::selection{background:var(--copper); color:var(--ink)}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative; min-height:100svh; display:flex; flex-direction:column;
+    justify-content:center; padding:0 7vw; isolation:isolate; overflow:hidden;
+    background:
+      radial-gradient(130% 100% at 85% -20%, rgba(157,184,174,.16), transparent 55%),
+      radial-gradient(90% 70% at 0% 115%, rgba(201,143,78,.12), transparent 50%),
+      var(--ink);
+  }
+  #particles{position:absolute; inset:0; z-index:0}
+  .fog{
+    position:absolute; inset:-20% -40%; z-index:1; pointer-events:none; opacity:.5;
+    background:
+      radial-gradient(40% 30% at 30% 60%, rgba(157,184,174,.10), transparent 70%),
+      radial-gradient(35% 25% at 70% 35%, rgba(157,184,174,.08), transparent 70%);
+    animation:drift 26s ease-in-out infinite alternate;
+  }
+  @keyframes drift{from{transform:translateX(-4%) translateY(1%)}to{transform:translateX(4%) translateY(-2%)}}
+  .hero-inner{position:relative; z-index:2; max-width:1080px}
+  .brand{
+    font-size:.8rem; letter-spacing:.5em; color:var(--mist);
+    margin-bottom:2.2rem; animation:rise .9s .1s both;
+  }
+  h1{
+    font-family:"Noto Serif TC","PMingLiU",serif; font-weight:600;
+    font-size:clamp(2.6rem,8vw,5.4rem); line-height:1.18; letter-spacing:.04em;
+    animation:rise .9s .25s both;
+  }
+  h1 em{font-style:normal; color:var(--copper)}
+  .hero-sub{
+    margin-top:1.6rem; color:var(--mist); font-size:clamp(.95rem,2vw,1.1rem);
+    line-height:2; max-width:30em; animation:rise .9s .4s both;
+  }
+  .dates{
+    display:inline-flex; flex-wrap:wrap; align-items:center; gap:.6rem 1rem; margin-top:2.6rem;
+    font-family:"Noto Serif TC",serif; font-size:clamp(1rem,2.4vw,1.25rem);
+    letter-spacing:.22em; color:var(--paper);
+    border-top:1px solid rgba(157,184,174,.3); border-bottom:1px solid rgba(157,184,174,.3);
+    padding:.85rem 0; animation:rise .9s .55s both;
+  }
+  .dates span{white-space:nowrap}
+  .dates .dot{width:5px;height:5px;border-radius:50%;background:var(--copper)}
+  .cta-main{
+    display:inline-block; margin-top:3rem; text-decoration:none;
+    background:var(--copper); color:var(--ink); font-weight:700; letter-spacing:.14em;
+    padding:1.05rem 2.8rem; border-radius:2px; font-size:.95rem;
+    box-shadow:0 14px 38px -12px rgba(201,143,78,.55);
+    transition:background .3s, transform .3s; animation:rise .9s .7s both;
+  }
+  .cta-main:hover{background:var(--copper-d); transform:translateY(-2px)}
+  @keyframes rise{from{opacity:0; transform:translateY(26px)}to{opacity:1; transform:none}}
+  .scroll-hint{
+    position:absolute; bottom:2.2rem; left:50%; transform:translateX(-50%);
+    z-index:2; color:rgba(157,184,174,.6); font-size:.7rem; letter-spacing:.4em;
+    animation:bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+  /* ---------- countdown ---------- */
+  .countdown{
+    background:var(--paper); color:var(--ink); padding:5.5rem 7vw; text-align:center;
+  }
+  .countdown .label{font-size:.78rem; letter-spacing:.42em; color:var(--moss); margin-bottom:2.2rem}
+  .cd-grid{display:flex; justify-content:center; gap:clamp(1.2rem,5vw,3.5rem)}
+  .cd-cell .n{
+    font-family:"Noto Serif TC",serif; font-weight:600;
+    font-size:clamp(2.6rem,8vw,4.6rem); color:var(--pine); font-variant-numeric:tabular-nums;
+  }
+  .cd-cell .u{font-size:.74rem; letter-spacing:.3em; color:var(--moss); margin-top:.4rem}
+  .cd-done{font-family:"Noto Serif TC",serif; font-size:clamp(1.6rem,5vw,2.6rem); color:var(--pine)}
+
+  /* ---------- highlights ---------- */
+  .highlights{padding:7rem 7vw; max-width:1180px; margin:0 auto}
+  .sec-title{
+    font-family:"Noto Serif TC",serif; font-weight:600; font-size:clamp(1.6rem,4vw,2.4rem);
+    margin-bottom:3.5rem; display:flex; align-items:baseline; gap:1.2rem;
+  }
+  .sec-title::after{content:""; flex:1; height:1px; background:rgba(157,184,174,.25)}
+  .hl-grid{display:grid; gap:1.4rem; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .hl{
+    border:1px solid rgba(157,184,174,.2); border-radius:4px; padding:2.4rem 2rem;
+    background:linear-gradient(165deg, rgba(46,92,77,.25), transparent 70%);
+    opacity:0; transform:translateY(28px); transition:opacity .7s, transform .7s;
+  }
+  .hl.show{opacity:1; transform:none}
+  .hl .no{font-family:"Noto Serif TC",serif; color:var(--copper); letter-spacing:.25em; font-size:.8rem; margin-bottom:1.2rem}
+  .hl h3{font-family:"Noto Serif TC",serif; font-size:1.25rem; font-weight:600; margin-bottom:.8rem}
+  .hl p{color:var(--mist); font-size:.9rem; line-height:1.95}
+
+  /* ---------- info ---------- */
+  .info{background:var(--pine); padding:6rem 7vw}
+  .info-inner{max-width:1180px; margin:0 auto; display:grid; gap:3rem; grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .info h4{font-size:.78rem; letter-spacing:.38em; color:var(--mist); margin-bottom:1.1rem}
+  .info p{font-size:.95rem; line-height:2.1; color:var(--cream)}
+  .info a{color:var(--copper)}
+
+  /* ---------- notes & footer ---------- */
+  .notes{padding:5rem 7vw; max-width:1180px; margin:0 auto}
+  .notes h4{font-size:.78rem; letter-spacing:.38em; color:var(--mist); margin-bottom:1.4rem}
+  .notes li{color:rgba(157,184,174,.85); font-size:.85rem; line-height:2.2; list-style:none}
+  .notes li::before{content:"— "; color:var(--copper)}
+  footer{padding:3rem 7vw 8rem; color:rgba(157,184,174,.5); font-size:.78rem; letter-spacing:.15em}
+
+  /* ---------- sticky cta ---------- */
+  .cta-bar{
+    position:fixed; left:0; right:0; bottom:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    background:rgba(16,34,29,.88); backdrop-filter:blur(12px);
+    border-top:1px solid rgba(201,143,78,.35); padding:.9rem 7vw;
+    transform:translateY(110%); transition:transform .45s cubic-bezier(.2,.8,.2,1);
+  }
+  .cta-bar.show{transform:none}
+  .cta-bar .txt{font-size:.85rem; color:var(--paper); letter-spacing:.06em}
+  .cta-bar a{
+    flex-shrink:0; text-decoration:none; background:var(--copper); color:var(--ink);
+    font-weight:700; font-size:.85rem; letter-spacing:.1em; padding:.7rem 1.6rem; border-radius:2px;
+  }
+  /* grain overlay */
+  body::after{
+    content:""; position:fixed; inset:0; z-index:99; pointer-events:none; opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <canvas id="particles"></canvas>
+  <div class="fog"></div>
+  <div class="hero-inner">
+    <p class="brand">SANWU COFFEE — 山霧咖啡</p>
+    <h1>霧還沒散,<br>咖啡先<em>香</em>了。</h1>
+    <p class="hero-sub">山霧咖啡落腳半山。開幕這一週,把第一杯的儀式感分給你——全品項買一送一,帶一個值得的人上山。</p>
+    <div class="dates"><span>6.20</span><span class="dot"></span><span>6.26</span><span class="dot"></span><span>開幕週 全品項買一送一</span></div>
+    <br>
+    <a class="cta-main" href="https://example.com" target="_blank" rel="noopener">加入 LINE 領開幕券</a>
+  </div>
+  <p class="scroll-hint">SCROLL</p>
+</section>
+
+<section class="countdown">
+  <p class="label">距 離 開 幕</p>
+  <div class="cd-grid" id="cd">
+    <div class="cd-cell"><div class="n" id="cd-d">--</div><div class="u">天</div></div>
+    <div class="cd-cell"><div class="n" id="cd-h">--</div><div class="u">時</div></div>
+    <div class="cd-cell"><div class="n" id="cd-m">--</div><div class="u">分</div></div>
+    <div class="cd-cell"><div class="n" id="cd-s">--</div><div class="u">秒</div></div>
+  </div>
+</section>
+
+<section class="highlights">
+  <h2 class="sec-title">開幕週亮點</h2>
+  <div class="hl-grid">
+    <div class="hl"><p class="no">01</p><h3>整週買一送一</h3><p>全品項,不限杯型。第二杯留給同行的人,或下午的自己。</p></div>
+    <div class="hl"><p class="no">02</p><h3>山霧限定豆</h3><p>開幕限定「霧色」配方豆,每日限量三十包,售完隔日請早。</p></div>
+    <div class="hl"><p class="no">03</p><h3>吧台手沖時刻</h3><p>每日 14:00,主理人現場手沖示範,坐吧台的人多一杯試飲。</p></div>
+  </div>
+</section>
+
+<section class="info">
+  <div class="info-inner">
+    <div><h4>時 間</h4><p>2026.6.20(六)— 6.26(五)<br>每日 08:00 — 18:00</p></div>
+    <div><h4>地 點</h4><p>山霧咖啡<br>霧峰山路 36 號(虛構地址,demo 用)</p></div>
+    <div><h4>怎 麼 去</h4><p>自駕導航「山霧咖啡」;<br>店前白線可停十二台。</p></div>
+  </div>
+</section>
+
+<section class="notes">
+  <h4>注 意 事 項</h4>
+  <ul>
+    <li>買一送一以兩杯中較低價者為招待,恕不與其他優惠併用。</li>
+    <li>開幕券限開幕週使用,一人一帳號限領一次。</li>
+    <li>山區午後偶有濃霧,行車請開霧燈、慢行。</li>
+  </ul>
+</section>
+
+<footer>SANWU COFFEE 山霧咖啡 — 本頁為課程 demo,品牌與資訊皆為虛構。</footer>
+
+<div class="cta-bar" id="ctaBar">
+  <span class="txt">開幕週 6/20 — 6/26 · 全品項買一送一</span>
+  <a href="https://example.com" target="_blank" rel="noopener">領開幕券</a>
+</div>
+
+<script>
+/* ========== 零依賴星座連線粒子(模組 3)==========
+   課堂上教的是 tsParticles CDN 版;demo 用等效的零依賴實作,
+   讓整包離線雙擊也能跑。密度、顏色、連線距離都在 CONF 裡。 */
+const CONF = {
+  density: 14000,        // 每多少 px^2 一顆粒子(數字越大越稀疏)
+  maxSpeed: .25,
+  linkDist: 130,
+  dotColor: "rgba(244,239,228,.85)",
+  linkColor: "157,184,174",  // RGB,透明度依距離衰減
+};
+(function(){
+  const cv = document.getElementById("particles");
+  const ctx = cv.getContext("2d");
+  const hero = cv.parentElement;
+  let pts = [], W = 0, H = 0;
+  const mobile = matchMedia("(max-width: 640px)").matches;
+
+  function resize(){
+    W = cv.width = hero.clientWidth;
+    H = cv.height = hero.clientHeight;
+    let n = Math.round(W * H / CONF.density);
+    if (mobile) n = Math.round(n / 2);          // 手機減半,省電
+    pts = Array.from({length:n}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-.5)*CONF.maxSpeed*2,
+      vy: (Math.random()-.5)*CONF.maxSpeed*2,
+      r: Math.random()*1.4 + .6,
+    }));
+  }
+  function tick(){
+    ctx.clearRect(0,0,W,H);
+    for (const p of pts){
+      p.x += p.vx; p.y += p.vy;
+      if (p.x<0||p.x>W) p.vx*=-1;
+      if (p.y<0||p.y>H) p.vy*=-1;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,7);
+      ctx.fillStyle = CONF.dotColor; ctx.fill();
+    }
+    for (let i=0;i<pts.length;i++){
+      for (let j=i+1;j<pts.length;j++){
+        const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y;
+        const d=Math.hypot(dx,dy);
+        if (d < CONF.linkDist){
+          ctx.strokeStyle = `rgba(${CONF.linkColor},${(1-d/CONF.linkDist)*.35})`;
+          ctx.lineWidth = .6;
+          ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y);
+          ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  addEventListener("resize", resize);
+  resize(); tick();
+})();
+
+/* ========== 開幕倒數 ========== */
+(function(){
+  const target = new Date("2026-06-20T08:00:00+08:00").getTime();
+  const $ = id => document.getElementById(id);
+  function pad(n){ return String(n).padStart(2,"0"); }
+  function update(){
+    const left = target - Date.now();
+    if (left <= 0){
+      $("cd").innerHTML = '<p class="cd-done">開幕中 — 山上見。</p>';
+      return;
+    }
+    $("cd-d").textContent = pad(Math.floor(left/86400000));
+    $("cd-h").textContent = pad(Math.floor(left/3600000)%24);
+    $("cd-m").textContent = pad(Math.floor(left/60000)%60);
+    $("cd-s").textContent = pad(Math.floor(left/1000)%60);
+    setTimeout(update, 1000);
+  }
+  update();
+})();
+
+/* ========== 捲動進場 + 置底 CTA ========== */
+(function(){
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add("show"); io.unobserve(e.target); }
+  }), {threshold:.2});
+  document.querySelectorAll(".hl").forEach((el,i) => {
+    el.style.transitionDelay = (i*.12)+"s"; io.observe(el);
+  });
+  const bar = document.getElementById("ctaBar");
+  addEventListener("scroll", () => {
+    bar.classList.toggle("show", scrollY > innerHeight * .8);
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>
