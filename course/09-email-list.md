@@ -70,7 +70,60 @@ wrangler secret put ADMIN_TOKEN             # 設後台密碼(自己想一組長
 
 ### 後台頁
 
-一個 `admin.html`:輸入密碼 → 打 `GET /list?token=密碼` → 把名單畫成表格 → 「匯出 CSV」按鈕(前端把 JSON 轉 CSV 下載)。密碼記在你瀏覽器的 localStorage,下次免再輸。CSV 拿到後就能匯進任何 email 群發工具。
+一個 `admin.html`:輸入密碼 → 帶著密碼打 `GET /list` → 把名單畫成表格 → 「匯出 CSV」按鈕(前端把 JSON 轉 CSV 下載)。密碼記在你瀏覽器的 localStorage,下次免再輸。CSV 拿到後就能匯進任何 email 群發工具。
+
+## 後台登入怎麼防護:兩種做法,從基本到實名
+
+後台等於你整份名單的入口,這道門怎麼鎖很重要。本章給兩層,按名單的敏感度選。
+
+### 做法一:token 走 Authorization 標頭(基本功,本章已採用)
+
+最先要做對的一件事:**密碼別放進網址**。`GET /list?token=密碼` 看起來會動,但網址會被瀏覽器歷史、CDN 日誌、甚至 referer 標頭記下來——等於把鑰匙到處留印子。正確做法是放進 HTTP 的 `Authorization` 標頭:
+
+```js
+// 後台頁:把密碼放標頭,不放網址
+fetch(API + "/list", { headers: { Authorization: "Bearer " + token } });
+```
+
+```js
+// Worker:從標頭讀、跟 Secret 裡的 ADMIN_TOKEN 比對
+const auth = request.headers.get("Authorization") || "";
+const token = auth.startsWith("Bearer ") ? auth.slice(7) : "";
+if (token !== env.ADMIN_TOKEN) return json({ error: "unauthorized" }, 401);
+```
+
+這叫 **token gate**:一把共享鑰匙,誰有誰能看。對「活動報名名單、自己一個人看」這種情境**夠用**。它的本質限制要心裡有數:只有一把鑰匙、不會自己過期、外洩了要手動換(`wrangler secret put ADMIN_TOKEN` 設一組新的,然後重新發給該知道的人)。
+
+### 做法二:Cloudflare Access 實名門禁(進階,放真實客戶資料才需要)
+
+當名單裡是真實客戶個資、或要給團隊多人看,一把共享鑰匙就不夠了。Cloudflare Access 把「鑰匙」換成「實名門禁」:每個人各自用自己的 email(收一次性碼)或 Google 帳號登入,你指定誰能進、誰要踢出即時生效、而且每次存取都有紀錄可查。
+
+**但有個前提一定要先講清楚**:Cloudflare Access 只能保護「**在 Cloudflare 經手的域名底下**」的頁面。本章的 `admin.html` 放在 GitHub Pages(`yazelin.github.io`),那不是你的 Cloudflare 域名,**Access 罩不住它**。所以要用 Access,得先把後台搬到 Cloudflare,兩步:
+
+1. **把後台移上 Cloudflare**:讓 Worker 自己吐出後台 HTML(加一個 `GET /` 回傳 admin 頁),或用 Cloudflare Pages 放後台。
+2. **掛一個 DNS 託管在 Cloudflare 的自訂網域**給它(例如 `admin.你的品牌.com`)——這是 Access 能介入的條件。
+
+接著在 Cloudflare 後台設定(Zero Trust 是免費 tier 就有的產品):
+
+1. Cloudflare Dashboard → **Zero Trust → Access → Applications → Add an application → Self-hosted**
+2. 填你後台的那個 Cloudflare 網域
+3. 加一條 **Policy**:Action 選 `Allow`,Include 選 `Emails`,填你自己的 email(要給團隊就填多個或用 Email domain)
+4. 登入方式選 **Email OTP**(寄一次性碼,零設定)或接 Google / Microsoft
+5. 存檔。之後任何人打開那個後台網址,都會先被 Cloudflare 攔一道登入,只有你授權的 email 收得到碼、進得來
+
+這道門擋在最前面,後面的 token gate 可留可拿。
+
+### 怎麼選
+
+| | 做法一:token 標頭 | 做法二:Cloudflare Access |
+|---|---|---|
+| 門檻 | 一把共享密碼 | 每個人實名登入 |
+| 適合 | 活動報名名單、自己看 | 真實客戶個資、多人、要稽核 |
+| 成本 | 零,本章已內建 | 後台得搬上 Cloudflare + 一個自訂網域 |
+| 踢人 | 換 token,全員重給一次 | 後台移除某 email,即時生效 |
+| 有沒有存取紀錄 | 沒有 | 有,每次登入都記錄 |
+
+一句話:**自己看的活動名單,做法一就好;要對客戶負責的名單,升級做法二。** 別把真實客戶個資長期只靠一把共享 token 守著。
 
 ## 名單拿到了,然後呢
 
@@ -82,7 +135,7 @@ wrangler secret put ADMIN_TOKEN             # 設後台密碼(自己想一組長
 
 1. **裸表單沒擋機器人**:公開的 email 收集端點一定會被灌垃圾。本章三道防線:honeypot 隱形欄位、每 IP 限流、email 格式驗證。要更強可加 Cloudflare Turnstile(免費人機驗證)。
 2. **去重沒做**:同一人按三次送出,名單就三筆。靠資料庫的 UNIQUE 約束擋,而且回應不要洩漏「這個 email 在不在名單」(隱私)。
-3. **管理密碼放進前端**:後台密碼一旦寫進 admin.html,等於公開。它必須只存在 Worker 的 Secret,前端是「使用者輸入、傳給 Worker 比對」。
+3. **管理密碼放進前端 / 放進網址**:後台密碼一旦寫進 admin.html 就等於公開;放進網址 `?token=` 則會被瀏覽器歷史與 CDN 日誌記下。密碼只存在 Worker 的 Secret,前端是「使用者輸入 → 放 Authorization 標頭傳給 Worker 比對」(見上面「後台登入怎麼防護」)。
 4. **個資責任**:收了 email 就有保管責任。報名頁寫清楚用途與退訂方式;不需要的個資不要收;名單別外流。
 5. **沒有退訂機制**:正式營運的名單要能退訂(法規與商譽)。本章 demo 未做,正式上線前補上。
 

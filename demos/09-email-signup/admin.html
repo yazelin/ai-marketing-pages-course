@@ -100,7 +100,8 @@ async function load(){
   const t = $("token").value.trim() || token();
   if (!t) return fail($("gateErr"), "請先輸入管理密碼");
   try {
-    const r = await fetch(API + "/list?token=" + encodeURIComponent(t));
+    // token 走 Authorization 標頭,不放進網址(避免被瀏覽器歷史 / CDN log 記下)
+    const r = await fetch(API + "/list", { headers: { Authorization: "Bearer " + t } });
     if (r.status === 401) return fail($("gateErr"), "密碼不對");
     if (!r.ok) return fail($("gateErr"), "讀取失敗(" + r.status + ")");
     list = (await r.json()).signups || [];
