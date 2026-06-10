@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模組 10 被看見:SEO / OG / Agent EO — AI 互動行銷頁實作課</title>
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<header class="bar"><span>模組 10 — 被看見:SEO / OG / Agent EO</span><span><a href="index.html">目錄</a> &nbsp; <span id="counter"></span></span></header>
+
+<section class="slide">
+  <p class="kicker">MODULE 10</p>
+  <h1>被看見:<br>SEO、社群卡、<em>給 AI 看</em>的頁面</h1>
+  <p class="sub">做得再好的活動頁,沒人看見等於沒做。</p>
+</section>
+
+<section class="slide">
+  <h2>頁面被看見的三條路</h2>
+  <ul class="points">
+    <li>有人 Google 搜尋 → <strong>SEO</strong></li>
+    <li>有人把連結貼到 LINE / FB / IG → <strong>OG 社群分享卡</strong></li>
+    <li>有人問 ChatGPT / Claude / Perplexity → <strong>Agent EO</strong>(給 AI 看的頁面)</li>
+  </ul>
+  <p class="sub">第三條是 2026 越來越重要的新管道:很多人不 Google 了,直接問 AI。</p>
+</section>
+
+<section class="slide">
+  <h2>一、SEO 基本功</h2>
+  <ul class="points">
+    <li><strong>title</strong> 每頁不同、放關鍵字 + 品牌</li>
+    <li><strong>meta description</strong> 一兩句,搜尋結果摘要,寫得讓人想點</li>
+    <li><strong>sitemap.xml</strong> 列所有公開頁,丟 Search Console</li>
+    <li>不想被收錄的頁(後台/感謝頁)用 <strong>noindex</strong> 擋</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>二、社群分享卡 OG</h2>
+  <pre>&lt;meta property="og:title" content="..."&gt;
+&lt;meta property="og:description" content="..."&gt;
+&lt;meta property="og:image" content="https://你的網域/og.jpg"&gt;  &lt;!-- 完整網址! --&gt;
+&lt;meta name="twitter:card" content="summary_large_image"&gt;</pre>
+  <ul class="points">
+    <li>og:image 必須<strong>完整 https 網址</strong>,相對路徑 LINE/FB 抓不到</li>
+    <li>圖 1200x630、壓 200KB 內;<strong>別留 example.com 假網址</strong>(本課第一版就犯過,分享破圖)</li>
+    <li>改了要用 FB Sharing Debugger 強制重抓(平台會快取)</li>
+  </ul>
+</section>
+
+<section class="slide statement">
+  <p class="kicker">Agent EO</p>
+  <p class="big">越來越多人<em>問 AI</em> 而不是 Google。<br>要讓 AI 講得出你的活動。</p>
+</section>
+
+<section class="slide">
+  <h2>三、Agent EO:給 AI 看的頁面</h2>
+  <ul class="points">
+    <li><strong>JSON-LD(schema.org)</strong> — 機器讀得懂的格式描述「這頁是什麼」;活動用 Event、課程用 Course、店家用 LocalBusiness。AI 與 Google 都吃</li>
+    <li><strong>llms.txt</strong> — 放網站根的純文字說明書,專門寫給 LLM:你是誰 + 重要連結</li>
+    <li><strong>重要資訊用文字寫</strong> — 日期/地點/優惠別只放圖裡,圖裡的字 AI 讀不到</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>驗收</h2>
+  <ul class="points">
+    <li><strong>SEO</strong>:Google 搜「site:你的網址」;Search Console 提交 sitemap</li>
+    <li><strong>OG</strong>:貼到 LINE 看預覽卡;FB Sharing Debugger 看抓到什麼</li>
+    <li><strong>Agent EO</strong>:把網址貼給 ChatGPT/Claude 問「這頁在講什麼活動」,看講得對不對;Rich Results Test 驗 JSON-LD</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>常見坑</h2>
+  <ul class="points">
+    <li><strong>og:image 相對路徑/假網址</strong> → 分享破圖,必完整 https</li>
+    <li><strong>改了 OG 沒重抓</strong> → 平台快取,用 debugger</li>
+    <li><strong>JSON-LD 跟頁面對不上</strong> → 會被懲罰,要一致</li>
+    <li><strong>重要資訊只在圖裡</strong> → AI 讀不到,用文字也寫一遍</li>
+    <li><strong>專案頁 robots/llms 在子路徑</strong> → 完整 SEO 要自訂網域(模組 5)</li>
+  </ul>
+  <span class="demo-tag">對照:本課整站就是案例(每頁 OG+JSON-LD、sitemap、llms.txt、後台 noindex)</span>
+</section>
+<div class="progress"><i id="prog"></i></div>
+<p class="navhint">← → 翻頁</p>
+<script src="deck.js"></script>
+</body>
+</html>

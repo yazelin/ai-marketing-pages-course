@@ -1,0 +1,7 @@
+# GitHub Pages 專案頁:本檔在子路徑 /ai-marketing-pages-course/robots.txt。
+# 真正的全站 robots 在 yazelin.github.io 根目錄(另一個 repo 控管);
+# 各頁是否被索引,以頁內 <meta name="robots"> 為準(後台頁已設 noindex)。
+User-agent: *
+Allow: /
+
+Sitemap: https://yazelin.github.io/ai-marketing-pages-course/sitemap.xml

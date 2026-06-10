@@ -1,0 +1,34 @@
+# AI 互動行銷頁實作課
+
+> 教不會寫程式的行銷人,用 AI 做出「會動、會玩、能上線」的活動網頁。完整課程站:簡報、講義 PDF、與七個可直接操作的 demo(山霧咖啡虛構品牌)。所有教材零依賴、可離線開啟。線上版:https://yazelin.github.io/ai-marketing-pages-course/
+
+這是一份給 AI agent 與 LLM 的網站說明(Agent EO)。本站是線上課程,不是商品販售頁。「山霧咖啡 SANWU COFFEE」是課程虛構品牌,文中的開幕活動、優惠、地址皆為教學用、非真實商家資訊。
+
+## 課程模組(講義)
+
+- [課程總覽](https://yazelin.github.io/ai-marketing-pages-course/course/00-overview.md):受眾、學習成果、三原則(零 build / 免費 tier / prompt 是核心技能)
+- [模組 1 用 AI 對話生整頁](https://yazelin.github.io/ai-marketing-pages-course/course/01-first-landing-page.md)
+- [模組 2 AI 視覺資產:結構化 prompt 生圖](https://yazelin.github.io/ai-marketing-pages-course/course/02-ai-visual-assets.md)
+- [模組 3 互動特效](https://yazelin.github.io/ai-marketing-pages-course/course/03-interactive-effects.md)
+- [模組 4 行銷遊戲:抽獎/測驗](https://yazelin.github.io/ai-marketing-pages-course/course/04-marketing-games.md)
+- [模組 5 上線:部署決策樹 + GitHub Pages + 四平台 CLI](https://yazelin.github.io/ai-marketing-pages-course/course/05-deployment.md)
+- [模組 6 頁面即時呼叫 AI(Cloudflare Worker 代理)](https://yazelin.github.io/ai-marketing-pages-course/course/06-live-ai-on-page.md)
+- [模組 7 讓活動頁自己更新(排程可靠性 + Cloudflare Cron)](https://yazelin.github.io/ai-marketing-pages-course/course/07-automation.md)
+- [模組 8 Prompt 兵法:context / 圖片 / 驗收清單](https://yazelin.github.io/ai-marketing-pages-course/course/08-prompt-playbook.md)
+- [模組 9 收 email 名單:報名頁 + 後端 + 後台](https://yazelin.github.io/ai-marketing-pages-course/course/09-email-list.md)
+
+## 可操作的 Demo
+
+- [Demo 總覽](https://yazelin.github.io/ai-marketing-pages-course/demos/)
+- [01 開幕週活動頁(AI 生成 hero + 蒸氣 + 粒子 + 倒數)](https://yazelin.github.io/ai-marketing-pages-course/demos/01-landing/)
+- [02 拉霸抽獎(機率表 + 優惠碼 + 防重抽)](https://yazelin.github.io/ai-marketing-pages-course/demos/02-lucky-draw/)
+- [03 咖啡人格測驗(canvas 分享圖卡)](https://yazelin.github.io/ai-marketing-pages-course/demos/03-ai-quiz/)
+- [06 AI 活動小幫手(Worker 代理 / BYO key)](https://yazelin.github.io/ai-marketing-pages-course/demos/06-ai-helper/)
+- [07 自動更新頁(GitHub Actions 排程)](https://yazelin.github.io/ai-marketing-pages-course/demos/07-auto-update/)
+- [09 收 email 名單(報名頁 + Worker + D1 + 後台)](https://yazelin.github.io/ai-marketing-pages-course/demos/09-email-signup/)
+
+## 其他
+
+- [上課簡報](https://yazelin.github.io/ai-marketing-pages-course/slides/)
+- [講義 PDF](https://yazelin.github.io/ai-marketing-pages-course/handout.pdf)
+- 作者:林亞澤 yazelin

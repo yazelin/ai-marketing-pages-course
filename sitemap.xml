@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://yazelin.github.io/ai-marketing-pages-course/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://yazelin.github.io/ai-marketing-pages-course/slides/</loc><priority>0.8</priority></url>
+  <url><loc>https://yazelin.github.io/ai-marketing-pages-course/handout.pdf</loc><priority>0.7</priority></url>
+  <url><loc>https://yazelin.github.io/ai-marketing-pages-course/demos/</loc><priority>0.8</priority></url>
+  <url><loc>https://yazelin.github.io/ai-marketing-pages-course/demos/01-landing/</loc><priority>0.7</priority></url>
+  <url><loc>https://yazelin.github.io/ai-marketing-pages-course/demos/02-lucky-draw/</loc><priority>0.6</priority></url>
+  <url><loc>https://yazelin.github.io/ai-marketing-pages-course/demos/03-ai-quiz/</loc><priority>0.6</priority></url>
+  <url><loc>https://yazelin.github.io/ai-marketing-pages-course/demos/06-ai-helper/</loc><priority>0.6</priority></url>
+  <url><loc>https://yazelin.github.io/ai-marketing-pages-course/demos/07-auto-update/</loc><priority>0.6</priority></url>
+  <url><loc>https://yazelin.github.io/ai-marketing-pages-course/demos/09-email-signup/</loc><priority>0.6</priority></url>
+</urlset>
