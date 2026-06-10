@@ -50,6 +50,17 @@
 </section>
 
 <section class="slide">
+  <h2>進階捷徑:wrangler CLI(配 agent 用)</h2>
+  <ul class="points">
+    <li>Cloudflare 官方 CLI,跟模組 5 的 gh 同邏輯:<strong>授權一次,agent 代你部署</strong></li>
+    <li><strong>npm install -g wrangler</strong> → <strong>wrangler login</strong></li>
+    <li>key 用 <strong>wrangler secret put</strong> 自己貼,不進對話(模組 8 紀律)</li>
+    <li>驗收清單寫進指令:部署完叫 agent 用 curl 測活動題 + 無關題</li>
+    <li>本課的示範 Worker 就是這樣部署的</li>
+  </ul>
+</section>
+
+<section class="slide">
   <h2>驗收</h2>
   <ul class="points">
     <li>問三題活動相關,回答合理</li>

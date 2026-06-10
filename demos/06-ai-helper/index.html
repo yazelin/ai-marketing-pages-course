@@ -107,9 +107,10 @@
     <button id="tabByo">B. 貼自己的 Groq Key(立即體驗)</button>
   </div>
   <div id="paneWorker">
-    <label>你的 Cloudflare Worker 網址(照模組 6 三步驟建好後貼進來)</label>
+    <label>Cloudflare Worker 網址(已預填課程示範 Worker,可直接開聊;換成你自己的也行)</label>
     <input id="workerUrl" type="url" placeholder="https://xxx.你的帳號.workers.dev">
-    <p class="note">key 藏在 Worker 的 Secret 裡,訪客看不到——這是給<strong>正式活動</strong>用的架構。</p>
+    <p class="note">key 藏在 Worker 的 Secret 裡,訪客看不到——這是給<strong>正式活動</strong>用的架構。
+    示範 Worker 有限流(每分鐘 8 次),被擋到就等一下。</p>
   </div>
   <div id="paneByo" style="display:none">
     <label>你的 Groq API Key(免費申請:console.groq.com)</label>
@@ -121,7 +122,6 @@
 
 <div class="chat">
   <div class="log" id="log">
-    <p class="msg sys">設定好上面任一模式,就可以開聊。</p>
     <p class="msg ai">午安,我是山霧的 AI 小幫手。開幕週的事——買一送一怎麼算、怎麼上山、限定豆還有沒有——都可以問我。</p>
   </div>
   <div class="quick">
@@ -149,8 +149,9 @@ const $ = id => document.getElementById(id);
 const log = $("log");
 let mode = localStorage.getItem("sanwu-ai-mode") || "worker";
 
-/* 模式切換 + 設定記憶 */
-$("workerUrl").value = localStorage.getItem("sanwu-worker-url") || "";
+/* 模式切換 + 設定記憶(預設用課程示範 Worker,key 在它的 Secret 裡) */
+const DEFAULT_WORKER = "https://sanwu-ai-helper.yazelinj303.workers.dev";
+$("workerUrl").value = localStorage.getItem("sanwu-worker-url") || DEFAULT_WORKER;
 $("byoKey").value = localStorage.getItem("sanwu-groq-key") || "";
 function setMode(m){
   mode = m; localStorage.setItem("sanwu-ai-mode", m);
