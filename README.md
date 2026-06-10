@@ -1,5 +1,11 @@
 # AI 互動行銷頁實作課
 
+線上課程站(學員入口):https://yazelin.github.io/ai-marketing-pages-course/ 
+
+- 簡報:https://yazelin.github.io/ai-marketing-pages-course/slides/ 
+- 講義 PDF:https://yazelin.github.io/ai-marketing-pages-course/handout.pdf 
+- Demo:https://yazelin.github.io/ai-marketing-pages-course/demos/ 
+
 教不會寫程式的行銷人,用 AI 做出「會動、會玩、能上線」的活動網頁。技術全部取材自 yazelin 2026-04 ~ 2026-06 的活躍 repo(web-effects-collector、gemini-image-starter、ai-tarot-companion、emoji-slot-machine、catime、j303 等),每一項都有真實上線的成品當證據。
 
 本 repo 是這門課的完整記錄:研究、決策、課程內容、demo、驗證,全在這裡。

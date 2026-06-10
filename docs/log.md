@@ -1,5 +1,9 @@
 # 執行日誌
 
+## 2026-06-10(下午,續)— 上線 GitHub Pages
+
+使用者要求學員看得到:repo 轉 public(gh api PATCH private=false;此版 gh repo edit 沒有 visibility consequences flag)+ 開 Pages(gh api POST /pages,legacy build,main 根目錄)。加了課程站首頁 index.html 與 .nojekyll。模組 5 增補「AI agent + gh CLI 一句話部署」一節(回應使用者問「怎麼在 Claude/Codex 用 gh cli」),講義 PDF 重產(26 頁)。上線驗證:10 條 URL 全 200;線上 demo 01 用瀏覽器實測 — 粒子 54,593 非透明像素、hero 圖載入、蒸氣 3 縷、倒數正確、console 零錯誤。
+
 ## 2026-06-10(下午)— v2:簡報 + PDF + demo 質感升級 + 模組 8
 
 使用者三項回饋:課程要 HTML 簡報 + 講義 PDF;demo 咖啡品牌感不夠(規格卡寫的熱拿鐵與蒸氣沒做出來);課程要含完整 prompt / context / 圖片技巧。
