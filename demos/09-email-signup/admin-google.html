@@ -64,13 +64,13 @@
 <!-- 未設定 Client ID 時的提示(占位字串還在就顯示) -->
 <div class="setup-warn hide" id="setupWarn">
   這個後台還沒接上 Google 登入。需要在頁面與 Worker 填入你的 <code>GOOGLE_CLIENT_ID</code> 與授權 email 白名單。
-  設定方式見課程模組 9「做法二」。在那之前,請改用共享密碼版後台 <a href="admin.html" style="color:var(--copper)">admin.html</a>。
+  設定方式見課程模組 9「做法三」。在那之前,請改用共享密碼版後台 <a href="admin.html" style="color:var(--copper)">admin.html</a>。
 </div>
 
 <div class="gate" id="gate">
   <p>用你的 Google 帳號登入。只有被加進白名單的 email 看得到名單;誰能進、誰要踢出,改 Worker 的 <code style="font-size:.85em">ALLOWED_EMAILS</code> 即時生效。</p>
   <div id="g_id_onload"
-       data-client_id="__GOOGLE_CLIENT_ID__"
+       data-client_id="1064307007549-rui0o3kijqomlknoq545vhbjbqn9b7m5.apps.googleusercontent.com"
        data-callback="handleGoogleSignIn"
        data-auto_prompt="false"></div>
   <div class="g_id_signin" data-type="standard" data-size="large"
@@ -96,14 +96,14 @@
   <p class="msg" id="panelMsg"></p>
 </section>
 
-<footer>本頁為課程 demo(模組 9 · 做法二 實名門禁)· <a href="admin.html">共享密碼版後台</a> · <a href="index.html">報名頁</a> · <a href="../index.html">demo 總覽</a></footer>
+<footer>本頁為課程 demo(模組 9 · 做法三 Google 實名登入)· <a href="admin.html">共享密碼版後台</a> · <a href="index.html">報名頁</a> · <a href="../index.html">demo 總覽</a></footer>
 
 <script>
 /* ============ 模組 9 做法二:Google 登入白名單 ============
    GIS 登入 → 拿到 Google 簽的 ID token(JWT)→ 帶 Authorization 打 /list
    → Worker 驗簽 + 查白名單。前端只有 Client ID(可公開),沒有任何密鑰。 */
 const API = "https://sanwu-signup.yazelinj303.workers.dev";
-const CLIENT_ID = "__GOOGLE_CLIENT_ID__";
+const CLIENT_ID = "1064307007549-rui0o3kijqomlknoq545vhbjbqn9b7m5.apps.googleusercontent.com";
 const $ = id => document.getElementById(id);
 let idToken = null, list = [];
 
