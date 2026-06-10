@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模組 11 成效追蹤 — AI 互動行銷頁實作課</title>
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<header class="bar"><span>模組 11 — 成效追蹤</span><span><a href="index.html">目錄</a> &nbsp; <span id="counter"></span></span></header>
+
+<section class="slide">
+  <p class="kicker">MODULE 11</p>
+  <h1>成效追蹤:<br>裝分析與廣告 <em>Pixel</em></h1>
+  <p class="sub">知道多少人來、有沒有報名、廣告有沒有效。都是貼一段 script 的事。</p>
+</section>
+
+<section class="slide statement">
+  <p class="kicker">為什麼一定要裝</p>
+  <p class="big">沒有分析,你只是<em>憑感覺</em>;<br>裝了,下次活動才有依據優化。</p>
+</section>
+
+<section class="slide">
+  <h2>一、網站分析(每頁都該裝)</h2>
+  <pre>&lt;!-- Google Analytics 4:貼進 &lt;head&gt; --&gt;
+&lt;script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"&gt;&lt;/script&gt;
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXX');
+&lt;/script&gt;</pre>
+  <p class="code-note">換成你自己的 G-XXXXXXX。在意隱私可改 Plausible / Umami,同樣貼一段。</p>
+</section>
+
+<section class="slide">
+  <h2>二、追「報名成功」(關鍵)</h2>
+  <ul class="points">
+    <li>只知道「有人來」不夠,要知道「幾個人真的報名」</li>
+    <li>報名表單送出成功時送事件:<strong>gtag('event', 'signup', …)</strong></li>
+    <li>後台才算得出<strong>轉換率</strong>(報名數 ÷ 來訪數)</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>三、廣告 Pixel(要投廣告才裝)</h2>
+  <ul class="points">
+    <li>投 FB/IG 廣告必裝 <strong>Meta Pixel</strong>,否則追不到哪個廣告帶來報名</li>
+    <li>裝了才能<strong>再行銷</strong>(把廣告投給來過卻沒報名的人)</li>
+    <li>報名成功加 <strong>fbq('track', 'Lead')</strong> 追轉換;不投廣告就不用裝</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>常見坑</h2>
+  <ul class="points">
+    <li><strong>裝了沒驗證</strong> → 開頁面在 GA「即時」看到自己這次造訪才算通</li>
+    <li><strong>只追流量、不追轉換</strong> → 一定要設「報名成功」事件</li>
+    <li><strong>Pixel 只 init 不 track</strong> → 後台看不到轉換、做不了再行銷</li>
+    <li><strong>追蹤碼貼錯位置</strong> → 主代碼放 head;track 放在動作完成那一刻</li>
+    <li><strong>忘了隱私揭露</strong> → 蒐集資料卻沒說,法規與信任有風險</li>
+  </ul>
+  <span class="demo-tag">做完把頁貼進健檢器,「追蹤」那格應變綠</span>
+</section>
+<div class="progress"><i id="prog"></i></div>
+<p class="navhint">← → 翻頁</p>
+<script src="deck.js"></script>
+</body>
+</html>

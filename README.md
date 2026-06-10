@@ -12,9 +12,9 @@
 
 ```
 index.html      課程站首頁
-slides/         上課簡報(11 份,瀏覽器直接放映,← → 翻頁)
-handout.pdf     講義 PDF(A4,模組 0-10)
-course/         全部模組講義 markdown(模組 0-10)
+slides/         上課簡報(12 份,瀏覽器直接放映,← → 翻頁)
+handout.pdf     講義 PDF(A4,模組 0-11)
+course/         全部模組講義 markdown(模組 0-11)
 demos/          山霧咖啡 demo 六件套,全部零 build
   01-landing/      活動 landing(AI 生成 hero + 蒸氣 + 粒子 + 倒數)
   02-lucky-draw/   拉霸抽獎(機率表 + 優惠碼 + 防重抽)
