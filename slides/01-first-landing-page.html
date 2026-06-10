@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模組 1 第一個活動頁 — AI 互動行銷頁實作課</title>
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<header class="bar"><span>模組 1 — 第一個活動頁</span><span><a href="index.html">目錄</a> &nbsp; <span id="counter"></span></span></header>
+
+<section class="slide">
+  <p class="kicker">MODULE 1</p>
+  <h1>第一個活動頁:<br>用 AI 對話<em>生出整頁</em></h1>
+  <p class="sub">學完:給 AI 一段活動 brief,拿回一個完整可開啟的活動網頁,並用對話迭代到滿意。</p>
+</section>
+
+<section class="slide statement">
+  <p class="kicker">核心觀念</p>
+  <p class="big">網頁只是一個<em>文字檔</em>。<br>AI 很會寫,你的工作是<em>驗收</em>和<em>下修改指令</em>。</p>
+</section>
+
+<section class="slide">
+  <h2>步驟一:把企劃壓成 brief</h2>
+  <ul class="points">
+    <li>活動名稱、檔期、一句話賣點</li>
+    <li>目標客群與他們在乎的事</li>
+    <li>需要的區塊 <span class="dim">hero / 活動辦法 / 時間地點 / CTA / 注意事項</span></li>
+    <li>風格參照:兩三個形容詞 + 色系</li>
+    <li>CTA 要使用者做什麼 <span class="dim">填表 / 加 LINE / 到店</span></li>
+  </ul>
+  <p class="sub">頁面好不好,九成取決於 brief。</p>
+</section>
+
+<section class="slide">
+  <h2>步驟二:prompt 範本</h2>
+  <pre>你是資深網頁設計師。請為以下活動做一個單檔活動網頁
+(所有 CSS 和 JS 都內嵌在同一個 HTML 檔):
+
+【活動】山霧咖啡開幕週,6/20-6/26,買一送一
+【客群】25-40 歲上班族,重視質感與儀式感
+【區塊】滿版 hero、三張活動亮點卡、地圖資訊、注意事項、頁尾
+【風格】沉穩、霧感、留白多;主色深墨綠,輔色奶油白
+【CTA】「加入 LINE 領券」按鈕
+
+要求:
+1. 繁體中文,手機優先(大部分人從 LINE/FB 點開)
+2. 不用任何外部框架,零依賴
+3. 加上 og:title、og:description、og:image 三個 meta tag
+4. 文案不要 AI 樣板腔,寫得像真的品牌</pre>
+</section>
+
+<section class="slide">
+  <h2>步驟三:存檔、開啟、驗收</h2>
+  <ul class="points">
+    <li>完整 HTML 貼進記事本,存成 <strong>index.html</strong>(UTF-8),雙擊開啟</li>
+    <li>手機寬度看一次(視窗縮窄即可)</li>
+    <li>每個按鈕連結點一次</li>
+    <li>文案逐字讀:<strong>AI 會編造</strong>「免費停車」這種你沒說過的服務</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>步驟四:對話式迭代</h2>
+  <ul class="points">
+    <li>修改不要自己動手改檔案,<strong>回到對話下指令</strong></li>
+    <li>「hero 字再大、卡片改左圖右文、主色換 #1a3c34」</li>
+    <li><strong>一次只改一兩件事</strong>,改完重存重開</li>
+    <li>「整頁留白再多 20%」「加置底浮動 CTA bar」都是合法指令</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>常見坑</h2>
+  <ul class="points">
+    <li><strong>檔案不完整</strong>破版 → 「從頭重新給我完整單一 HTML,不要省略」</li>
+    <li><strong>編造內容</strong> → brief 沒給的資訊逐項檢查</li>
+    <li><strong>連結佔位符</strong> → 上線前全頁搜尋 # 和 example.com</li>
+    <li><strong>忘了 OG tags</strong> → LINE 分享變空白卡,觸及砍半</li>
+  </ul>
+  <span class="demo-tag">對照成品:demos/01-landing</span>
+</section>
+<div class="progress"><i id="prog"></i></div>
+<p class="navhint">← → 翻頁</p>
+<script src="deck.js"></script>
+</body>
+</html>

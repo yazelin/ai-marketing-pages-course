@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模組 2 AI 視覺資產 — AI 互動行銷頁實作課</title>
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<header class="bar"><span>模組 2 — AI 視覺資產</span><span><a href="index.html">目錄</a> &nbsp; <span id="counter"></span></span></header>
+
+<section class="slide">
+  <p class="kicker">MODULE 2</p>
+  <h1>AI 視覺資產:<br>從<em>許願</em>到<em>可控</em></h1>
+  <p class="sub">學完:生出風格一致、可重現的活動視覺——主視覺、貼文圖、OG 分享圖。</p>
+</section>
+
+<section class="slide statement">
+  <p class="kicker">許願 vs 下規格</p>
+  <p class="big">「幫我畫咖啡店開幕的圖」每次都在<em>重新抽籤</em>。<br>行銷要的是一<em>套</em>視覺,不是一<em>張</em>圖。</p>
+</section>
+
+<section class="slide">
+  <h2>視覺規格卡:六個欄位</h2>
+  <table>
+    <tr><th>欄位</th><th>範例</th></tr>
+    <tr><td>主體</td><td>一杯拿鐵在木質吧台上,蒸氣上升</td></tr>
+    <tr><td>風格</td><td>日系極簡攝影,底片感</td></tr>
+    <tr><td>光線</td><td>清晨柔和側光,窗光</td></tr>
+    <tr><td>構圖</td><td>主體置右,左側留白放標題</td></tr>
+    <tr><td>配色</td><td>深墨綠 + 奶油白 + 木質棕</td></tr>
+    <tr><td>負面</td><td>不要文字、不要人臉、不要過度銳利</td></tr>
+  </table>
+  <p class="sub">產第二張圖只換「主體」「構圖」,其他欄位不動,整套視覺自然成系列。</p>
+</section>
+
+<section class="slide">
+  <h2>實證:本課 demo 的 hero 就是這樣生的</h2>
+  <pre>主體:山嵐間的咖啡店窗景,熱拿鐵在窗台,蒸氣清楚上升,旁邊兩三顆咖啡豆
+風格:日系極簡商業攝影,底片顆粒感,安靜高級
+光線:清晨窗光,柔和,從左側來
+構圖:16:9 橫式,杯子置於右三分之一,左側大量留白(要疊活動標題)
+配色:深墨綠、奶油白、木質棕,低飽和
+避免:任何文字、人臉、logo、過度 HDR 銳利感</pre>
+  <p class="code-note">demos/01-landing/assets/hero.jpg — 一次生成到位,因為規格卡把決定權留給自己。</p>
+</section>
+
+<section class="slide">
+  <h2>一次生一個用途</h2>
+  <ul class="points">
+    <li><strong>主視覺</strong> 16:9,構圖預留標題位</li>
+    <li><strong>IG 貼文</strong> 1:1 方形</li>
+    <li><strong>OG 分享圖</strong> 1200x630,主體靠中(各平台會裁切)</li>
+    <li>微調用<strong>追加</strong>:「同一張,光線改黃昏」,不要重寫整個 prompt</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>文字疊圖的正確做法</h2>
+  <ul class="points">
+    <li>生圖模型寫中文<strong>幾乎必錯</strong></li>
+    <li>圖只負責氛圍(所以構圖要留白)</li>
+    <li>文字用<strong>網頁疊上去</strong>:「hero 換這張圖,標題疊左側留白,白字加細陰影」</li>
+    <li>文案隨時能改,不用重新生圖</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>常見坑</h2>
+  <ul class="points">
+    <li><strong>每張圖重新發明風格</strong> → 先卡死規格卡的風格欄位</li>
+    <li><strong>OG 圖留白不足</strong> → 重要元素放中央 80% 安全區</li>
+    <li><strong>直接叫模型畫字</strong> → 字交給網頁層</li>
+    <li><strong>圖太大</strong> → 壓到 500KB 以下,行動網路 3 秒打不開人就走了</li>
+  </ul>
+  <span class="demo-tag">對照:demos/01-landing/NOTES.md 視覺規格卡</span>
+</section>
+<div class="progress"><i id="prog"></i></div>
+<p class="navhint">← → 翻頁</p>
+<script src="deck.js"></script>
+</body>
+</html>

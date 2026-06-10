@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模組 5 上線 — AI 互動行銷頁實作課</title>
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<header class="bar"><span>模組 5 — 上線</span><span><a href="index.html">目錄</a> &nbsp; <span id="counter"></span></span></header>
+
+<section class="slide">
+  <p class="kicker">MODULE 5</p>
+  <h1>上線:部署決策樹 +<br><em>GitHub Pages</em> 實作</h1>
+  <p class="sub">學完:把活動頁變成真實網址,不被帳單或休眠嚇到。</p>
+</section>
+
+<section class="slide">
+  <h2>部署決策樹</h2>
+  <pre>你的頁面需要伺服器隨時運算嗎?
+├─ 不用,純靜態(本課 90% 情境)
+│   → GitHub Pages(免費、零帳單、repo 即備份)
+├─ 收表單 / 一點點後端函式
+│   → Vercel(git push 即部署,免費函式額度夠活動用)
+├─ 幫「頁面即時呼叫 AI」藏 API key(模組 6)
+│   → Cloudflare Workers(免費每天十萬次)
+└─ 常駐後端:資料庫、即時連線、會員
+    → Render(免費版 15 分鐘沒人用會休眠)</pre>
+</section>
+
+<section class="slide">
+  <h2>免費 tier 陷阱,先講明</h2>
+  <ul class="points">
+    <li><strong>Pages</strong> — 只能靜態,沒有後端就是沒有</li>
+    <li><strong>Vercel</strong> — 免費版有流量上限,爆紅等級活動先看額度</li>
+    <li><strong>Render</strong> — 免費版休眠,第一個訪客要等它醒</li>
+    <li>真實案例:本課 demo 全在 Pages;ai-tarot 用 Pages + Workers;mori-canvas 在 Render</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>GitHub Pages 三步</h2>
+  <ul class="points">
+    <li><strong>1. 建 repo</strong> — 名稱英文小寫加連字號(會變網址),Public</li>
+    <li><strong>2. 上傳</strong> — index.html 與圖片拖進去,Commit</li>
+    <li><strong>3. 開 Pages</strong> — Settings → Pages → Deploy from branch → main / root</li>
+  </ul>
+  <p class="sub">一兩分鐘後:https://你的帳號.github.io/repo名/ </p>
+</section>
+
+<section class="slide">
+  <h2>上線驗收清單</h2>
+  <ul class="points">
+    <li><strong>無痕視窗</strong>開網址(避免快取騙你)</li>
+    <li><strong>真手機</strong>開一次,不是模擬</li>
+    <li>網址貼到 LINE 給自己:<strong>分享預覽卡</strong>有沒有出現?</li>
+    <li>OG 圖必須是完整網址(https:// 開頭),相對路徑不行</li>
+    <li>圖片都有出現?<strong>檔名大小寫</strong>在 GitHub 上是兩個不同檔案</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>更新與自訂網域</h2>
+  <ul class="points">
+    <li>改版 = 重新上傳同名檔案 commit,一兩分鐘生效</li>
+    <li>每次 commit 都有紀錄,改壞了找得回舊版</li>
+    <li>自訂網域:Pages 填 Custom domain + DNS 設 CNAME → 帳號.github.io,再勾 Enforce HTTPS</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>進階捷徑:AI agent + gh CLI</h2>
+  <ul class="points">
+    <li>一次性準備:裝 <strong>gh</strong>(winget / brew)→ <strong>gh auth login</strong> 瀏覽器授權</li>
+    <li>之後 Claude Code / Codex 就能<strong>代替你操作 GitHub</strong></li>
+  </ul>
+  <pre>幫我把這個資料夾發佈成 GitHub Pages:
+1. gh repo create coffee-opening --public --source=. --push
+2. 用 gh api 啟用 Pages(main branch 根目錄)
+3. 驗證網址回 200,把最終網址給我</pre>
+  <p class="code-note">prompt 裡永遠不出現密碼或 token;agent 跑 gh 前會先問你,看清楚 --public 再放行。本課課程站就是這樣發佈的。</p>
+</section>
+
+<section class="slide">
+  <h2>常見坑</h2>
+  <ul class="points">
+    <li><strong>404</strong> → index.html 不在 repo 根目錄,或 Pages 還在建置</li>
+    <li><strong>OG 預覽不更新</strong> → 平台快取;FB 有 Sharing Debugger 可強制重抓</li>
+    <li><strong>公開 repo</strong> → 程式碼等於公開,高價券邏輯別放純前端</li>
+    <li><strong>改了沒生效</strong> → 瀏覽器快取,Ctrl+Shift+R 再判斷</li>
+  </ul>
+</section>
+<div class="progress"><i id="prog"></i></div>
+<p class="navhint">← → 翻頁</p>
+<script src="deck.js"></script>
+</body>
+</html>

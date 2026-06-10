@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模組 6 頁面即時呼叫 AI — AI 互動行銷頁實作課</title>
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<header class="bar"><span>模組 6(進階)— 頁面即時呼叫 AI</span><span><a href="index.html">目錄</a> &nbsp; <span id="counter"></span></span></header>
+
+<section class="slide">
+  <p class="kicker">MODULE 6 — ADVANCED</p>
+  <h1>頁面<em>即時</em>呼叫 AI</h1>
+  <p class="sub">AI 抽籤解語、客製祝福文、活動 QA。標準:照著抄能動。</p>
+</section>
+
+<section class="slide statement">
+  <p class="kicker">先講清楚</p>
+  <p class="big">API key 等於信用卡。<br>key 放前端 = 把信用卡<em>貼在店門口</em>。</p>
+</section>
+
+<section class="slide">
+  <h2>架構:中間加一個免費代理</h2>
+  <pre>訪客瀏覽器 ──> Cloudflare Worker(key 藏在這)──> AI API
+   GitHub Pages          免費 10 萬次/天</pre>
+  <ul class="points">
+    <li>網頁呼叫代理、代理拿著藏好的 key 呼叫 AI、答案傳回來</li>
+    <li>真實案例:ai-tarot-companion 整站就是這個架構,全部免費 tier</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>三步驟</h2>
+  <ul class="points">
+    <li><strong>1. 建 Worker</strong> — Cloudflare 免費註冊,貼上講義的完整範本(含 CORS 處理)</li>
+    <li><strong>2. 藏 key</strong> — Groq 免費 key 放進 Worker 的 Secret,名稱 GROQ_API_KEY;<strong>永遠不出現在網頁程式碼</strong></li>
+    <li><strong>3. 網頁接上</strong> — 給 AI 的 prompt 只能出現 Worker 網址,不能出現 key</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>範本內建的兩道閘門</h2>
+  <ul class="points">
+    <li><strong>長度限制</strong> — 訊息超過 500 字直接擋,防止被當免費 ChatGPT 玩</li>
+    <li><strong>範圍限制</strong> — system prompt 寫死「只回答咖啡與本次活動,其他婉拒」</li>
+    <li>想換更高品質模型:只改 fetch 的網址、模型名與 key,架構不變</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>驗收</h2>
+  <ul class="points">
+    <li>問三題活動相關,回答合理</li>
+    <li>問「幫我寫作業」,確認有<strong>婉拒</strong></li>
+    <li>F12 → Network:瀏覽器只連 workers.dev,<strong>看不到任何 API key</strong></li>
+    <li>Console 出現含 CORS 的紅字 → 範本 headers 區塊被改壞,整段還原</li>
+  </ul>
+</section>
+<div class="progress"><i id="prog"></i></div>
+<p class="navhint">← → 翻頁</p>
+<script src="deck.js"></script>
+</body>
+</html>

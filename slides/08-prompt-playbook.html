@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模組 8 Prompt 兵法 — AI 互動行銷頁實作課</title>
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<header class="bar"><span>模組 8 — Prompt 兵法</span><span><a href="index.html">目錄</a> &nbsp; <span id="counter"></span></span></header>
+
+<section class="slide">
+  <p class="kicker">MODULE 8 — PROMPT PLAYBOOK</p>
+  <h1>Prompt <em>兵法</em></h1>
+  <p class="sub">本課所有 demo 是怎麼被 prompt 出來的——把方法拆開,讓你對 Claude / ChatGPT / Gemini / Codex 都能複製這個品質。</p>
+</section>
+
+<section class="slide">
+  <h2>prompt 的四層結構</h2>
+  <table>
+    <tr><th>層</th><th>在做什麼</th><th>demo 01 實際用法</th></tr>
+    <tr><td>1 角色</td><td>借專業視角</td><td>你是資深網頁設計師</td></tr>
+    <tr><td>2 任務+格式</td><td>做什麼、交什麼形狀</td><td>單檔網頁,CSS/JS 全內嵌</td></tr>
+    <tr><td>3 規格</td><td>內容 / 風格 / 技術</td><td>區塊清單;霧感+色票;零依賴+OG</td></tr>
+    <tr><td>4 驗收+禁止</td><td>怎麼檢查、不要什麼</td><td>不要 AI 樣板腔、不要外部框架</td></tr>
+  </table>
+  <p class="sub">缺一層,AI 就自己腦補一層——腦補的那層就是你不滿意的地方。</p>
+</section>
+
+<section class="slide">
+  <h2>四個實戰心法</h2>
+  <ul class="points">
+    <li>風格用<strong>形容詞 + 色票</strong>,不要只說「好看」</li>
+    <li>把已知的雷<strong>預先寫進 prompt</strong>(loadAll / fullScreen:false)</li>
+    <li><strong>負面清單</strong>跟正面需求一樣重要:不要 emoji、不要紫色漸層、不要罐頭版型</li>
+    <li>之後會改的東西,要求<strong>放在好改的地方</strong>(機率表放最上方)</li>
+  </ul>
+</section>
+
+<section class="slide statement">
+  <p class="kicker">context 準備</p>
+  <p class="big">同一句指令,<br>有沒有附對 context,<br>輸出是<em>兩個世界</em>。</p>
+</section>
+
+<section class="slide">
+  <h2>品牌規格卡:一次寫好,每次都餵</h2>
+  <pre>品牌:山霧咖啡 SANWU COFFEE
+色票:墨綠底 #10221d / 松綠 #1d4438 / 霧灰綠 #9db8ae
+      / 奶油白 #f4efe4 / 銅棕 #c98f4e
+字體:標題襯線(Noto Serif TC),內文黑體
+語氣:沉穩、有畫面感、短句;不用驚嘆號轟炸、不用 emoji
+一句話人格:把第一杯的儀式感分給你</pre>
+  <p class="code-note">本課三個 demo 風格一致,不是 AI 記性好,是每次開新對話都先貼這張卡。</p>
+</section>
+
+<section class="slide">
+  <h2>另外三種 context</h2>
+  <ul class="points">
+    <li><strong>現有檔案</strong> — 要改頁面就把整個 HTML 貼回去;AI 沒有「上次」</li>
+    <li><strong>錯誤現場</strong> — Console 紅字原文 + 我做了什麼 / 預期什麼 / 看到什麼</li>
+    <li><strong>參照範例</strong> — 「像 web-effects-collector 裡『星座連線』那種」比「科技感點點」精準一百倍</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>圖片 context:兩個方向</h2>
+  <div class="cols">
+    <div>
+      <h3>A. 讓 AI 生圖</h3>
+      <ul>
+        <li>六欄規格卡(模組 2)</li>
+        <li>構圖欄寫用途:「左側留白疊標題」</li>
+        <li>生圖時就想好它進版面哪裡</li>
+      </ul>
+    </div>
+    <div>
+      <h3>B. 拿圖片當輸入</h3>
+      <ul>
+        <li>截圖貼給 AI 改版面,比文字描述有效</li>
+        <li>參照圖定風格與配色</li>
+        <li>進頁面前:壓 500KB、進 canvas 考慮 base64 內嵌</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>聊天式 vs agent 式(Claude Code / Codex)</h2>
+  <table>
+    <tr><th></th><th>聊天式</th><th>agent 式</th></tr>
+    <tr><td>檔案</td><td>貼進去、複製出來</td><td>直接讀寫你的資料夾</td></tr>
+    <tr><td>規格卡</td><td>每次對話重貼</td><td>存成 BRAND.md 叫它先讀</td></tr>
+    <tr><td>驗收</td><td>你自己開瀏覽器</td><td>叫它自己開瀏覽器驗證</td></tr>
+  </table>
+</section>
+
+<section class="slide">
+  <h2>agent 式殺手鐧:驗收清單寫進指令</h2>
+  <pre>做完之後你要自己驗證:
+1. 起本機 server 開頁面,console 不能有紅字
+2. 特效 canvas 要真的有畫東西(數非透明像素)
+3. 手機寬度 390px 檢查無水平捲動
+4. 互動流程(抽獎/答題)完整走一遍
+驗證通過才回報,並附截圖。</pre>
+  <p class="code-note">demo 01 手機版兩個 bug 就是這樣被抓出來的。一次到位是迷思,一輪驗收內收斂才是實力。</p>
+</section>
+
+<section class="slide">
+  <h2>迭代紀律</h2>
+  <ul class="points">
+    <li><strong>一次只改一兩件事</strong> — 壞了才知道是誰造成的</li>
+    <li><strong>重要版本先另存再改</strong> — index-v2.html</li>
+    <li><strong>改壞了別戀戰</strong> — 貼回最後的好版本,換個說法重下</li>
+    <li><strong>滿意的 prompt 存起來</strong> — prompt 庫是資產,比成品值錢</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>實戰回放:demo 01 的 prompt 鏈</h2>
+  <ul class="points">
+    <li><strong>1.</strong> 四層 brief → 第一版單檔 HTML(模組 1)</li>
+    <li><strong>2.</strong> 六欄規格卡 → 窗景熱拿鐵 hero.jpg(模組 2)</li>
+    <li><strong>3.</strong> 點菜 → 星座連線粒子,優雅不要吵(模組 3)</li>
+    <li><strong>4.</strong> 疊層指令 → 照片維持原比例,杯口 76%/60% 疊蒸氣絲</li>
+    <li><strong>5.</strong> 驗收回饋 → 手機溢出、日期折行,兩輪修正收斂</li>
+  </ul>
+  <p class="sub">沒有一步需要會寫程式。</p>
+</section>
+
+<section class="slide">
+  <h2>常見坑</h2>
+  <ul class="points">
+    <li><strong>prompt 寫成許願池</strong> — 規格不寫,驗收時逐條吵</li>
+    <li><strong>context 只給一次</strong> — 對話一長 AI 就忘,關鍵指令前重貼品牌卡</li>
+    <li><strong>把 AI 的自信當正確</strong> — 它寫錯時語氣一樣肯定</li>
+    <li><strong>貼了不該貼的</strong> — API key、客戶名單、內部價格表不進對話</li>
+  </ul>
+  <span class="demo-tag">整個 repo 就是本模組的對照成品</span>
+</section>
+<div class="progress"><i id="prog"></i></div>
+<p class="navhint">← → 翻頁</p>
+<script src="deck.js"></script>
+</body>
+</html>

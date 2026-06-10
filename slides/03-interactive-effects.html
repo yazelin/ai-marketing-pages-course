@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模組 3 互動特效 — AI 互動行銷頁實作課</title>
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<header class="bar"><span>模組 3 — 互動特效</span><span><a href="index.html">目錄</a> &nbsp; <span id="counter"></span></span></header>
+
+<section class="slide">
+  <p class="kicker">MODULE 3</p>
+  <h1>互動特效:<br>讓頁面<em>活起來</em></h1>
+  <p class="sub">學完:加上「一眼記住」的動態,知道怎麼點菜、怎麼驗收特效真的在動。</p>
+</section>
+
+<section class="slide statement">
+  <p class="kicker">核心觀念</p>
+  <p class="big">特效是<em>菜單題</em>,不是技術題。<br>你需要的是<em>叫得出名字</em>。</p>
+</section>
+
+<section class="slide">
+  <h2>先逛菜單,再點菜</h2>
+  <ul class="points">
+    <li><strong>web-effects-collector</strong> — 90 個開源特效、12 類,每個有現場 demo</li>
+    <li>挑特效流程:逛 → 記下名字 → 貼給 AI</li>
+    <li>「加個酷酷的效果」= 災難;「tsParticles 星座連線粒子,白點細線,hero 背景」= 精品</li>
+  </ul>
+  <p class="sub">https://yazelin.github.io/web-effects-collector/ </p>
+</section>
+
+<section class="slide">
+  <h2>行銷頁最實用三類</h2>
+  <table>
+    <tr><th>類型</th><th>適用</th><th>點菜關鍵字</th></tr>
+    <tr><td>粒子背景</td><td>hero 科技感 / 夢幻感</td><td>tsParticles、星座連線、漂浮光點</td></tr>
+    <tr><td>動態材質</td><td>質感品牌、不想太花</td><td>Vanta FOG(霧)、WAVES(波浪)</td></tr>
+    <tr><td>捲動進場</td><td>內容多的長頁</td><td>IntersectionObserver 淡入</td></tr>
+  </table>
+  <p class="sub">原則:一頁最多一個搶眼特效,其他用安靜的捲動進場。特效是調味料。</p>
+</section>
+
+<section class="slide">
+  <h2>點菜 prompt 範本</h2>
+  <pre>在我這個活動頁的 hero 區塊加上 tsParticles 粒子背景:
+1. 用 CDN 引入 tsParticles v3 的 @tsparticles/all bundle,
+   並記得先呼叫 loadAll() 再 load 設定
+2. fullScreen 要設為 false,粒子只出現在 hero 區塊內
+3. 風格:細小白色光點 + 淡淡連線,緩慢漂浮,密度低,優雅不要吵
+4. 粒子層要在文字後面(z-index),不能擋到標題和按鈕
+5. 手機上粒子數量減半,避免發熱耗電</pre>
+  <p class="code-note">第 1、2 點照抄——這是 tsParticles 兩個最常見的雷,先在 prompt 裡堵住。</p>
+</section>
+
+<section class="slide">
+  <h2>細節疊加:demo 01 的蒸氣</h2>
+  <ul class="points">
+    <li>照片裡的蒸氣是<strong>靜的</strong>,品牌感要<strong>會動的</strong></li>
+    <li>解法:CSS 蒸氣絲(三縷模糊白絲、錯拍上升)疊在照片杯口</li>
+    <li>關鍵:照片容器維持原始比例,杯口位置就是固定百分比,蒸氣不會跑位</li>
+    <li>這類「照片 + 動態疊層」是質感頁的高 CP 值手法</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>驗收:特效真的在動?</h2>
+  <ul class="points">
+    <li>肉眼:hero 上看得到在動</li>
+    <li><strong>F12 Console 不能有紅字</strong>;有就整段貼回給 AI</li>
+    <li>縮成手機寬:還在、不擋文字、捲動順暢</li>
+    <li>特效層壞掉常是「整頁正常,canvas 一片空白」——別只看有沒有 canvas</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>常見坑</h2>
+  <ul class="points">
+    <li><strong>粒子蓋住整頁、按鈕點不到</strong> → fullScreen 沒關 / z-index 蓋到文字</li>
+    <li><strong>載入順序</strong> → Console 出現 xxx is not defined,貼給 AI</li>
+    <li><strong>特效太多</strong> → 粒子 + 波浪 + confetti = 夜市</li>
+    <li><strong>老手機發燙</strong> → 粒子減半、關 hover 互動</li>
+  </ul>
+  <span class="demo-tag">對照成品:demos/01-landing(粒子 + 蒸氣)</span>
+</section>
+<div class="progress"><i id="prog"></i></div>
+<p class="navhint">← → 翻頁</p>
+<script src="deck.js"></script>
+</body>
+</html>

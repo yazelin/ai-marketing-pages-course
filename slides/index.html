@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>簡報目錄 — AI 互動行銷頁實作課</title>
+<style>
+  :root{
+    --ink:#10221d; --pine:#1d4438; --moss:#2e5c4d; --mist:#9db8ae;
+    --cream:#f4efe4; --copper:#c98f4e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:
+      radial-gradient(120% 90% at 80% -10%, rgba(157,184,174,.14), transparent 60%),
+      radial-gradient(100% 80% at 10% 110%, rgba(201,143,78,.10), transparent 55%),
+      var(--ink);
+    color:var(--cream); min-height:100vh; padding:9vh 8vw 12vh;
+  }
+  .kicker{font-size:.78rem; letter-spacing:.42em; color:var(--mist); margin-bottom:1.2rem}
+  h1{font-family:"Noto Serif TC","PMingLiU",serif; font-weight:600; font-size:clamp(1.9rem,4.5vw,3rem); margin-bottom:.8rem}
+  .sub{color:var(--mist); line-height:1.9; margin-bottom:4rem; font-size:.95rem; max-width:36em}
+  ol{list-style:none; max-width:46rem}
+  ol a{
+    display:flex; align-items:baseline; gap:1.4rem; text-decoration:none; color:var(--cream);
+    padding:1.15rem .4rem; border-bottom:1px solid rgba(157,184,174,.18);
+    transition:padding-left .3s, border-color .3s;
+  }
+  ol a:hover{padding-left:1.2rem; border-color:var(--copper)}
+  .no{font-family:"Noto Serif TC",serif; color:var(--copper); font-size:.85rem; letter-spacing:.2em; min-width:3.4rem}
+  .t{font-size:1.05rem}
+  .adv{font-size:.7rem; letter-spacing:.2em; color:var(--mist); border:1px solid rgba(157,184,174,.4); border-radius:99px; padding:.15rem .7rem; margin-left:auto}
+  footer{margin-top:5rem; color:rgba(157,184,174,.55); font-size:.78rem; letter-spacing:.12em; line-height:2}
+  footer a{color:var(--copper)}
+</style>
+</head>
+<body>
+  <p class="kicker">AI MARKETING PAGES COURSE — SLIDES</p>
+  <h1>上課簡報目錄</h1>
+  <p class="sub">點進任一模組,← → 或點畫面左右側翻頁,網址 # 會記住頁碼。投影時瀏覽器按 F11 全螢幕。</p>
+  <ol>
+    <li><a href="00-overview.html"><span class="no">總覽</span><span class="t">課程總覽:給誰上、學什麼、三原則</span></a></li>
+    <li><a href="00b-setup.html"><span class="no">M0</span><span class="t">行前準備:工具與心態</span></a></li>
+    <li><a href="01-first-landing-page.html"><span class="no">M1</span><span class="t">第一個活動頁:用 AI 對話生出整頁</span></a></li>
+    <li><a href="02-ai-visual-assets.html"><span class="no">M2</span><span class="t">AI 視覺資產:從許願到可控</span></a></li>
+    <li><a href="03-interactive-effects.html"><span class="no">M3</span><span class="t">互動特效:讓頁面活起來</span></a></li>
+    <li><a href="04-marketing-games.html"><span class="no">M4</span><span class="t">行銷遊戲:抽獎、刮刮樂、測驗</span></a></li>
+    <li><a href="05-deployment.html"><span class="no">M5</span><span class="t">上線:部署決策樹 + GitHub Pages</span></a></li>
+    <li><a href="06-live-ai-on-page.html"><span class="no">M6</span><span class="t">頁面即時呼叫 AI</span><span class="adv">進階</span></a></li>
+    <li><a href="07-automation.html"><span class="no">M7</span><span class="t">讓活動頁自己更新</span><span class="adv">進階</span></a></li>
+    <li><a href="08-prompt-playbook.html"><span class="no">M8</span><span class="t">Prompt 兵法:context、圖片與驗收清單</span></a></li>
+  </ol>
+  <footer>
+    講義 PDF:repo 根目錄 handout.pdf · demo:<a href="../demos/index.html">demos/index.html</a><br>
+    SANWU COFFEE 為課程虛構品牌
+  </footer>
+</body>
+</html>

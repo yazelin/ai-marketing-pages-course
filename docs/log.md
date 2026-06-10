@@ -1,5 +1,21 @@
 # 執行日誌
 
+## 2026-06-10(下午)— v2:簡報 + PDF + demo 質感升級 + 模組 8
+
+使用者三項回饋:課程要 HTML 簡報 + 講義 PDF;demo 咖啡品牌感不夠(規格卡寫的熱拿鐵與蒸氣沒做出來);課程要含完整 prompt / context / 圖片技巧。
+
+1. **「蒸氣去哪了」調查**:非程式錯誤——NOTES.md 規格卡當初只當模組 2 教材範例,demo 為零依賴刻意用漸層粒子代替,落差屬實。
+2. **真的生圖**:nanobanana(Gemini)403 被擋 → 改用 codex-imagegen skill(Codex CLI $imagegen,ChatGPT 訂閱額度)生成兩張:hero 窗景熱拿鐵(16:9)、俯視拉花(1:1)。PIL 壓成 hero.jpg 108K / latte-top.jpg 76K(實踐模組 2 的 500KB 紀律)。
+3. **demo 升級**:
+   - 01:hero 改「左標題 + 右窗景照片」;照片容器維持原比例,CSS 三縷蒸氣絲錨定杯口 76%/60%(紅色定位法校過位);亮點卡加咖啡 SVG 線圖示。
+   - 02:拉花圓徽 + 蒸氣動畫進場。
+   - 03:開場圓徽;分享圖卡 canvas 畫入拉花照——以 base64 內嵌(file:// 直開時外部圖會汙染 canvas,toDataURL 下載會掛)。
+   - 驗證:medallion 載入、圖卡 1,458,000 像素全繪、圖卡中心像素為奶泡色、toDataURL 正常、四種結果型路徑可達。
+4. **模組 8 Prompt 兵法**(course/08 + slides/08):四層結構 / 品牌規格卡等四種 context / 圖片雙向(生圖規格卡、截圖參照)/ 聊天式 vs agent 式 / 驗收清單寫進指令 / demo 01 prompt 鏈實戰回放。
+5. **HTML 簡報**:slides/ 共用 deck.css + deck.js(鍵盤、點擊、觸控翻頁,hash 記頁,print 模式攤平),10 份 deck + 目錄頁。驗證:翻頁/計數/邊界正常、console 乾淨、全部 200。
+6. **講義 PDF**:scripts/build-handout.py(python-markdown 組 10 份講義 + 印刷 CSS)→ pdf/handout.html → headless google-chrome → **handout.pdf(25 頁 A4)**。修過一輪封面標題色被內文規則蓋掉的問題。
+
+
 ## 2026-06-10 — 一次完成:研究、決策、課程、demo、驗證
 
 1. **盤點**:`gh repo list` 篩出 2026-04-10 後有 push 的約 55 個 repo,逐一評估與「行銷人做 AI 互動行銷頁」的相關性,實地讀了 web-effects-collector / gemini-image-starter / ai-tarot-companion / catime / yazelin-courses / j303 的本機 clone 確認技術細節。→ `docs/research/01-repo-survey.md`

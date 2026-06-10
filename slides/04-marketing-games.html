@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模組 4 行銷遊戲 — AI 互動行銷頁實作課</title>
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<header class="bar"><span>模組 4 — 行銷遊戲</span><span><a href="index.html">目錄</a> &nbsp; <span id="counter"></span></span></header>
+
+<section class="slide">
+  <p class="kicker">MODULE 4</p>
+  <h1>行銷遊戲:<br>抽獎、刮刮樂、<em>測驗</em></h1>
+  <p class="sub">學完:做出兩種最有效的活動互動,懂機率設定與防重抽。</p>
+</section>
+
+<section class="slide">
+  <h2>遊戲機制 = 行銷機制</h2>
+  <table>
+    <tr><th>遊戲</th><th>行銷目的</th><th>關鍵設計</th></tr>
+    <tr><td>拉霸 / 轉盤 / 刮刮樂</td><td>到店核銷、領券轉換</td><td>機率表、優惠碼、防重抽</td></tr>
+    <tr><td>心理測驗</td><td>社群擴散、品牌好感</td><td>結果值得曬、一鍵存分享圖</td></tr>
+  </table>
+  <p class="sub">純前端就能做(零後端、零成本);代價是防重抽只防君子——對活動夠用。</p>
+</section>
+
+<section class="slide">
+  <h2>A. 拉霸:prompt 範本重點</h2>
+  <pre>做一個單檔 HTML 拉霸抽獎頁:
+1. 三個轉輪,按「抽一次」後依序停下
+2. 中獎機率由一張表控制,放在程式碼最上方讓我能自己改:
+   三個咖啡(大獎)5% / 任兩個相同(小獎)25% / 其他銘謝惠顧
+3. 中獎跳出優惠碼 SANWU-XXXX(隨機),附「截圖到店出示」
+4. localStorage 記錄已抽過,同一台手機每天限抽一次
+5. 中大獎撒一波 confetti
+6. 手機優先,按鈕要大</pre>
+  <p class="code-note">「機率表放最上方」是給未來的自己留調整入口。</p>
+</section>
+
+<section class="slide">
+  <h2>A. 拉霸:驗收三招</h2>
+  <ul class="points">
+    <li>機率表改成 <strong>100% 大獎</strong>,抽十次都該中 → 證明機率表真的有作用,再改回去</li>
+    <li>抽完<strong>重新整理</strong>,「今天已抽過」要擋住</li>
+    <li>優惠碼每次中獎都不同</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>B. 測驗:先用 AI 生題庫</h2>
+  <pre>幫我設計「你是哪一型咖啡人」心理測驗:
+- 5 題,每題 3 個選項,情境要生活化、有畫面感
+- 4 種結果型(儀式感 / 效率 / 社交 / 探險),每型給:
+  名稱、兩句個性描述(要準到讓人想截圖)、推薦飲品、分享語
+- 每個選項對應到某一型的加權,輸出成 JSON</pre>
+  <p class="code-note">題目與結果文案是行銷人的主場——測驗的靈魂在「被說中感」。</p>
+</section>
+
+<section class="slide">
+  <h2>B. 測驗:再讓 AI 組頁面</h2>
+  <pre>用這份 JSON 做單檔測驗頁:一題一畫面、進度條、
+答完依加權算出結果型。
+結果頁用 canvas 畫一張 1080x1350 的結果圖卡
+(型別名稱 + 描述 + 品牌),提供「儲存圖片」按鈕
+讓使用者下載去限動分享。配色:深墨綠 + 奶油白。</pre>
+  <ul class="points">
+    <li>驗收:每條路徑點一輪,<strong>四種結果都要到得了</strong></li>
+    <li>下載圖卡打開看:字沒爆框、沒亂碼</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>常見坑</h2>
+  <ul class="points">
+    <li><strong>機率寫死在深處</strong> → prompt 要求機率表放最上方</li>
+    <li><strong>結果不值得曬</strong> → 文案弱,技術再好也沒人分享</li>
+    <li><strong>canvas 中文字型</strong> → 系統字型堆疊 + 等字型載入</li>
+    <li><strong>把純前端當抽獎系統</strong> → 高價券要後端;到店核銷沒問題</li>
+    <li><strong>LINE / FB 內建瀏覽器</strong> → 記狀態一律 localStorage</li>
+  </ul>
+  <span class="demo-tag">對照:demos/02-lucky-draw、demos/03-ai-quiz</span>
+</section>
+<div class="progress"><i id="prog"></i></div>
+<p class="navhint">← → 翻頁</p>
+<script src="deck.js"></script>
+</body>
+</html>

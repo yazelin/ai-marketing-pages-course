@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模組 7 讓活動頁自己更新 — AI 互動行銷頁實作課</title>
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<header class="bar"><span>模組 7(進階)— 讓活動頁自己更新</span><span><a href="index.html">目錄</a> &nbsp; <span id="counter"></span></span></header>
+
+<section class="slide">
+  <p class="kicker">MODULE 7 — ADVANCED</p>
+  <h1>讓活動頁<em>自己</em>更新</h1>
+  <p class="sub">每天換標語、倒數自動更新、每天換一張 AI 圖。照著抄能動。</p>
+</section>
+
+<section class="slide statement">
+  <p class="kicker">核心觀念</p>
+  <p class="big">GitHub 不只存檔,<br>還能<em>定時幫你做事</em>。</p>
+</section>
+
+<section class="slide">
+  <h2>GitHub Actions 排程</h2>
+  <ul class="points">
+    <li>放一個「排程指令檔」進 repo,GitHub 按表操課</li>
+    <li>執行結果 commit 回 repo → Pages 自動更新 → 訪客看到新內容</li>
+    <li>全程不需要你的電腦開機,免費額度內</li>
+    <li>真實案例:<strong>catime</strong> 每小時自動生成一張 AI 貓圖並發布</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>照著抄:每天自動換標語</h2>
+  <ul class="points">
+    <li><strong>1.</strong> 把會變的部分抽成 daily.json,頁面從它讀標語</li>
+    <li><strong>2.</strong> 放 .github/workflows/daily.yml(講義有完整檔,路徑一字不差)</li>
+    <li><strong>3.</strong> Actions 頁籤 → Run workflow 手動測一次 → json 變了、頁面跟著變</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>延伸玩法(原理相同)</h2>
+  <ul class="points">
+    <li><strong>倒數天數</strong> — 腳本算剩 N 天寫進 json</li>
+    <li><strong>每日 AI 圖</strong> — 排程呼叫生圖 API(key 放 repo Secrets,同模組 6 觀念)</li>
+    <li><strong>自動抓資料</strong> — 每天抓天氣:「山上 16 度,適合熱拿鐵」</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>常見坑</h2>
+  <ul class="points">
+    <li><strong>cron 是 UTC</strong> — 0 0 * * * 是台北早上八點,不是半夜</li>
+    <li><strong>排程不準時</strong> — 尖峰可能晚幾十分鐘,別承諾「整點準時」</li>
+    <li><strong>忘了 permissions: contents: write</strong> — push 會 Permission denied</li>
+    <li><strong>活動結束忘了關</strong> — 收攤時刪 yml 或 Disable workflow</li>
+  </ul>
+</section>
+<div class="progress"><i id="prog"></i></div>
+<p class="navhint">← → 翻頁</p>
+<script src="deck.js"></script>
+</body>
+</html>

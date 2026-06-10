@@ -23,11 +23,20 @@ course/
   05-deployment.md               模組 5 部署決策樹 + GitHub Pages
   06-live-ai-on-page.md          模組 6(進階)頁面即時呼叫 AI
   07-automation.md               模組 7(進階)GitHub Actions 自動更新
+  08-prompt-playbook.md          模組 8 Prompt 兵法(prompt / context / 圖片 / 驗收)
+slides/
+  index.html                     簡報目錄(上課用,F11 全螢幕)
+  deck.css / deck.js             共用簡報框架(鍵盤、觸控翻頁、print 攤平)
+  00-overview ~ 08 共 10 份 deck
+handout.pdf                      上課講義 PDF(25 頁 A4,全模組)
+scripts/build-handout.py         講義 PDF 產生器(md → 印刷 HTML → headless Chrome)
+pdf/handout.html                 PDF 的中間印刷版(可自行重印)
 demos/
   index.html                     demo 總覽入口
-  01-landing/                    活動 landing(粒子 hero + 倒數 + 置底 CTA)
+  assets/latte-top.jpg           AI 生成俯視拉花(02/03 品牌圓徽用)
+  01-landing/                    活動 landing(AI 生成窗景 hero + 杯口蒸氣 + 粒子 + 倒數)
   02-lucky-draw/                 拉霸抽獎(機率表 + 優惠碼 + 防重抽 + confetti)
-  03-ai-quiz/                    心理測驗(加權計分 + canvas 分享圖卡下載)
+  03-ai-quiz/                    心理測驗(加權計分 + canvas 分享圖卡含拉花照)
 ```
 
 ## 怎麼驗證成果

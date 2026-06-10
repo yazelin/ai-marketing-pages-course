@@ -26,13 +26,55 @@
   /* ---------- hero ---------- */
   .hero{
     position:relative; min-height:100svh; display:flex; flex-direction:column;
-    justify-content:center; padding:0 7vw; isolation:isolate; overflow:hidden;
+    justify-content:center; padding:9vh 7vw; isolation:isolate; overflow:hidden;
     background:
       radial-gradient(130% 100% at 85% -20%, rgba(157,184,174,.16), transparent 55%),
       radial-gradient(90% 70% at 0% 115%, rgba(201,143,78,.12), transparent 50%),
       var(--ink);
   }
   #particles{position:absolute; inset:0; z-index:0}
+  .hero-grid{
+    position:relative; z-index:2; max-width:1180px; margin:0 auto; width:100%;
+    display:grid; grid-template-columns:minmax(0,11fr) minmax(0,9fr);
+    gap:clamp(2rem,5vw,4.5rem); align-items:center;
+  }
+  /* 窗景:照片維持原始比例,蒸氣能精準錨定杯口 */
+  .window{
+    position:relative; border-radius:6px; overflow:hidden;
+    border:1px solid rgba(201,143,78,.35);
+    box-shadow:0 40px 90px -40px rgba(0,0,0,.9), 0 0 0 8px rgba(244,239,228,.03);
+    animation:rise .9s .5s both;
+  }
+  .window img{display:block; width:100%; height:auto}
+  .window::after{      /* 窗玻璃霧感 */
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(115deg, rgba(16,34,29,.32), transparent 45%, rgba(157,184,174,.07));
+    pointer-events:none;
+  }
+  .window .caption{
+    position:absolute; left:1.1rem; bottom:.95rem; z-index:3;
+    font-size:.66rem; letter-spacing:.32em; color:rgba(244,239,228,.75);
+  }
+  /* 杯口蒸氣:三縷模糊白絲,錯拍上升(疊在照片本身的蒸氣上) */
+  .steam{position:absolute; z-index:2; left:76%; top:60%; width:0; height:0}
+  .steam i{
+    position:absolute; bottom:0; left:0; width:14px; height:64px; border-radius:50%;
+    background:linear-gradient(to top, rgba(244,239,228,.0), rgba(244,239,228,.5), rgba(244,239,228,0));
+    filter:blur(5px); opacity:0; transform-origin:bottom center;
+    animation:steam 4.2s ease-in-out infinite;
+  }
+  .steam i:nth-child(2){left:-14px; height:84px; animation-delay:1.3s; animation-duration:5s}
+  .steam i:nth-child(3){left:12px; height:52px; animation-delay:2.4s; animation-duration:4.6s}
+  @keyframes steam{
+    0%{opacity:0; transform:translateY(6px) scaleY(.55) skewX(0deg)}
+    25%{opacity:.85}
+    55%{opacity:.45; transform:translateY(-46px) scaleY(1.05) skewX(-7deg)}
+    100%{opacity:0; transform:translateY(-92px) scaleY(1.25) skewX(6deg)}
+  }
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr; gap:2.6rem}
+    .window{order:2; max-width:34rem}
+  }
   .fog{
     position:absolute; inset:-20% -40%; z-index:1; pointer-events:none; opacity:.5;
     background:
@@ -41,7 +83,7 @@
     animation:drift 26s ease-in-out infinite alternate;
   }
   @keyframes drift{from{transform:translateX(-4%) translateY(1%)}to{transform:translateX(4%) translateY(-2%)}}
-  .hero-inner{position:relative; z-index:2; max-width:1080px}
+  .hero-inner{position:relative; min-width:0}
   .brand{
     font-size:.8rem; letter-spacing:.5em; color:var(--mist);
     margin-bottom:2.2rem; animation:rise .9s .1s both;
@@ -108,7 +150,8 @@
     opacity:0; transform:translateY(28px); transition:opacity .7s, transform .7s;
   }
   .hl.show{opacity:1; transform:none}
-  .hl .no{font-family:"Noto Serif TC",serif; color:var(--copper); letter-spacing:.25em; font-size:.8rem; margin-bottom:1.2rem}
+  .hl .no{font-family:"Noto Serif TC",serif; color:var(--copper); letter-spacing:.25em; font-size:.8rem; margin-bottom:1.2rem; display:flex; justify-content:space-between; align-items:center}
+  .hl .no svg{width:30px; height:30px; opacity:.85}
   .hl h3{font-family:"Noto Serif TC",serif; font-size:1.25rem; font-weight:600; margin-bottom:.8rem}
   .hl p{color:var(--mist); font-size:.9rem; line-height:1.95}
 
@@ -152,13 +195,20 @@
 <section class="hero">
   <canvas id="particles"></canvas>
   <div class="fog"></div>
-  <div class="hero-inner">
-    <p class="brand">SANWU COFFEE — 山霧咖啡</p>
-    <h1>霧還沒散,<br>咖啡先<em>香</em>了。</h1>
-    <p class="hero-sub">山霧咖啡落腳半山。開幕這一週,把第一杯的儀式感分給你——全品項買一送一,帶一個值得的人上山。</p>
-    <div class="dates"><span>6.20</span><span class="dot"></span><span>6.26</span><span class="dot"></span><span>開幕週 全品項買一送一</span></div>
-    <br>
-    <a class="cta-main" href="https://example.com" target="_blank" rel="noopener">加入 LINE 領開幕券</a>
+  <div class="hero-grid">
+    <div class="hero-inner">
+      <p class="brand">SANWU COFFEE — 山霧咖啡</p>
+      <h1>霧還沒散,<br>咖啡先<em>香</em>了。</h1>
+      <p class="hero-sub">山霧咖啡落腳半山。開幕這一週,把第一杯的儀式感分給你——全品項買一送一,帶一個值得的人上山。</p>
+      <div class="dates"><span>6.20</span><span class="dot"></span><span>6.26</span><span class="dot"></span><span>開幕週 全品項買一送一</span></div>
+      <br>
+      <a class="cta-main" href="https://example.com" target="_blank" rel="noopener">加入 LINE 領開幕券</a>
+    </div>
+    <figure class="window">
+      <img src="assets/hero.jpg" alt="山嵐間的咖啡店窗景,一杯熱拿鐵在窗台,蒸氣上升">
+      <span class="steam"><i></i><i></i><i></i></span>
+      <figcaption class="caption">06:10 · 山 上 的 第 一 杯</figcaption>
+    </figure>
   </div>
   <p class="scroll-hint">SCROLL</p>
 </section>
@@ -176,9 +226,9 @@
 <section class="highlights">
   <h2 class="sec-title">開幕週亮點</h2>
   <div class="hl-grid">
-    <div class="hl"><p class="no">01</p><h3>整週買一送一</h3><p>全品項,不限杯型。第二杯留給同行的人,或下午的自己。</p></div>
-    <div class="hl"><p class="no">02</p><h3>山霧限定豆</h3><p>開幕限定「霧色」配方豆,每日限量三十包,售完隔日請早。</p></div>
-    <div class="hl"><p class="no">03</p><h3>吧台手沖時刻</h3><p>每日 14:00,主理人現場手沖示範,坐吧台的人多一杯試飲。</p></div>
+    <div class="hl"><p class="no">01<svg viewBox="0 0 24 24" fill="none" stroke="#c98f4e" stroke-width="1.4" stroke-linecap="round"><path d="M4 10h12v5a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-5z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M7.5 6.5c0-1 .9-1.1.9-2.3M11 6.5c0-1 .9-1.1.9-2.3"/></svg></p><h3>整週買一送一</h3><p>全品項,不限杯型。第二杯留給同行的人,或下午的自己。</p></div>
+    <div class="hl"><p class="no">02<svg viewBox="0 0 24 24" fill="none" stroke="#c98f4e" stroke-width="1.4" stroke-linecap="round"><ellipse cx="9" cy="9" rx="3.4" ry="4.6" transform="rotate(-24 9 9)"/><path d="M7.6 6.2c1.4 1.2 1.6 4 .4 5.6" /><ellipse cx="15.5" cy="15.5" rx="3.4" ry="4.6" transform="rotate(-24 15.5 15.5)"/><path d="M14.1 12.7c1.4 1.2 1.6 4 .4 5.6"/></svg></p><h3>山霧限定豆</h3><p>開幕限定「霧色」配方豆,每日限量三十包,售完隔日請早。</p></div>
+    <div class="hl"><p class="no">03<svg viewBox="0 0 24 24" fill="none" stroke="#c98f4e" stroke-width="1.4" stroke-linecap="round"><path d="M6 5h12l-4 5v4.5M10 14.5V10L6 5z"/><path d="M8.5 19h7M12 14.5V19"/></svg></p><h3>吧台手沖時刻</h3><p>每日 14:00,主理人現場手沖示範,坐吧台的人多一杯試飲。</p></div>
   </div>
 </section>
 
