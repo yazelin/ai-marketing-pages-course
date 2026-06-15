@@ -82,3 +82,7 @@
 
 - `demos/02-lucky-draw/` — 拉霸 + 機率表 + 優惠碼 + 防重抽 + confetti 完整實作
 - `demos/03-ai-quiz/` — 測驗 + 加權計分 + canvas 分享圖卡完整實作
+
+## 真實世界天花板版
+
+課堂 demo 把遊戲機制講透,但你會想看「同一套思路推到極限長什麼樣」。K 線騎手 K-Rider 就是這條路的天花板:一樣是純前端、零後端、可分享圖卡,但把遊戲手感、即時計分、社群擴散磨到了產品級。線上玩 [K-Rider 上線版](https://yazelin.github.io/k-rider/ );想看它怎麼從一頁規格書一路施工驗收到這個程度,讀 [K-Rider case study](https://github.com/yazelin/k-rider/tree/main/docs/case-study )。

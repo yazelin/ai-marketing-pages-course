@@ -6,7 +6,8 @@
 
 ## 課程模組(講義)
 
-- [課程總覽](https://yazelin.github.io/ai-marketing-pages-course/course/00-overview.md):受眾、學習成果、三原則(零 build / 免費 tier / prompt 是核心技能)
+- [課程總覽](https://yazelin.github.io/ai-marketing-pages-course/course/00-overview.md):受眾、學習成果、方法論(甲方思維 / AI 發包法)、三原則(零 build / 免費 tier / prompt 是核心技能)
+- [模組 S 甲方思維:動手前先開規格(核心 Prompt 規格書)](https://yazelin.github.io/ai-marketing-pages-course/course/00c-spec-brief.md)
 - [模組 1 用 AI 對話生整頁](https://yazelin.github.io/ai-marketing-pages-course/course/01-first-landing-page.md)
 - [模組 2 AI 視覺資產:結構化 prompt 生圖](https://yazelin.github.io/ai-marketing-pages-course/course/02-ai-visual-assets.md)
 - [模組 3 互動特效](https://yazelin.github.io/ai-marketing-pages-course/course/03-interactive-effects.md)
@@ -16,6 +17,8 @@
 - [模組 7 讓活動頁自己更新(排程可靠性 + Cloudflare Cron)](https://yazelin.github.io/ai-marketing-pages-course/course/07-automation.md)
 - [模組 8 Prompt 兵法:context / 圖片 / 驗收清單](https://yazelin.github.io/ai-marketing-pages-course/course/08-prompt-playbook.md)
 - [模組 9 收 email 名單:報名頁 + 後端 + 後台](https://yazelin.github.io/ai-marketing-pages-course/course/09-email-list.md)
+- [模組 10 被看見:SEO / 社群分享卡 OG / AEO・GEO](https://yazelin.github.io/ai-marketing-pages-course/course/10-seo-og-agenteo.md)
+- [模組 11 成效追蹤:GA / Meta Pixel](https://yazelin.github.io/ai-marketing-pages-course/course/11-tracking.md)
 
 ## 可操作的 Demo
 

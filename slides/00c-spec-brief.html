@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模組 S 甲方思維:動手前先開規格 — AI 互動行銷頁實作課</title>
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<header class="bar"><span>模組 S — 甲方思維:開規格</span><span><a href="index.html">目錄</a> &nbsp; <span id="counter"></span></span></header>
+
+<section class="slide">
+  <p class="kicker">MODULE S — SPEC FIRST</p>
+  <h1>甲方<em>思維</em></h1>
+  <p class="sub">這門課的方法論是一句話:AI 時代,你升格成甲方了。動手前,先把規格開出來。</p>
+</section>
+
+<section class="slide statement">
+  <p class="kicker">為什麼是甲方</p>
+  <p class="big">工具每半年換一輪,<br>但<em>會開規格、會驗收</em>的人,<br>拿到的東西就是比較好。</p>
+</section>
+
+<section class="slide">
+  <h2>AI 是史上最好說話的乙方</h2>
+  <ul class="points">
+    <li>重做一百次<strong>不加價</strong></li>
+    <li>半夜三點交件<strong>不擺臉色</strong></li>
+    <li>不會已讀不回,不會「下週再給你」</li>
+  </ul>
+  <p class="sub">但合約的另一面也成立:爛甲方拿到爛交付物。規格寫多清楚,交付物就多接近你要的。</p>
+</section>
+
+<section class="slide">
+  <h2>甲方有兩件事不能外包</h2>
+  <table>
+    <tr><th></th><th>在做什麼</th><th>在本課的位置</th></tr>
+    <tr><td>1 開規格</td><td>受眾、價值主張、文案、區塊 → 一頁規格書</td><td>本模組</td></tr>
+    <tr><td>2 下發包</td><td>把規格書變成 prompt 丟給 AI</td><td>模組 1–7</td></tr>
+    <tr><td>3 做驗收</td><td>對清單逐條驗,不過就退回重做</td><td>模組 8</td></tr>
+  </table>
+  <p class="code-note">中間「施工」那段,從這門課開始,交給 AI。這三步合起來叫「AI 發包法」。</p>
+</section>
+
+<section class="slide statement">
+  <p class="kicker">記不住技術細節?</p>
+  <p class="big">程式碼是<em>耗材</em>,AI 隨時能重生一份;<br>規格和驗收的<em>判斷力</em>才是你帶走的。</p>
+</section>
+
+<section class="slide">
+  <h2>第一步:受眾與痛點</h2>
+  <pre>你是資深行銷顧問。我要辦一檔活動:[一句話描述]。
+先不要給建議。請你扮演我的目標受眾[描述],
+用第一人稱寫出 5 條「跟這檔活動有關」的真實煩惱——
+要具體到有畫面(不要「想要放鬆」,
+要「下午三點開完會,只想找個沒人認識我的角落」)。
+寫完後,標出哪一條最強烈、為什麼。</pre>
+  <p class="code-note">AI 演的受眾是假設,不是市調——拿 5 條去問 3 個真人「哪條最像你」,被打臉是賺到。</p>
+</section>
+
+<section class="slide">
+  <h2>價值主張:一句話公式</h2>
+  <pre>給[誰],我們用[什麼],解決[哪個痛],而且[別人給不了的點]。</pre>
+  <p class="sub">山霧咖啡:給想喘口氣的上班族,我們用窗邊座位與手沖的儀式感,把下午三點變成你自己的時間,而且就在你公司樓下。</p>
+</section>
+
+<section class="slide">
+  <h2>主標題:甲方不用會寫,要會挑</h2>
+  <pre>這是我的價值主張:[貼上]。
+給我 10 個活動頁主標題,每個不超過 16 字:
+3 個直球講好處、3 個有畫面感、2 個提問式、2 個反差式。
+不要驚嘆號、不要 emoji、不要「限時優惠」這種罐頭詞。</pre>
+  <p class="code-note">挑的標準只有一條:受眾的痛 &gt; 你的特色。「把第一杯的儀式感分給你」贏過「嚴選阿里山豆」。</p>
+</section>
+
+<section class="slide">
+  <h2>CTA:一頁只能有一個目標</h2>
+  <ul class="points">
+    <li>留 email、領優惠碼、報名——<strong>挑一個</strong>;「都想要」= 都拿不到</li>
+    <li>CTA 文案 = <strong>動詞 + 拿到什麼</strong>:「領開幕週咖啡券」勝過「了解更多」</li>
+    <li>次要動作全部降級成頁尾小連結,不准搶版面</li>
+    <li>現在就決定:按下去之後發生什麼事(模組 9 教你自己接住名單)</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>產出:核心 Prompt 規格書(一頁)</h2>
+  <pre>【活動目標】開幕週 7 天收 300 個 email
+【受眾與痛】30 歲上下上班族;下午想找個安靜角落
+【價值主張】給想喘口氣的上班族…
+【主標題】把第一杯的儀式感分給你(+2 備選)
+【唯一 CTA】留 email 領開幕週咖啡券
+【品牌規格卡】(模組 8 六行卡)
+【區塊清單】hero / 痛點共鳴 / 活動 / FAQ / CTA
+【驗收標準】手機無水平捲動;無 AI 樣板腔;CTA 第一屏可見</pre>
+  <p class="code-note">模組 1 的第一句 prompt = 這頁整段貼上 + 「做成單檔活動網頁」。工具會過期,規格書思維不會。</p>
+</section>
+
+<section class="slide">
+  <h2>常見坑</h2>
+  <ul class="points">
+    <li><strong>跳過規格直接許願</strong> — 決定權讓給 AI 的預設品味,驗收時十倍時間吵回來</li>
+    <li><strong>把 AI 的扮演當市調</strong> — 上線前拿 3 個真人驗過才算數</li>
+    <li><strong>標題寫自己的特色</strong> — 你的倉庫,不是他的下午</li>
+    <li><strong>一頁塞多個目標</strong> — 訪客最後一個都不做</li>
+    <li><strong>規格書不更新</strong> — 方向改了先改規格書,它是唯一事實來源</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>真實世界<em>天花板版</em></h2>
+  <ul class="points">
+    <li>山霧咖啡是課堂範例;<strong>K 線騎手 K-Rider</strong> 是同一套規格 → 施工 → 驗收推到產品級的版本</li>
+    <li>完整拆解(規格書 / prompt 鏈 / 驗收清單 / 模組對應表)在 case study</li>
+  </ul>
+  <p class="code-note">case study:<a href="https://github.com/yazelin/k-rider/tree/main/docs/case-study" style="color:var(--copper)">github.com/yazelin/k-rider/tree/main/docs/case-study</a></p>
+  <span class="demo-tag">對照:demos/01-landing/NOTES.md 的 brief 就是一份規格書實例</span>
+</section>
+
+<section class="slide">
+  <h2>動手做</h2>
+  <ul class="points">
+    <li><strong>任務</strong> — 替你下一檔活動(沒有就虛構),產出一頁核心 Prompt 規格書</li>
+    <li><strong>預期</strong> — 陌生人(或全新對話的 AI)五分鐘看懂:做給誰、解決什麼、成功長什麼樣</li>
+    <li><strong>卡關</strong> — 價值主張寫不順,十之八九是痛點不夠有畫面,回受眾那步重跑</li>
+  </ul>
+</section>
+<div class="progress"><i id="prog"></i></div>
+<p class="navhint">← → 翻頁</p>
+<script src="deck.js"></script>
+</body>
+</html>

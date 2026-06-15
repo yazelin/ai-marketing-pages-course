@@ -5,6 +5,8 @@
 不寫程式,做出會動、會玩、能上線的活動網頁。
 給行銷人的 AI 實作課。
 
+課程方法論:**甲方思維** — AI 時代你升格成甲方,AI 是重做不加價的乙方;用「AI 發包法」三步走完整門課:開規格(模組 S)、下發包(模組 1–7)、做驗收(模組 8)。
+
 - 課程首頁 : https://yazelin.github.io/ai-marketing-pages-course/ 
 - 線上課程簡報 : https://yazelin.github.io/ai-marketing-pages-course/slides/ 
 - 下載課程講義 PDF : https://yazelin.github.io/ai-marketing-pages-course/handout.pdf 
@@ -15,9 +17,9 @@
 
 ```
 index.html      課程站首頁
-slides/         上課簡報(12 份,瀏覽器直接放映,← → 翻頁)
-handout.pdf     講義 PDF(A4,模組 0-11)
-course/         全部模組講義 markdown(模組 0-11)
+slides/         上課簡報(14 份,瀏覽器直接放映,← → 翻頁)
+handout.pdf     講義 PDF(A4,模組 0-11 + 模組 S)
+course/         全部模組講義 markdown(模組 0-11 + 模組 S 甲方思維)
 demos/          山霧咖啡 demo 六件套,全部零 build
   01-landing/      活動 landing(AI 生成 hero + 蒸氣 + 粒子 + 倒數)
   02-lucky-draw/   拉霸抽獎(機率表 + 優惠碼 + 防重抽)

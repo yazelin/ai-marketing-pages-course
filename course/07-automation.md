@@ -133,6 +133,8 @@ export default {
 
 `demos/07-auto-update/` — 「今日山霧」頁,標語來自 `daily.json`;本 repo 的 `.github/workflows/daily.yml` 每天台北 08:00 自動改寫它(跟上面範本同一套)。到 repo 的 Actions 頁籤可以看到每天的執行紀錄,也可以按 Run workflow 現場示範。
 
+真實世界版見 [K-Rider case study](https://github.com/yazelin/k-rider/tree/main/docs/case-study ):它把同一套「GitHub Pages 部署 + 排程 / 自動化更新」的方法用在一個產品級專案上,讓你看到部署排程在課堂 demo 之外、推到天花板時是怎麼安排的。
+
 ## 常見坑
 
 1. **cron 是 UTC 時區**:`0 0 * * *` 是台北早上八點,不是半夜。要台北時間 X 點,寫 X-8(負數就 +24)。
