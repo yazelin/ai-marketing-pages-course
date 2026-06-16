@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273.2%27 fill=%27%23c98f4e%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 行銷頁課程系列 — 從學單招到做出產品級作品的一條學習線</title>
+<meta name="description" content="AI 行銷頁三階學習路徑:基礎課學單招(AI 生頁、生圖、特效、遊戲、上線、收名單)、進階課把單招組成完整產品與漏斗(目標九宮格)、K-Rider 示範把全部疊成產品級作品。貫穿方法論是甲方思維:開規格、下發包、做驗收。">
+<link rel="canonical" href="https://yazelin.github.io/ai-marketing-pages-course/series.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI 互動行銷頁實作課">
+<meta property="og:url" content="https://yazelin.github.io/ai-marketing-pages-course/series.html">
+<meta property="og:title" content="AI 行銷頁課程系列 — 一條從學單招到產品級的學習線">
+<meta property="og:description" content="基礎學單招 → 進階組成完整產品+漏斗 → K-Rider 天花板示範。貫穿方法論是甲方思維。">
+<meta property="og:image" content="https://yazelin.github.io/ai-marketing-pages-course/assets/og-course.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI 行銷頁課程系列 — 學習路徑">
+<meta name="twitter:description" content="基礎 → 進階 → 天花板示範,一條完整的 AI 行銷頁學習線。">
+<meta name="twitter:image" content="https://yazelin.github.io/ai-marketing-pages-course/assets/og-course.jpg">
+<style>
+  :root{
+    --ink:#10221d; --pine:#1d4438; --moss:#2e5c4d; --mist:#9db8ae;
+    --cream:#f4efe4; --copper:#c98f4e; --copper-d:#a8743a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:
+      radial-gradient(120% 90% at 80% -10%, rgba(157,184,174,.15), transparent 60%),
+      radial-gradient(100% 80% at 10% 110%, rgba(201,143,78,.10), transparent 55%),
+      var(--ink);
+    color:var(--cream); min-height:100svh; padding:11vh 8vw 12vh;
+  }
+  .wrap{max-width:1080px; margin:0 auto}
+  .kicker{font-size:.78rem; letter-spacing:.42em; color:var(--copper); margin-bottom:1.4rem}
+  h1{
+    font-family:"Noto Serif TC","PMingLiU",serif; font-weight:600;
+    font-size:clamp(2.1rem,5vw,3.6rem); line-height:1.32; margin-bottom:1.2rem; max-width:16em;
+  }
+  h1 em{font-style:normal; color:var(--copper)}
+  .sub{color:var(--mist); line-height:2; margin-bottom:4rem; font-size:1rem; max-width:38em}
+
+  /* 路徑帶 */
+  .path{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); margin-bottom:5rem}
+  .step{border:1px solid rgba(157,184,174,.22); border-radius:4px; padding:1.5rem 1.4rem; position:relative;
+    background:linear-gradient(160deg, rgba(46,92,77,.22), rgba(16,34,29,.1))}
+  .step .stage{font-family:"Noto Serif TC",serif; font-size:.72rem; letter-spacing:.28em; color:var(--copper); margin-bottom:.7rem}
+  .step b{display:block; font-family:"Noto Serif TC",serif; font-weight:600; font-size:1.1rem; margin-bottom:.5rem}
+  .step p{color:var(--mist); font-size:.85rem; line-height:1.8}
+
+  .sec-title{font-family:"Noto Serif TC",serif; font-weight:600; font-size:1.5rem; margin:0 0 .4rem}
+  .sec-hint{color:var(--mist); font-size:.9rem; line-height:1.9; margin-bottom:2rem; max-width:40em}
+
+  /* 課程卡 */
+  .grid{display:grid; gap:1.4rem; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); margin-bottom:5rem}
+  a.card{
+    display:block; text-decoration:none; color:var(--cream);
+    border:1px solid rgba(157,184,174,.22); border-radius:4px;
+    padding:2rem 1.8rem 1.8rem; position:relative; overflow:hidden;
+    background:linear-gradient(160deg, rgba(46,92,77,.28), rgba(16,34,29,.1));
+    transition:transform .35s cubic-bezier(.2,.8,.2,1), border-color .35s;
+  }
+  a.card:hover{transform:translateY(-5px); border-color:var(--copper)}
+  .num{font-family:"Noto Serif TC",serif; font-size:.74rem; color:var(--copper); letter-spacing:.26em; margin-bottom:.9rem}
+  .card h3{font-family:"Noto Serif TC",serif; font-weight:600; font-size:1.2rem; margin-bottom:.6rem}
+  .card .role{color:var(--copper); font-size:.78rem; letter-spacing:.1em; margin-bottom:.8rem}
+  .card p{color:var(--mist); font-size:.86rem; line-height:1.8; margin-bottom:.4rem}
+  .card .go{margin-top:1rem; font-size:.8rem; color:var(--cream); border-top:1px solid rgba(157,184,174,.18); padding-top:.9rem}
+  .card .go span{color:var(--copper)}
+
+  /* 模組總覽兩欄 */
+  .mods{display:grid; gap:2.2rem; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); margin-bottom:5rem}
+  .modcol h4{font-family:"Noto Serif TC",serif; font-weight:600; font-size:1.05rem; margin-bottom:1rem; color:var(--cream)}
+  .modcol h4 small{display:block; color:var(--mist); font-size:.78rem; letter-spacing:.06em; font-weight:400; margin-top:.25rem}
+  ul.ml{list-style:none}
+  ul.ml li{display:flex; gap:.8rem; padding:.5rem 0; border-bottom:1px solid rgba(157,184,174,.1); font-size:.86rem; line-height:1.6}
+  ul.ml li span.n{font-family:"Noto Serif TC",serif; color:var(--copper); flex:0 0 1.8em; font-size:.8rem}
+  ul.ml li span.t{color:var(--mist)}
+  ul.ml li span.t b{color:var(--cream); font-weight:500}
+
+  /* K-Rider 展示 */
+  .showcase{border:1px solid rgba(201,143,78,.35); border-radius:4px; padding:2.4rem 2rem; margin-bottom:5rem;
+    background:linear-gradient(160deg, rgba(201,143,78,.12), rgba(16,34,29,.15))}
+  .showcase .num{margin-bottom:.7rem}
+  .showcase h3{font-family:"Noto Serif TC",serif; font-weight:600; font-size:1.45rem; margin-bottom:.7rem}
+  .showcase p{color:var(--mist); font-size:.92rem; line-height:1.95; max-width:42em; margin-bottom:1rem}
+  .showcase .tags{display:flex; flex-wrap:wrap; gap:.5rem; margin:1.2rem 0 1.4rem}
+  .showcase .tags i{font-style:normal; font-size:.76rem; color:var(--cream); border:1px solid rgba(157,184,174,.25); border-radius:99px; padding:.3rem .8rem}
+  .showcase a.play{display:inline-block; text-decoration:none; color:var(--ink); background:var(--copper); font-weight:600;
+    font-size:.9rem; padding:.7rem 1.5rem; border-radius:3px; transition:background .3s}
+  .showcase a.play:hover{background:var(--copper-d)}
+  .showcase .note{color:rgba(157,184,174,.7); font-size:.78rem; margin-top:1rem; line-height:1.7}
+
+  /* 方法論 */
+  .method{margin-bottom:4rem}
+  .method .row{display:grid; gap:1.2rem; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); margin-top:1.5rem}
+  .method .row div{border-left:2px solid var(--copper); padding:.3rem 0 .3rem 1.1rem}
+  .method .row b{font-family:"Noto Serif TC",serif; display:block; margin-bottom:.4rem}
+  .method .row p{color:var(--mist); font-size:.85rem; line-height:1.8}
+
+  footer{margin-top:5rem; color:rgba(157,184,174,.55); font-size:.78rem; letter-spacing:.1em; line-height:2.2}
+  footer a{color:var(--copper)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">AI MARKETING PAGES · 學習路徑</p>
+  <h1>三門課其實是<em>一條</em>學習線:<br>從學單招,到做出產品級作品。</h1>
+  <p class="sub">AI 時代你升格成甲方——開規格、下發包、做驗收,施工交給 AI。這條學習線分三段:先在基礎課學會每一招、再在進階課把單招組成一個完整產品與漏斗、最後用 K-Rider 看到把全部疊起來能做到什麼。下面是完整地圖。</p>
+
+  <div class="path">
+    <div class="step">
+      <p class="stage">STAGE 1 · 基礎</p>
+      <b>學單招</b>
+      <p>用 AI 對話生整頁、生視覺、加特效與遊戲、免費上線、收 email 名單。每一招獨立可用。</p>
+    </div>
+    <div class="step">
+      <p class="stage">STAGE 2 · 進階</p>
+      <b>組成完整產品 + 漏斗</b>
+      <p>把單招串成一個會生圖、會收名單、有防刷與後台的完整產品(目標九宮格)。</p>
+    </div>
+    <div class="step">
+      <p class="stage">STAGE 3 · 天花板</p>
+      <b>產品級示範</b>
+      <p>K-Rider:真實股價資料管線 + 物理模擬 + AI 互動 + 名單漏斗,看到頂長怎樣。</p>
+    </div>
+  </div>
+
+  <h2 class="sec-title">三門課</h2>
+  <p class="sec-hint">照順序走最順;每一門都能單獨開,也都能免費看、免費玩。</p>
+  <div class="grid">
+    <a class="card" href="https://yazelin.github.io/ai-marketing-pages-course/">
+      <p class="num">課程 01 · 基礎</p>
+      <h3>AI 互動行銷頁實作課</h3>
+      <p class="role">給不會寫程式的行銷人</p>
+      <p>13 個模組,每個教一招:AI 生頁、結構化生圖、互動特效、抽獎與心理測驗、GitHub Pages 上線、即時呼叫 AI、自動更新、收 email 名單、SEO 與成效追蹤。</p>
+      <p class="go">產出:一系列可玩的單頁技巧 &nbsp;<span>立即開始 →</span></p>
+    </a>
+    <a class="card" href="https://yazelin.github.io/ai-goal-grid-course/">
+      <p class="num">課程 02 · 進階</p>
+      <h3>目標九宮格實戰</h3>
+      <p class="role">上過基礎課、想做完整產品的人</p>
+      <p>把單招組成一個上線產品:填九宮格 → AI 補格 → 選風格生桌布(長任務輪詢)→ canvas 合成文字 → 下載 → email 換 30 天行動追蹤表。含防刷額度與 admin 後台。</p>
+      <p class="go">產出:一個上線的完整產品 + 名單後台 &nbsp;<span>看進階課 →</span></p>
+    </a>
+    <a class="card" href="https://yazelin.github.io/k-rider/">
+      <p class="num">示範 · 天花板</p>
+      <h3>K-Rider 線騎手</h3>
+      <p class="role">想看「做到頂」長怎樣的人</p>
+      <p>騎機車衝真實歷史股價 K 線的網頁遊戲。把基礎課的進階模組全疊成產品級結果:資料管線、特效、AI 嘴砲、排行榜與名單漏斗。附完整拆解。</p>
+      <p class="go">示範作品,不開課 &nbsp;<span>直接玩 →</span></p>
+    </a>
+  </div>
+
+  <h2 class="sec-title">完整模組總覽</h2>
+  <p class="sec-hint">基礎課教單招、進階課把對應的招深化成產品級。左右對照看得出每一招怎麼長大。</p>
+  <div class="mods">
+    <div class="modcol">
+      <h4>基礎課 · 行銷頁實作<small>13 模組,每個一招</small></h4>
+      <ul class="ml">
+        <li><span class="n">0</span><span class="t">行前準備:工具與心態</span></li>
+        <li><span class="n">S</span><span class="t"><b>甲方思維:動手前先開規格</b></span></li>
+        <li><span class="n">1</span><span class="t">第一個活動頁:用 AI 對話生整頁</span></li>
+        <li><span class="n">2</span><span class="t">AI 視覺資產:從許願到可控</span></li>
+        <li><span class="n">3</span><span class="t">互動特效:讓頁面活起來</span></li>
+        <li><span class="n">4</span><span class="t">行銷遊戲:抽獎、刮刮樂、測驗</span></li>
+        <li><span class="n">5</span><span class="t">上線:部署決策樹 + GitHub Pages</span></li>
+        <li><span class="n">6</span><span class="t">進階:頁面即時呼叫 AI</span></li>
+        <li><span class="n">7</span><span class="t">進階:讓活動頁自己更新</span></li>
+        <li><span class="n">8</span><span class="t">Prompt 兵法:context、圖片與驗收</span></li>
+        <li><span class="n">9</span><span class="t">收 email 名單:報名頁 + 後端 + 後台</span></li>
+        <li><span class="n">10</span><span class="t">被看見:SEO / OG / AEO・GEO</span></li>
+        <li><span class="n">11</span><span class="t">成效追蹤:GA / Meta Pixel</span></li>
+      </ul>
+    </div>
+    <div class="modcol">
+      <h4>進階課 · 目標九宮格<small>把單招組成一個完整產品</small></h4>
+      <ul class="ml">
+        <li><span class="n">00</span><span class="t">課程總覽 + 前課銜接</span></li>
+        <li><span class="n">01</span><span class="t">產品定位與命名(IP / 商標)</span></li>
+        <li><span class="n">02</span><span class="t">九宮格 UI 與資料模型</span></li>
+        <li><span class="n">03</span><span class="t">AI 補格(Worker + LLM JSON)</span></li>
+        <li><span class="n">04</span><span class="t">圖片上傳與前端縮圖</span></li>
+        <li><span class="n">05</span><span class="t">AI 桌布背景:長任務 job + 輪詢</span></li>
+        <li><span class="n">06</span><span class="t">canvas 文字合成</span></li>
+        <li><span class="n">07</span><span class="t">AI 編輯迴圈 + 可攜帶 prompt</span></li>
+        <li><span class="n">08</span><span class="t">防刷與額度(Turnstile + 四層防線)</span></li>
+        <li><span class="n">09</span><span class="t">Email 收集 & admin 後台(D1 + CSV)</span></li>
+        <li><span class="n">10</span><span class="t">進階 9×9 + 發佈與 SEO / AEO</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="showcase">
+    <p class="num">天花板示範 · CASE STUDY</p>
+    <h3>K-Rider:把所有招疊成一個產品級作品</h3>
+    <p>K-Rider 不是課,是一個示範:證明這套方法做到頂能長什麼樣。它是一個騎機車衝真實歷史股價 K 線的網頁遊戲,撞到 AI 生成的事件路標、摔車時 AI 會嘴你,玩完留 email 換每日挑戰。背後把基礎課的進階模組全用上了。</p>
+    <div class="tags">
+      <i>視覺資產 → HUD / 結算卡</i>
+      <i>特效 → Canvas + WebAudio</i>
+      <i>部署排程 → Actions 多 cron 抓股價</i>
+      <i>AI Worker → Groq 嘴砲</i>
+      <i>名單漏斗 → D1 + 後台</i>
+    </div>
+    <a class="play" href="https://yazelin.github.io/k-rider/">直接玩 K-Rider →</a>
+    <p class="note">想深入的人可以走支線:K-Rider 附完整 case study,把規格書、prompt chain 與驗收清單(78 個自動化測試)攤開,當作進階自修教材。它是 showcase 的逆向拆解,不是可報名的課程模組。</p>
+  </div>
+
+  <div class="method">
+    <h2 class="sec-title">貫穿三課的方法論</h2>
+    <p class="sec-hint">三門課用的是同一套心法,只是規模不同。</p>
+    <div class="row">
+      <div><b>甲方思維</b><p>把自己當甲方,動手前先開規格。基礎課模組 S 是這套的入口。</p></div>
+      <div><b>AI 發包法</b><p>開規格 → 下發包 → 做驗收。K-Rider 把「規格 + prompt + 驗收清單」一起出貨。</p></div>
+      <div><b>零依賴 · 免費上線</b><p>不裝建置工具,瀏覽器直接跑;GitHub Pages + Cloudflare 免費額度內就能上線。</p></div>
+      <div><b>漏斗誠實</b><p>免費先給、留資換加值、即時兌現真資產,不依賴寄信。</p></div>
+    </div>
+  </div>
+
+  <footer>
+    一條學習線:基礎 → 進階 → 天花板示範 · 全部零依賴、可離線使用<br>
+    課程:林亞澤 yazelin · <a href="https://yazelin.github.io/">yazelin.github.io</a>
+  </footer>
+</div>
+</body>
+</html>
