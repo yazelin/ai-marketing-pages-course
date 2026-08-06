@@ -45,9 +45,9 @@ A 路線的代價:報名框外觀受限於服務、名單放在別人家、量�
 
 ```text
 做一個「開幕通知報名」的 Cloudflare Worker(worker.js)+ D1:
-1. D1 一張表 signups:id、email(唯一)、name、created_at、ip
+1. D1 一張表 signups:id、email(唯一)、name、created_at、ip、flagged(預設 0)
 2. POST 收 {email, name, company}:
-   - company 是 honeypot,有值就當機器人,假裝成功但不寫入
+   - company 是 honeypot,有值就當機器人,但照樣寫入、只標記 flagged=1
    - email 格式驗證、轉小寫;每 IP 每分鐘最多 5 次
    - email 重複(UNIQUE 衝突)當「已報名」處理,不報錯也不洩漏
 3. GET /list?token=xxx:token 比對 Secret ADMIN_TOKEN,對了才回名單 JSON
@@ -176,10 +176,11 @@ Worker 收到 Bearer token 後:從 Google 的公鑰驗 JWT 簽名、檢查 `aud`
 ## 常見坑
 
 1. **裸表單沒擋機器人**:公開的 email 收集端點一定會被灌垃圾。本章三道防線:honeypot 隱形欄位、每 IP 限流、email 格式驗證。要更強可加 Cloudflare Turnstile(免費人機驗證)。
-2. **去重沒做**:同一人按三次送出,名單就三筆。靠資料庫的 UNIQUE 約束擋,而且回應不要洩漏「這個 email 在不在名單」(隱私)。
-3. **管理密碼放進前端 / 放進網址**:後台密碼一旦寫進 admin.html 就等於公開;放進網址 `?token=` 則會被瀏覽器歷史與 CDN 日誌記下。密碼只存在 Worker 的 Secret,前端是「使用者輸入 → 放 Authorization 標頭傳給 Worker 比對」(見上面「後台登入怎麼防護」)。
-4. **個資責任**:收了 email 就有保管責任。報名頁寫清楚用途與退訂方式;不需要的個資不要收;名單別外流。
-5. **沒有退訂機制**:正式營運的名單要能退訂(法規與商譽)。本章 demo 未做,正式上線前補上。
+2. **honeypot 拿來擋人**:隱形欄位要用 `<input type="hidden">`,不要用「移出視野的 text 欄位」,後者會被瀏覽器或密碼管理器自動填,而真人看不到那個欄位,也清不掉。而且命中時**只標記不要擋**:擋錯是真人以為報名成功、你名單裡卻沒有他(而且雙方都不會發現);收錯只是名單多幾筆垃圾,查的時候濾掉就好。兩種誤判的代價差很多,設計要往便宜的那一邊倒。真正在擋量的是限流。
+3. **去重沒做**:同一人按三次送出,名單就三筆。靠資料庫的 UNIQUE 約束擋,而且回應不要洩漏「這個 email 在不在名單」(隱私)。
+4. **管理密碼放進前端 / 放進網址**:後台密碼一旦寫進 admin.html 就等於公開;放進網址 `?token=` 則會被瀏覽器歷史與 CDN 日誌記下。密碼只存在 Worker 的 Secret,前端是「使用者輸入 → 放 Authorization 標頭傳給 Worker 比對」(見上面「後台登入怎麼防護」)。
+5. **個資責任**:收了 email 就有保管責任。報名頁寫清楚用途與退訂方式;不需要的個資不要收;名單別外流。
+6. **沒有退訂機制**:正式營運的名單要能退訂(法規與商譽)。本章 demo 未做,正式上線前補上。
 
 ## 動手做
 

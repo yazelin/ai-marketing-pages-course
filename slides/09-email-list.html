@@ -101,6 +101,7 @@ wrangler secret put ADMIN_TOKEN         # 設後台密碼(自己想一組長字�
   <h2>常見坑</h2>
   <ul class="points">
     <li><strong>裸表單沒擋機器人</strong> → honeypot 隱形欄位 + 每 IP 限流 + 格式驗證(可加 Turnstile)</li>
+    <li><strong>honeypot 拿來擋人</strong> → 用 hidden 欄位(移出視野的 text 會被自動填),而且命中只標記不擋;擋錯是真人靜靜掉出名單,收錯只是多幾筆垃圾</li>
     <li><strong>去重沒做</strong> → 靠資料庫 UNIQUE;回應別洩漏「這 email 在不在名單」</li>
     <li><strong>管理密碼放進前端</strong> → 只能存 Worker Secret,前端是輸入後傳給 Worker 比對</li>
     <li><strong>個資責任</strong> → 寫清楚用途與退訂、不收沒必要的、別外流</li>

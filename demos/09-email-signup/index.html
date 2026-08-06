@@ -68,8 +68,8 @@
     border-radius:4px; padding:.85rem 1rem; outline:none; transition:border-color .25s;
   }
   input:focus{border-color:var(--copper)}
-  /* honeypot:給機器人填的隱形欄位,真人看不到 */
-  .gotcha{position:absolute; left:-9999px; width:1px; height:1px; opacity:0}
+  /* honeypot 用 <input type="hidden">,不需要樣式 ——
+     移出視野的 text 欄位會被瀏覽器自動填,真人會因此被誤判 */
   button{
     margin-top:.4rem; cursor:pointer; font-family:inherit; font-weight:700;
     font-size:1rem; letter-spacing:.18em; background:var(--copper); color:var(--ink);
@@ -113,8 +113,8 @@
     <label for="email">你的 Email</label>
     <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
   </div>
-  <!-- honeypot:真人不會看到也不會填,機器人通常會 -->
-  <input class="gotcha" id="company" name="company" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <!-- honeypot:hidden 欄位真人填不到(也不會被瀏覽器自動填),機器人通常照填 -->
+  <input id="company" name="company" type="hidden" value="">
   <button id="submit" type="submit">把開幕券寄給我</button>
   <p class="msg" id="msg"></p>
   <p class="privacy">送出代表你同意收到山霧咖啡的開幕通知。隨時可在信中退訂。本頁為課程 demo,請勿填寫真實重要信箱。</p>

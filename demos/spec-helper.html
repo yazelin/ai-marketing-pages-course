@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%231d4438%27/%3E%3Crect x=%274%27 y=%274.5%27 width=%278%27 height=%271.6%27 rx=%27.8%27 fill=%27%23c98f4e%27/%3E%3Crect x=%274%27 y=%277.2%27 width=%278%27 height=%271.6%27 rx=%27.8%27 fill=%27%23f4efe4%27/%3E%3Crect x=%274%27 y=%279.9%27 width=%275%27 height=%271.6%27 rx=%27.8%27 fill=%27%23f4efe4%27/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>開規格小幫手 — AI 帶你十分鐘開出活動頁規格書</title>
+<meta name="description" content="開規格小幫手:AI 教練一問一答,帶你收齊活動頁五格規格(活動/客群/區塊/風格/CTA),一鍵複製規格書貼去任何 AI 生成頁面。課程工具,Worker 版參考前端。">
+<meta name="robots" content="noindex">
+<style>
+  :root{
+    --ink:#10221d; --pine:#1d4438; --moss:#2e5c4d; --mist:#9db8ae;
+    --cream:#f4efe4; --copper:#c98f4e; --copper-d:#a8743a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:
+      radial-gradient(120% 80% at 50% -20%, rgba(46,92,77,.5), transparent 60%),
+      radial-gradient(80% 60% at 50% 120%, rgba(201,143,78,.12), transparent 55%),
+      var(--ink);
+    color:var(--cream); min-height:100svh;
+    display:flex; flex-direction:column; align-items:center; padding:4vh 4vw 4vh;
+  }
+  .brand{font-size:.75rem; letter-spacing:.5em; color:var(--mist); margin-bottom:1rem}
+  h1{
+    font-family:"Noto Serif TC","PMingLiU",serif; font-weight:600; text-align:center;
+    font-size:clamp(1.6rem,5.5vw,2.4rem); line-height:1.35; margin-bottom:.5rem;
+  }
+  h1 em{font-style:normal; color:var(--copper)}
+  .sub{color:var(--mist); font-size:.86rem; line-height:1.9; text-align:center; max-width:34em}
+
+  .chat{
+    width:min(38rem,100%); margin-top:1.6rem; flex:1; display:flex; flex-direction:column;
+    border:1px solid rgba(201,143,78,.35); border-radius:6px; overflow:hidden;
+    background:linear-gradient(170deg, rgba(46,92,77,.3), rgba(16,34,29,.5));
+    min-height:26rem;
+  }
+  .log{flex:1; overflow-y:auto; padding:1.3rem; display:flex; flex-direction:column; gap:.85rem}
+  .msg{
+    max-width:86%; padding:.75rem 1.05rem; border-radius:10px;
+    font-size:.92rem; line-height:1.85; white-space:pre-wrap; word-break:break-word;
+    animation:pop .3s both;
+  }
+  @keyframes pop{from{opacity:0; transform:translateY(8px)}to{opacity:1; transform:none}}
+  .msg.user{align-self:flex-end; background:var(--copper); color:var(--ink); border-bottom-right-radius:3px}
+  .msg.ai{align-self:flex-start; background:rgba(244,239,228,.92); color:var(--ink); border-bottom-left-radius:3px}
+  .msg.sys{align-self:center; background:none; color:var(--mist); font-size:.78rem; text-align:center}
+  .typing i{display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--moss); margin:0 2px; animation:blink 1.2s infinite}
+  .typing i:nth-child(2){animation-delay:.2s} .typing i:nth-child(3){animation-delay:.4s}
+  @keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+  .copybtn{
+    align-self:flex-start; cursor:pointer; font-family:inherit; font-weight:700;
+    font-size:.85rem; letter-spacing:.1em; margin-top:-.3rem;
+    background:var(--copper); color:var(--ink); border:none; border-radius:4px;
+    padding:.6rem 1.2rem; transition:background .25s; animation:pop .3s both;
+  }
+  .copybtn:hover{background:var(--copper-d)}
+  .inputrow{display:flex; gap:.6rem; padding:.9rem; border-top:1px solid rgba(157,184,174,.2)}
+  .inputrow input{
+    flex:1; min-width:0; font-family:inherit; font-size:.95rem; color:var(--cream);
+    background:rgba(16,34,29,.6); border:1px solid rgba(157,184,174,.3);
+    border-radius:4px; padding:.8rem 1rem; outline:none;
+  }
+  .inputrow input:focus{border-color:var(--copper)}
+  .inputrow button{
+    cursor:pointer; font-family:inherit; font-weight:700; font-size:.9rem; letter-spacing:.15em;
+    background:var(--copper); color:var(--ink); border:none; border-radius:4px; padding:0 1.5rem;
+    transition:background .25s;
+  }
+  .inputrow button:hover{background:var(--copper-d)}
+  .inputrow button:disabled{background:#5a5448; color:#2e2b25; cursor:not-allowed}
+  footer{margin-top:2rem; font-size:.72rem; color:rgba(157,184,174,.5); letter-spacing:.12em; text-align:center; line-height:2}
+  footer a{color:rgba(201,143,78,.8)}
+</style>
+</head>
+<body>
+
+<p class="brand">SPEC HELPER — 開規格小幫手</p>
+<h1>十分鐘,開出你的<em>活動頁規格書</em></h1>
+<p class="sub">AI 教練一次問一題,幫你收齊五格:活動、客群、區塊、風格、CTA。
+收尾時一鍵複製規格書,貼去 ChatGPT、Claude 或 Gemini,請它照規格生成你的活動頁。</p>
+
+<div class="chat">
+  <div class="log" id="log">
+    <p class="msg ai">你好,我是規格教練。十分鐘,我幫你把活動頁的規格問清楚。先從第一格開始:你這檔活動是什麼?名稱、檔期、一句話賣點。</p>
+  </div>
+  <div class="inputrow">
+    <input id="box" type="text" maxlength="500" placeholder="回答教練的問題">
+    <button id="send">送出</button>
+  </div>
+</div>
+
+<footer>此工具用本課教的方法做成 · <a href="#" id="storyLink">誕生故事</a> · <a href="index.html">回 demo 總覽</a></footer>
+
+<script>
+/* ============ 開規格小幫手(Worker 版參考前端)============
+   定位:實作營 v1 用純 Gemini Canvas app 版;這頁是
+   ① 日後公開網站版的參考實作 ② Canvas 失靈時的救援對照。
+   接線:POST {messages:[{role,content},...]} 到 WORKER_URL + /chat,回 {reply}。
+   教練 prompt 在 Worker 端注入(docs/spec-helper-coach-prompt.md),前端不帶 system。 */
+
+/* 部署後換成實際網址(見 worker-deploy/spec-helper/DEPLOY.md;本機測試用 http://localhost:8788) */
+const WORKER_URL = "https://spec-helper.yazelinj303.workers.dev";
+
+const SPEC_MARK = "【規格書】";   // 教練收尾的固定開頭;複製按鈕從這裡擷取到訊息結尾
+const MAX_TURNS = 40;            // 與 Worker 的 MAX_MESSAGES 一致
+
+const $ = id => document.getElementById(id);
+const log = $("log");
+const history = [];              // {role:"user"|"assistant", content}——每次整包送給 Worker
+
+/* 誕生故事連結:文章上線後把 href 換成實際網址即可 */
+$("storyLink").addEventListener("click", e => {
+  if ($("storyLink").getAttribute("href") === "#") {
+    e.preventDefault();
+    bubble("sys", "誕生故事撰寫中——這個工具本身就是用「開規格、下發包、做驗收」做出來的。");
+  }
+});
+
+function bubble(cls, text){
+  const p = document.createElement("p");
+  p.className = "msg " + cls; p.textContent = text;
+  log.appendChild(p); log.scrollTop = log.scrollHeight;
+  return p;
+}
+
+/* 回覆含【規格書】→ 加「一鍵複製規格書」按鈕,只複製規格書區塊(從標記到結尾) */
+function maybeAddCopy(reply){
+  const i = reply.indexOf(SPEC_MARK);
+  if (i === -1) return;
+  const spec = reply.slice(i).trim();
+  const btn = document.createElement("button");
+  btn.className = "copybtn"; btn.textContent = "一鍵複製規格書";
+  btn.onclick = async () => {
+    try {
+      await navigator.clipboard.writeText(spec);
+      btn.textContent = "已複製,貼去你的 AI 吧";
+      setTimeout(() => { btn.textContent = "一鍵複製規格書"; }, 2500);
+    } catch {
+      bubble("sys", "瀏覽器擋了自動複製,請手動長按選取上面的規格書");
+    }
+  };
+  log.appendChild(btn); log.scrollTop = log.scrollHeight;
+}
+
+let busy = false;
+async function send(){
+  const message = $("box").value.trim();
+  if (!message || busy) return;
+  if (history.length >= MAX_TURNS) return bubble("sys", "這輪對話滿了,重新整理頁面再開一輪");
+  $("box").value = "";
+  bubble("user", message);
+  history.push({ role: "user", content: message });
+  busy = true; $("send").disabled = true;
+  const t = bubble("ai typing", "");
+  t.innerHTML = '<span class="typing"><i></i><i></i><i></i></span>';
+  try {
+    const r = await fetch(WORKER_URL + "/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: history }),
+    });
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(data.reply || data.error || ("Worker 回應 " + r.status));
+    t.classList.remove("typing"); t.textContent = data.reply;
+    history.push({ role: "assistant", content: data.reply });
+    maybeAddCopy(data.reply);
+  } catch (e) {
+    t.remove();
+    history.pop();               // 這輪沒成,回滾,讓使用者原句重送
+    bubble("sys", "教練忙線中 — " + e.message);
+  } finally {
+    busy = false; $("send").disabled = false;
+    log.scrollTop = log.scrollHeight;
+  }
+}
+$("send").onclick = send;
+$("box").addEventListener("keydown", e => { if (e.key === "Enter") send(); });
+</script>
+</body>
+</html>
